@@ -12,23 +12,29 @@ function Test() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/.../')
+        axios.get('http://localhost:8000')
             .then(response => {
                 setData(response.data);
             })
             .catch(error => {
                 console.error(error);
             });
+        
     }, []);
 
     return (
         <div>
+
             <h1>Data from Django</h1>
-            <ul>
-                {data.map(item => (
-                    <li key={item.id}>{item}</li> // замените на соответствующие поля
-                ))}
-            </ul>
+            
+
+            {/* {data.map(item => (
+                <div>
+                    {item.name}
+                    {item.released}
+                </div>
+            ))} */}
+
         </div>
     )
 }

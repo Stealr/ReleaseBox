@@ -7,7 +7,7 @@ function Home() {
     useEffect(() => {
         // Обновляем заголовок документа с помощью API браузера
         document.title = `Вы нажали ${count} раз`;
-        console.log("effect")
+        // console.log("effect")
     });
 
     return (
