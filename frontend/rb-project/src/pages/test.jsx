@@ -26,7 +26,7 @@ function Test() {
         <div>
 
             <h1>Data from Django</h1>
-            
+            {console.log(data)}
 
             {/* {data.map(item => (
                 <div>
