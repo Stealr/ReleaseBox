@@ -1,13 +1,18 @@
-import { useState } from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Test from './pages/test';
+import Home from './pages/home';
 
 
 function App() {
 
   return (
-    <div>
-      <h2> Just nothing here yet :)</h2>
-      RB project | testing
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/test" element={<Test />} />
+      </Routes>
+    </Router>
   )
 }
 
