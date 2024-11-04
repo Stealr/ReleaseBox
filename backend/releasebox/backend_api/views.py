@@ -3,17 +3,18 @@ from rest_framework.response import Response
 from .models import GameInfo
 from .serializer import GameSerializer
 
+
 class GameInfoView(APIView):
     def get(self, request):
         output = [
             {
+                'id': output.id,
                 'name': output.name,
                 'released': output.released,
-                'rating': output.rating,
                 'platform': output.platform,
-                'genre': output.genre,
-                'stores': output.stores,
-                'metacritic': output.metacritic
+                'genres': output.genre,
+                'metacritic': output.metacritic,
+                'imageBackground': output.imageBackground
             } for output in GameInfo.objects.all()
         ]
         return Response(output)
