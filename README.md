@@ -1,4 +1,4 @@
-### Web проект ReleaseBox (RB) - 
+## Web проект ReleaseBox (RB) - 
 
 Три ветки в git:
 main - содержит работающий проект
@@ -8,11 +8,17 @@ backend - здесь ведется разработка backend и затем �
 frontend: react
 backend: django
 
-Ссылка на дизайн сайта
+
+## Дизайн сайта
+![chrome_VPUJIAdS8Y](https://github.com/user-attachments/assets/ccd82fd0-9df7-4161-ba4d-67b4cfd80a78)
+
+![chrome_aeVpWE2l0m](https://github.com/user-attachments/assets/e8c295fc-a634-4387-a17e-843c999b8ae9)
+
+Ссылка на редактор дизайна
 https://www.figma.com/design/RNe4cKMj4bttBO3lnzswjp/RB?node-id=0-1&node-type=canvas&t=VBhevS6rPRpwazMt-0
 
-### Полезные ссылки
 
+## Полезные ссылки
 Материал по основам git:
 https://learngitbranching.js.org/
 https://githowto.com/ru
