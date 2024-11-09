@@ -11,11 +11,20 @@ backend: django
 
 ## Дизайн сайта
 
-![chrome_BNpD0oWWHR](https://github.com/user-attachments/assets/110b89da-5810-4c4b-9055-25301cd912f3)
+Calendar page:
+![image](https://github.com/user-attachments/assets/0533e9b3-98c0-405b-b3f7-59eeea1bd3fd)
 
+Games page:
+![image](https://github.com/user-attachments/assets/91fbb579-597c-4777-b370-3ed7abac85da)
 
-![chrome_eumj1h8bm4](https://github.com/user-attachments/assets/89944b1f-e725-45b4-8c10-911f1c77d2be)
+Log in page:
+![image](https://github.com/user-attachments/assets/59fa1603-04f9-467d-b023-8f9339bac630)
 
+Sign up page:
+![image](https://github.com/user-attachments/assets/147c0212-403f-4e41-a92e-fc8131560d56)
+
+Game info page:
+![image](https://github.com/user-attachments/assets/4c7f7d59-e478-4f80-87cf-e196ebd388aa)
 
 
 Ссылка на редактор дизайна
