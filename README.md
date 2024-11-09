@@ -10,9 +10,13 @@ backend: django
 
 
 ## Дизайн сайта
-![chrome_VPUJIAdS8Y](https://github.com/user-attachments/assets/ccd82fd0-9df7-4161-ba4d-67b4cfd80a78)
 
-![chrome_aeVpWE2l0m](https://github.com/user-attachments/assets/e8c295fc-a634-4387-a17e-843c999b8ae9)
+![chrome_BNpD0oWWHR](https://github.com/user-attachments/assets/110b89da-5810-4c4b-9055-25301cd912f3)
+
+
+![chrome_eumj1h8bm4](https://github.com/user-attachments/assets/89944b1f-e725-45b4-8c10-911f1c77d2be)
+
+
 
 Ссылка на редактор дизайна
 https://www.figma.com/design/RNe4cKMj4bttBO3lnzswjp/RB?node-id=0-1&node-type=canvas&t=VBhevS6rPRpwazMt-0
