@@ -26,6 +26,17 @@ Sign up page:
 Game info page:
 ![image](https://github.com/user-attachments/assets/4c7f7d59-e478-4f80-87cf-e196ebd388aa)
 
+Profile:
+![image](https://github.com/user-attachments/assets/b899890f-2922-4811-9104-acb6eff77752)
+
+![image](https://github.com/user-attachments/assets/22baac41-9f1d-4599-ae04-2389438977de)
+
+![image](https://github.com/user-attachments/assets/a2e36cf7-a6a4-4861-8a77-b22fef0b4c7b)
+
+Home:
+![image](https://github.com/user-attachments/assets/e97a3642-afce-4cc2-805b-20e90e7bbf58)
+
+
 
 Ссылка на редактор дизайна
 https://www.figma.com/design/RNe4cKMj4bttBO3lnzswjp/RB?node-id=0-1&node-type=canvas&t=VBhevS6rPRpwazMt-0
