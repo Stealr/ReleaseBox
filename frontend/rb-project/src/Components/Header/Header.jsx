@@ -7,7 +7,7 @@ function Home() {
         <div className="header">
             <div className='content-header'>
                 {/* <img src=''> */}
-                <div className="logo">ReleaseBox</div>
+                <img src='/src/assets/LOGO.png' alt='logo'/>
                 <div className='center'>
                     <nav className="navigation">
                         <a href="home">Home</a>

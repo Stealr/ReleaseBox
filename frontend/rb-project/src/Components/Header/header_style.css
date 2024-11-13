@@ -3,92 +3,44 @@
      padding: 25px 0 25px 0;
      display: flex;
      justify-content: center;
-     /* position: fixed; Фиксируем шапку */
+     /* position: fixed; */
 
  }
 
  .content-header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-    width: 80%;
-    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+    font-size: 18px;
  }
 
- .logo {
-     font-size: 1.5rem;
-     font-weight: bold;
- }
+.content-header img {
+    width: 165px;
+    height: auto;
+}
 
  .center {
      display: flex;
      flex-direction: row;
      align-items: center;
-     gap: 10px;
  }
 
  .navigation a {
-     margin: 0 1rem;
+     margin: 0 10px;
      color: rgb(255, 255, 255);
      text-decoration: none;
  }
 
  .search-bar input {
-     padding: 0.5rem;
-     border-radius: 5px;
+     padding: 10px;
+     margin-left: 15px;
+     border-radius: 15px;
      border: none;
  }
 
  .right a {
-     margin-left: 1rem;
+     margin-left: 1.8vw;
      color: white;
      text-decoration: none;
- }
-
- .content {
-     display: flex;
-     justify-content: space-around;
-     padding: 2rem;
- }
-
- .intro {
-     max-width: 600px;
- }
-
- .intro h1 {
-     font-size: 2.5rem;
-     margin-bottom: 1rem;
- }
-
- .intro p {
-     margin-bottom: 1rem;
- }
-
- .auth-buttons button {
-     margin: 0.5rem;
-     padding: 0.5rem 1rem;
-     background-color: #ff7043;
-     border: none;
-     color: white;
-     cursor: pointer;
-     border-radius: 5px;
- }
-
- .statistics {
-     background: rgba(0, 0, 0, 0.5);
-     padding: 1rem;
-     border-radius: 10px;
- }
-
- .statistics h3 {
-     margin-bottom: 1rem;
- }
-
- .statistics ul {
-     list-style: none;
-     padding: 0;
- }
-
- .statistics li {
-     margin: 0.5rem 0;
  }
