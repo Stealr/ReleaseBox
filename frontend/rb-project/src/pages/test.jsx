@@ -37,7 +37,7 @@ function Test() {
                     </li>
                 ))}
             </ul>
-            {console.log(data)}
+            {console.log(data[0].name)}
         </div>
     )
 }

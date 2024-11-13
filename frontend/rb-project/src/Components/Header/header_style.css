@@ -1,0 +1,94 @@
+ .header {
+     background: #1b1b2f;
+     padding: 25px 0 25px 0;
+     display: flex;
+     justify-content: center;
+     /* position: fixed; Фиксируем шапку */
+
+ }
+
+ .content-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+    width: 80%;
+    
+ }
+
+ .logo {
+     font-size: 1.5rem;
+     font-weight: bold;
+ }
+
+ .center {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .navigation a {
+     margin: 0 1rem;
+     color: rgb(255, 255, 255);
+     text-decoration: none;
+ }
+
+ .search-bar input {
+     padding: 0.5rem;
+     border-radius: 5px;
+     border: none;
+ }
+
+ .right a {
+     margin-left: 1rem;
+     color: white;
+     text-decoration: none;
+ }
+
+ .content {
+     display: flex;
+     justify-content: space-around;
+     padding: 2rem;
+ }
+
+ .intro {
+     max-width: 600px;
+ }
+
+ .intro h1 {
+     font-size: 2.5rem;
+     margin-bottom: 1rem;
+ }
+
+ .intro p {
+     margin-bottom: 1rem;
+ }
+
+ .auth-buttons button {
+     margin: 0.5rem;
+     padding: 0.5rem 1rem;
+     background-color: #ff7043;
+     border: none;
+     color: white;
+     cursor: pointer;
+     border-radius: 5px;
+ }
+
+ .statistics {
+     background: rgba(0, 0, 0, 0.5);
+     padding: 1rem;
+     border-radius: 10px;
+ }
+
+ .statistics h3 {
+     margin-bottom: 1rem;
+ }
+
+ .statistics ul {
+     list-style: none;
+     padding: 0;
+ }
+
+ .statistics li {
+     margin: 0.5rem 0;
+ }
