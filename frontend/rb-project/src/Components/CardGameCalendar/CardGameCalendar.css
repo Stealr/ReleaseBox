@@ -1,0 +1,103 @@
+.card-game-calendar {
+    width: 211px;
+    height: 320px;
+}
+
+.card-top {
+    display: flex;
+    flex-direction: column;
+    width: 211px;
+    height: 235px;
+    background-color: #4c4774;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-bottom {
+    display: flex;
+    flex-direction: column;
+    width: 211px;
+    height: 102px;
+    background-color: #343052;
+    border-radius: 0 0 10px 10px;
+}
+
+.NumberofDay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 19px;
+    height: 19px;
+    background-color: #343052;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 20px 0 15px 20px;
+}
+
+.name-game {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.switchers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 6px 0 6px;
+    margin-top: 40px;
+}
+
+.switchers .left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    background-color: #343052;
+    border-radius: 20px;
+    padding: 3px;
+}
+
+.switchers .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    background-color: #343052;
+    border-radius: 20px;
+    padding: 3px;
+}
+
+.card-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.card-game-calendar .info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 120px;
+    margin-top: auto;
+    margin-bottom: auto;
+    gap: 8px;
+
+}
+
+.card-game-calendar .amount-games {
+    display: flex;
+    flex-direction: row;
+    text-align:start;
+    gap: 3px;
+    margin-bottom: 5px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background-color: #dbdbdb;
+    border-radius: 50%;
+    
+  }
