@@ -4,7 +4,6 @@
     display: flex;
     justify-content: center;
     /* position: fixed; */
-
 }
 
 .content-header {
@@ -72,7 +71,7 @@
   }
   
   .dropdown-menu-right {
-    display: block;
+    display: none;
     position: absolute;
     top: 35px;
     left: 0;
@@ -153,7 +152,7 @@
     .menu-container-center {
         display: inline-block;
     }
-    .navigation a {
+    .header .navigation a {
         display: none;
     }
 }
