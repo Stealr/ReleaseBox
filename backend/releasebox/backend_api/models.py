@@ -26,6 +26,7 @@ class CustomUser(AbstractUser):
 
     class Meta:
         db_table = 'backend_api_custom_user'
+
     def add_to_user_collection(self, collection_name, game_id):
         if self.userCollections is None:
             self.userCollections = {'Wishlist': [],
