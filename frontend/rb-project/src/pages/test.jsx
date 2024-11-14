@@ -8,23 +8,63 @@ function Test() {
     // console.log("test")
     // axios.get('http://localhost:8000')
 
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([{}]);
 
+    // axios.get('http://localhost:8000/games/')
+    // .then(response => {
+    //     setData(response.data);
+    // })
+    // .catch(error => {
+    //     console.error(error);
+    // });
 
-    useEffect(() => {
-        axios.get('http://localhost:8000')
-            .then(response => {
-                setData(response.data);
-            })
-            .catch(error => {
-                console.error(error);
+    // useEffect(() => {
+
+    // }, []);
+
+    const sendData = async (data) => {
+        try {
+            console.log("after in")
+            const response = await axios.post('http://localhost:8000/games/addToCollection/', data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
-    }, []);
+            console.log("in func ")
+        }
+        catch (error) {
+            console.log('Error ', error.response)
+        }
+
+    }
+
+    const sendData_reg = async (data) => {
+        try {
+            console.log("after in")
+            const response = await axios.post('http://localhost:8000/register/', data, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log("in func ")
+        }
+        catch (error) {
+            console.log('Error ', error.response)
+        }
+
+    }
+
+    console.log("out func ")
+    const data = { 'username': 'newuser2', 'email': 'email@gmail.com', 'password': '5dads23', 'userCollections': {} }
+
+    // sendData({ 'user_id': 2, 'collection_name': 'Done', 'gameId': 523})
+    // sendData_reg({ 'username': 'newuser', 'email': 'email@gmail.com', 'password': '5dads23', 'userCollections': {}})
 
     return (
         <div>
             <h1>Data from Django</h1>
-            <ul>
+            <button onClick={() => sendData_reg(data)} > test button</button>
+            {/* <ul>
                 {data.map(data => (
                     <li key={data.id}>
                         <h2>{data.name}</h2>
@@ -37,7 +77,7 @@ function Test() {
                     </li>
                 ))}
             </ul>
-            {console.log(data[0].name)}
+            {console.log("test")} */}
         </div>
     )
 }
