@@ -1,0 +1,24 @@
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background-color: #26253bd8;
+    width: 1656px;
+    min-height: 300px;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 150px;
+    margin-bottom: 150px;
+
+    /* background: #ffffffd9 */
+}
+
+.container .list-games-grid {
+    display: flex;
+    justify-content: center;
+    margin: 70px; 
+}   

@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from "/src/Components/CardGameList/CardGameList.jsx";
+import "./GameList.css";
 
 function GameList({ data }) { // Деструктурируем пропс
     return (

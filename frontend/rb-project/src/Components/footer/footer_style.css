@@ -1,9 +1,9 @@
 .footer {
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #08081d;
+    background-color: #0D0D18;
     color: white;
     padding: 18px 0 18px 0;
     display:  flex;
