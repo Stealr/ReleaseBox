@@ -1,7 +1,9 @@
 import React from 'react';
 import "./CardGameCalendar.css";
 
-function Home() {
+// TODO Добавить кнопку добавления в коллекцию
+
+function CardGameCalendar() {
     return (
         <div className='card-game-calendar'>
             <div className='card-top'>
@@ -42,4 +44,4 @@ function Home() {
     );
 }
 
-export default Home
+export default CardGameCalendar

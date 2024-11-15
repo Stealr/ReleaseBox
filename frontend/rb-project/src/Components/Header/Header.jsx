@@ -1,7 +1,7 @@
 import React from 'react';
 import "./header_style.css";
 
-function Home() {
+function Header() {
 
     return (
         <div className="header">
@@ -57,4 +57,4 @@ function Home() {
     );
 }
 
-export default Home
+export default Header
