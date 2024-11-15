@@ -4,12 +4,9 @@ import axios from "axios";
 
 
 function Test() {
-    // const API_URL = "http://127.0.0.1:8000/api/students/"
-    // console.log("test")
-    // axios.get('http://localhost:8000')
-
     // const [data, setData] = useState([{}]);
 
+    // useEffect(() => {
     // axios.get('http://localhost:8000/games/')
     // .then(response => {
     //     setData(response.data);
@@ -17,9 +14,6 @@ function Test() {
     // .catch(error => {
     //     console.error(error);
     // });
-
-    // useEffect(() => {
-
     // }, []);
 
     const sendData = async (data) => {
