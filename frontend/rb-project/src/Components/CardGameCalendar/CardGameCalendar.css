@@ -3,7 +3,7 @@
     height: 320px;
 }
 
-.card-top {
+.card-game-calendar .card-top {
     display: flex;
     flex-direction: column;
     width: 211px;
@@ -12,7 +12,7 @@
     border-radius: 10px 10px 0 0;
 }
 
-.card-bottom {
+.card-game-calendar .card-bottom {
     display: flex;
     flex-direction: column;
     width: 211px;
@@ -21,7 +21,7 @@
     border-radius: 0 0 10px 10px;
 }
 
-.NumberofDay {
+.card-game-calendar .NumberofDay {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,12 +33,12 @@
     margin: 20px 0 15px 20px;
 }
 
-.name-game {
+.card-game-calendar .name-game {
     margin-left: 20px;
     font-size: 20px;
 }
 
-.switchers {
+.card-game-calendar .switchers {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -46,7 +46,7 @@
     margin-top: 40px;
 }
 
-.switchers .left {
+.card-game-calendar .switchers .left {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +57,7 @@
     padding: 3px;
 }
 
-.switchers .right {
+.card-game-calendar .switchers .right {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,7 +68,7 @@
     padding: 3px;
 }
 
-.card-bottom {
+.card-game-calendar .card-bottom {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -94,7 +94,7 @@
     margin-bottom: 5px;
 }
 
-.dot {
+.card-game-calendar .dot {
     width: 6px;
     height: 6px;
     background-color: #dbdbdb;
