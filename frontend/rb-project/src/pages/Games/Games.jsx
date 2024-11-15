@@ -13,7 +13,6 @@ function Games() {
         axios.get('http://localhost:8000/games/')
             .then(response => {
                 setData(response.data);
-                console.info("The data has been successfully recorded!");
             })
             .catch(error => {
                 console.error(error);
@@ -32,12 +31,14 @@ function Games() {
                 }}
             >
                 <div className='container'>
-                    <div className='filters'>
-                        <h3>Filters</h3>
-                    </div>
-                    <p>Games are found: {Object.keys(data).length}</p>
-                    <div className='sort'>
-                        <button>sort</button>
+                    <div className='filters-sort'>
+                        <div className='filters'>
+                            <h3>Filters</h3>
+                        </div>
+                        <p>Games are found: {Object.keys(data).length}</p>
+                        <div className='sort'>
+                            <button>sort</button>
+                        </div>
                     </div>
                     <div className='list-games-grid'>
                         <GameList data={data} />
