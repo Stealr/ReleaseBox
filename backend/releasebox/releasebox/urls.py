@@ -13,5 +13,4 @@ urlpatterns = [
     path('register/', RegisterView.as_view()),
     path('login/', CustomTokenObtainPairView.as_view()),
     path('games/addToCollection/', addToCollection)
-    # const response = await fetch('http://localhost:8000/games/addToCollection/'
-]
+    ]

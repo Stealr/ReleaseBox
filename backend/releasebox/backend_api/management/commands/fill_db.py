@@ -23,17 +23,22 @@ class Command(BaseCommand):
                         'gameId': game.get('id'),
                         'name': game.get('name'),
                         'released': game.get('released'),
+                        'rating': game.get('rating'),
                         'platform': ', '.join([platform.get('platform').get('name') for platform in game.get('parent_platforms', [])]),
                         'genres': ', '.join([genre.get('name') for genre in game.get('genres', [])]),
+                        'stores': ', '.join([store.get("store").get('name') for store in game.get('stores', [])]),
+                        'esrb_rating': game.get('esrb_rating', {}).get('name') if game.get('esrb_rating') else 'null',
+                        'tags': ', '.join([tag.get('name') for tag in game.get('tags', [])]),
+                        'short_screenshots': ', '.join([screen.get('image') for screen in game.get('short_screenshots', [])]),
                         'metacritic': game.get('metacritic'),
-                        'imageBackground': game.get('background_image')
+                        'imageBackground': game.get('background_image') if game.get('background_image') else 'null',
                     }
                     serializer = GameSerializer(data=item)
                     if serializer.is_valid():
                         serializer.save()
                     else:
                         self.stdout.write(self.style.ERROR(f'Error saving data: {serializer.errors}'))
-            self.stdout.write(self.style.SUCCESS('Database' + str(model_name) + 'filled successfully!'))
+            self.stdout.write(self.style.SUCCESS('Database ' + str(model_name) + ' filled successfully!'))
         if model_name.lower() == 'UnreleasedGamesInfo'.lower():
             for i in range(1,2):
                 url = 'https://api.rawg.io/api/games?key=d6c9714af1784481affffd3493eff327'+\

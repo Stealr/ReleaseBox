@@ -12,20 +12,29 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 def getGame(request, id):
-    url = 'https://api.rawg.io/api/games/'+ str(id) + '?key=d6c9714af1784481affffd3493eff327'
+    url = 'https://api.rawg.io/api/games/' + str(id) + '?key=d6c9714af1784481affffd3493eff327'
     response = requests.get(url)
     game = response.json()
     item = {
         'gameId': game.get('id'),
         'name': game.get('name'),
-        'rating': game.get('rating'),
         'released': game.get('released'),
+        'rating': game.get('rating'),
         'platform': ', '.join([platform.get('platform').get('name') for platform in game.get('parent_platforms', [])]),
         'genres': ', '.join([genre.get('name') for genre in game.get('genres', [])]),
+        'stores': ', '.join([store.get("store").get('name') for store in game.get('stores', [])]),
         'metacritic': game.get('metacritic'),
         'publishers': ', '.join([pub.get('name') for pub in game.get('publishers', [])]),
         'developers': ', '.join([dev.get('name') for dev in game.get('developers', [])]),
+        'tags': ', '.join([tag.get('name') for tag in game.get('tags', [])]),
         'imageBackground': game.get('background_image'),
+        'system_requirements': {
+                                platform.get("platform").get("name"): {
+                                    key: platform.get("requirements", {}).get(key)
+                                    for key in platform.get("requirements", {}).keys()
+                                }
+                                for platform in game.get("platforms", [])
+                                },
         'description': game.get('description_raw')
     }
     return JsonResponse(item)
@@ -35,12 +44,17 @@ class GameInfoView(APIView):
     def get(self, request):
         output = [
             {
-                'id': output.gameId,
+                'gameId': output.gameId,
                 'name': output.name,
                 'released': output.released,
+                'rating': output.rating,
                 'platform': output.platform,
                 'genres': output.genres,
+                'stores': output.stores,
                 'metacritic': output.metacritic,
+                'esrb_rating': output.esrb_rating,
+                'tags': output.tags,
+                "short_screenshots": output.short_screenshots,
                 'imageBackground': output.imageBackground
             } for output in GameInfo.objects.all()
         ]
@@ -75,12 +89,17 @@ class UnreleasedGameInfoView(APIView):
 
 
 class RegisterView(generics.CreateAPIView):
+    # При POST запросе данные передаются в userSerializer,
+    # который создает экземпляр класса
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer = UserSerializer
     permission_classes = [AllowAny]
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
+    # После регистрации пользователь может отправить POST на
+    # path(token/), которые проверит данные с бд
+    # чтобы получить токен
     pass
 
 
@@ -89,7 +108,11 @@ def addToCollection(request):
     user_id = request.data.get('user_id')
     collection_name = request.data.get('collection_name')
     game_id = request.data.get('gameId')
+    user_rating = request.data.get('user_rating')
 
     user = CustomUser.objects.get(id=user_id)
-    user.add_to_user_collection(collection_name, game_id)
+    if user_rating:
+        user.add_to_user_collection(collection_name, game_id, user_rating)
+    else:
+        user.add_to_user_collection(collection_name, game_id)
     return Response({'message': 'Game added to collection'})

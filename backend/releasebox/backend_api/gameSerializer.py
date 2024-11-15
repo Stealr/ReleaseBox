@@ -6,8 +6,11 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = GameInfo
         fields = ['gameId', 'name',
-                  'released', 'platform',
-                  'genres', 'metacritic',
+                  'released', 'rating',
+                  'platform', 'genres',
+                  'stores', 'metacritic',
+                  'esrb_rating', 'tags',
+                  'short_screenshots',
                   'imageBackground']
 
 
