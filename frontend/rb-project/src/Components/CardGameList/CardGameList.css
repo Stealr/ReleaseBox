@@ -1,10 +1,9 @@
 .card-game-list {
-    width: 290px;
-    height: 308px;
+    max-width: 1200px;
+    transition: all 0.3s ease-out;
 }
 
 .card-game-list .card-top {
-    width: 290px;
     height: 209px;
     background-color: #4c4774;
     border-radius: 10px 10px 0 0;
@@ -57,7 +56,6 @@
 .card-game-list .card-bottom {
     display: flex;
     flex-direction: column;
-    width: 290px;
     height: 98px;
     background-color: #343052;
     border-radius: 0 0 10px 10px;
@@ -66,15 +64,23 @@
 .card-game-list .info {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    height: 100%;
 
-    padding-top: 20px;
+    padding: 15px;
 }
 
 .card-game-list .game-name {
     font-size: 18px;
-    width: 70%;
+    width: 77%;
     line-height: 23px;
+    display: flex;
+    align-items: center;
+}
+
+.card-game-list .platforms {
+    display: flex;
+    align-items: center;
 }
 
 .card-game-list .platforms-grid {
