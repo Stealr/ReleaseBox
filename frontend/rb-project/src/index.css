@@ -1,5 +1,30 @@
 body {
-    font-family: Arial, sans-serif;
-    color: white;
-    background: #19182C;
-  }
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #19182C;
+}
+
+/* Стилизация всей полосы прокрутки */
+::-webkit-scrollbar {
+  width: 10px; /* ширина вертикального скроллбара */
+  height: 10px; /* высота горизонтального скроллбара */
+  background-color: #19182C; /* цвет фона полосы */
+  border-radius: 5px; /* скругление краев */
+}
+
+/* Стилизация ползунка (ползущий элемент) */
+::-webkit-scrollbar-thumb {
+  background-color: #ff7f50d7; /* цвет ползунка */
+  border-radius: 4px; /* скругление краев */
+}
+
+/* Стилизация при наведении на ползунок */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b85937d7; /* цвет при наведении */
+}
+
+/* Стилизация трека (задний фон полосы прокрутки) */
+::-webkit-scrollbar-track {
+  background: #231e41; /* цвет трека */
+  border-radius: 5px; /* скругление краев трека */
+}

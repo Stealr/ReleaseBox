@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./footer_style.css";
 
 function Footer() {
@@ -8,10 +9,10 @@ function Footer() {
                 <img src='/src/assets/LOGO.png' alt='logo' />
 
                 <nav className="navigation">
-                    <a href="home">Home</a>
-                    <a href="games">Games</a>
-                    <a href="calendar">Calendar</a>
-                    <a href="reviews">Reviews</a>
+                    <Link to="/">Home</Link>
+                    <Link to="/games">Games</Link>
+                    <Link to="/calendar">Calendar</Link>
+                    <Link to="/reviews">Reviews</Link>
                 </nav>
             </div>
         </div>

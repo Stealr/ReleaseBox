@@ -1,14 +1,20 @@
-import React from 'react';
+import {React, memo} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from "/src/Components/Header/Header.jsx";
+import Footer from "/src/Components/Footer/Footer.jsx";
 import Test from './pages/test.jsx';
 import Home from './pages/Home/home.jsx';
 import Games from './pages/Games/Games.jsx';
 
 
+const MemoizedHeader = memo(Header);
+const MemoizedFooter = memo(Footer);
+
 function App() {
 
   return (
     <Router>
+      <MemoizedHeader />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Calendar" element={<Test />} />
@@ -18,6 +24,7 @@ function App() {
         <Route path="/Profile" element={<Test />} />
         <Route path="/Profile/Settings" element={<Test />} />
       </Routes>
+      <MemoizedFooter />
     </Router>
   )
 }

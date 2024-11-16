@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import Header from "/src/Components/Header/Header.jsx";
-import Footer from "/src/Components/Footer/Footer.jsx";
 import GameList from "/src/Components/GameList/GameList.jsx";
 import "./Games.css";
 import "/src/pages/main-container.css";
@@ -25,7 +23,6 @@ function Games() {
 
     return (
         <div>
-            <Header />
             <div className='main-content'
                 style={{
                     backgroundImage: `url(/src/assets/vampire-the-masquerade-bloodlines-2.jpg)`,
@@ -48,7 +45,6 @@ function Games() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

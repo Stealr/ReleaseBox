@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./header_style.css";
 
-function Header() {
-
+function Header(props) {
+    console.log("header render ", props)
     return (
         <div className="header">
             <div className='content-header'>
@@ -10,19 +11,19 @@ function Header() {
                 <img src='/src/assets/LOGO.png' alt='logo' />
                 <div className='center'>
                     <nav className="navigation">
-                        <a href="home">Home</a>
-                        <a href="games">Games</a>
-                        <a href="calendar">Calendar</a>
-                        <a href="reviews">Reviews</a>
+                        <Link to="/">Home</Link>
+                        <Link to="/games">Games</Link>
+                        <Link to="/calendar">Calendar</Link>
+                        <Link to="/reviews">Reviews</Link>
                     </nav>
 
                     <div class="menu-container-center">
                         <span>Navigation</span>
                         <div class="dropdown-menu-center">
-                            <a href="home">Home</a>
-                            <a href="games">Games</a>
-                            <a href="calendar">Calendar</a>
-                            <a href="reviews">Reviews</a>
+                            <Link to="/">Home</Link>
+                            <Link to="/games">Games</Link>
+                            <Link to="/calendar">Calendar</Link>
+                            <Link to="/reviews">Reviews</Link>
                         </div>
                     </div>
 
@@ -37,16 +38,16 @@ function Header() {
 
                     <div className='normal-size'>
                         <a href="#en">EN</a>
-                        <a href="#sign-up">Sign up</a>
-                        <a href="#log-in">Log in</a>
+                        <Link to="/sign up">Sign up</Link>
+                        <Link to="/log in">Log in</Link>
                     </div>
 
                     <div class="menu-container-right">
                         <span>☰</span>
                         <div class="dropdown-menu-right">
                             <a href="#">EN</a>
-                            <a href="#">Sign up</a>
-                            <a href="#">Log in</a>
+                            <Link to="/sign up">Sign up</Link>
+                            <Link to="/log in">Log in</Link>
                         </div>
                     </div>
 
