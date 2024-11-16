@@ -4,6 +4,7 @@ import Header from "/src/Components/Header/Header.jsx";
 import Footer from "/src/Components/Footer/Footer.jsx";
 import GameList from "/src/Components/GameList/GameList.jsx";
 import "./Games.css";
+import "/src/pages/main-container.css";
 
 
 function Games() {

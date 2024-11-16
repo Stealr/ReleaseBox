@@ -1,6 +1,6 @@
 .card-game-list {
     max-width: 1200px;
-    transition: all 0.3s ease-out;
+    /* transition: all 0.3s ease-out; */
 }
 
 .card-game-list .card-top {
