@@ -7,12 +7,14 @@ import "./Games.css";
 
 
 function Games() {
-    const [data, setData] = useState([{}]);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:8000/games/')
             .then(response => {
                 setData(response.data);
+                console.log("Successful data recording! ")
+                console.log(data)
             })
             .catch(error => {
                 console.error(error);
