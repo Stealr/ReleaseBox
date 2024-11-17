@@ -10,9 +10,9 @@ function Footer() {
 
                 <nav className="navigation">
                     <Link to="/">Home</Link>
-                    <Link to="/games">Games</Link>
-                    <Link to="/calendar">Calendar</Link>
-                    <Link to="/reviews">Reviews</Link>
+                    <Link to="/Games">Games</Link>
+                    <Link to="/Calendar">Calendar</Link>
+                    <Link to="/Reviews">Reviews</Link>
                 </nav>
             </div>
         </div>

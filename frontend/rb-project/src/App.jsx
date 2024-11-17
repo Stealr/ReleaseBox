@@ -5,6 +5,7 @@ import Footer from "/src/Components/Footer/Footer.jsx";
 import Test from './pages/test.jsx';
 import Home from './pages/Home/home.jsx';
 import Games from './pages/Games/Games.jsx';
+import Calendar from './pages/Calendar/calendar.jsx';
 
 
 const MemoizedHeader = memo(Header);
@@ -17,7 +18,7 @@ function App() {
       <MemoizedHeader />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Calendar" element={<Test />} />
+        <Route path="/Calendar" element={<Calendar />} />
         <Route path="/Games" element={<Games />} />
         <Route path="/Login" element={<Test />} />
         <Route path="/{Game}" element={<Test />} />

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import "./header_style.css";
 
 function Header(props) {
-    console.log("header render ", props)
     return (
         <div className="header">
             <div className='content-header'>
@@ -12,18 +11,18 @@ function Header(props) {
                 <div className='center'>
                     <nav className="navigation">
                         <Link to="/">Home</Link>
-                        <Link to="/games">Games</Link>
-                        <Link to="/calendar">Calendar</Link>
-                        <Link to="/reviews">Reviews</Link>
+                        <Link to="/Games">Games</Link>
+                        <Link to="/Calendar">Calendar</Link>
+                        <Link to="/Reviews">Reviews</Link>
                     </nav>
 
                     <div class="menu-container-center">
                         <span>Navigation</span>
                         <div class="dropdown-menu-center">
                             <Link to="/">Home</Link>
-                            <Link to="/games">Games</Link>
-                            <Link to="/calendar">Calendar</Link>
-                            <Link to="/reviews">Reviews</Link>
+                            <Link to="/Games">Games</Link>
+                            <Link to="/Calendar">Calendar</Link>
+                            <Link to="/Reviews">Reviews</Link>
                         </div>
                     </div>
 
@@ -38,16 +37,16 @@ function Header(props) {
 
                     <div className='normal-size'>
                         <a href="#en">EN</a>
-                        <Link to="/sign up">Sign up</Link>
-                        <Link to="/log in">Log in</Link>
+                        <Link to="/Sign up">Sign up</Link>
+                        <Link to="/Log in">Log in</Link>
                     </div>
 
                     <div class="menu-container-right">
                         <span>☰</span>
                         <div class="dropdown-menu-right">
                             <a href="#">EN</a>
-                            <Link to="/sign up">Sign up</Link>
-                            <Link to="/log in">Log in</Link>
+                            <Link to="/Sign up">Sign up</Link>
+                            <Link to="/Log in">Log in</Link>
                         </div>
                     </div>
 
