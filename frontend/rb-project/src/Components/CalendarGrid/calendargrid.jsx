@@ -6,6 +6,7 @@ import "./calendargrid.css";
 
 function CalendarGrid(props) {
     const grouped = props["grouped_data"];
+    const dayofweek = props["dayofweek"];
 
     return (
         <div className="calendar-grid">
@@ -17,6 +18,9 @@ function CalendarGrid(props) {
             <div className="calendar-weekday">Saturday</div>
             <div className="calendar-weekday">Sunday</div>
 
+            {Array.from({ length: dayofweek }, (_, index) => (
+                <div key={index} className="empty-div"></div>
+            ))}
 
             {grouped.map((games, index) => (
                 games.length > 0 ? (
@@ -28,7 +32,7 @@ function CalendarGrid(props) {
                     </div>
                 ) : (
                     <div className="placeholder" key={index}>
-                        <Placeholder day={index + 1}/>
+                        <Placeholder day={index + 1} />
                     </div>
                 )
             ))}

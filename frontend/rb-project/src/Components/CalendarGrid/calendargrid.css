@@ -10,3 +10,9 @@
     text-align: center;
     padding: 10px 0;
 }
+
+.empty-div {
+    width: 211px;
+    height: 335px;
+    background-color: #222135d8;
+}

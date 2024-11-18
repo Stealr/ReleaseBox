@@ -15,7 +15,6 @@ import "./CardGameCalendar.css";
 // 'imageBackground': output.imageBackground
 
 function CardGameCalendar({ day, games }) {
-    console.log(day, games);
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -74,7 +73,7 @@ function CardGameCalendar({ day, games }) {
                         {games[currentIndex]?.name}
                     </div>
                 </div>
-                
+
                 {games.length > 1 && (
                     <div className='amount-games'>
                         {games.map((_, index) => (

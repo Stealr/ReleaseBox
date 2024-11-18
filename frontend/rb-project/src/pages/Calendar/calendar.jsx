@@ -9,6 +9,18 @@ import "./calendar.css";
 function Calendar() {
     const [data, setData] = useState([]);
 
+    const  definedayofweek = () => {
+        const today = new Date();
+
+        const month = today.getMonth() + 1;
+        const year = today.getFullYear();
+
+        const firstDayOfMonth = new Date(year, month - 1, 0);
+        const dayOfWeek = firstDayOfMonth.getDay();
+
+        return dayOfWeek;
+    }
+
     const initializeDays = () => {
         const today = new Date();
 
@@ -58,7 +70,7 @@ function Calendar() {
                 <div className="container">
                     Count of new releases in this month: {data.length}
                     <div className="calendar">
-                        <CalendarGrid grouped_data={groupByDay(data)} />
+                        <CalendarGrid grouped_data={groupByDay(data)} dayofweek={definedayofweek()} />
                     </div>
                 </div>
             </div>
