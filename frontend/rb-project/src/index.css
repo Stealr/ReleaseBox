@@ -2,6 +2,7 @@ body {
   font-family: Arial, sans-serif;
   color: white;
   background: #19182C;
+  line-height: 23px;
 }
 
 /* Стилизация всей полосы прокрутки */

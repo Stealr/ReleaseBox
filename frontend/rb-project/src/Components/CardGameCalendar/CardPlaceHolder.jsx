@@ -2,11 +2,14 @@ import React from 'react';
 import "./CardPlaceHolder.css";
 
 
-function CardGameCalendar({day}) {
+function CardGameCalendar({ day }) {
     return (
         <div className='card-placeholder'>
-            <div className='NumberofDay'>
-                {day}
+            <div className='day'>
+                <div className='NumberofDay'>
+                    {day}
+                </div>
+                <div></div>
             </div>
         </div>
 

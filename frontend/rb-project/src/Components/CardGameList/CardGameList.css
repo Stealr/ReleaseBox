@@ -39,12 +39,13 @@
     color: #72fc6e;
     border: 1px solid #72fc6e;
     border-radius: 6px;
-    padding: 5px;
+    padding: 2px 4px;
     font-weight: 600;
     
 }
 
 .card-game-list .button-add {
+    display: flex;
     width: 15px;
     height: 15px;
     background-color: #ff7f50d7;
@@ -73,7 +74,6 @@
 .card-game-list .game-name {
     font-size: 18px;
     width: 77%;
-    line-height: 23px;
     display: flex;
     align-items: center;
 }

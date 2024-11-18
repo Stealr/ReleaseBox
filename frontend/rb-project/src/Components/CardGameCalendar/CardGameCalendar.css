@@ -6,12 +6,30 @@
 .card-game-calendar .card-top {
     display: flex;
     flex-direction: column;
-    width: 211px;
+
     height: 235px;
     background-color: #4c4774;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
     position: relative;
+}
+
+.card-game-calendar .button-add {
+    display: flex;
+    width: 15px;
+    height: 15px;
+    background-color: #ff7f50d7;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-game-calendar .day-add {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
 }
 
 .card-game-calendar .card-media {
@@ -36,20 +54,21 @@
 }
 
 .NumberofDay {
+    font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 19px;
     height: 19px;
-    background-color: #343052;
+    background-color: #343052d2;
     border-radius: 5px;
-    padding: 3px;
-    margin: 20px 0 15px 20px;
+    padding: 5px;
+    /* margin: 20px 0 15px 20px; */
     position: relative;
 }
 
 .card-game-calendar .name-game {
-    font-size: 20px;
+    font-size: 18px;
     position: relative;
 }
 
@@ -60,48 +79,45 @@
     margin: 0 6px 0 6px;
     margin-top: 40px;
     position: relative;
+    user-select: none;
+    font-size: 21px;
 }
 
 .card-game-calendar .switchers .left {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
-    background-color: #343052;
+    background-color: #343052e8;
     border-radius: 20px;
-    padding: 3px;
+    padding: 6px 7px;
+    cursor: pointer;
 }
 
 .card-game-calendar .switchers .right {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
-    background-color: #343052;
+    background-color: #343052e8;
     border-radius: 20px;
-    padding: 3px;
+    padding: 6px 7px;
+    cursor: pointer;
 }
 
 .card-game-calendar .card-bottom {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* align-items: center; */
-    
 }
 
 .card-game-calendar .info {
-    /* display: flex;
+    display: flex;
     margin-top: auto;
-    margin-bottom: auto; */
+    margin-bottom: auto;
+    margin-left: 10px;
 }
 
 .card-game-calendar .amount-games {
     display: flex;
     flex-direction: row;
-    text-align:start;
+    justify-content: center;
     gap: 3px;
     margin-bottom: 5px;
 }

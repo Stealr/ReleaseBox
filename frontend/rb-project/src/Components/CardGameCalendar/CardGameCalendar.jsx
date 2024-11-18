@@ -5,6 +5,7 @@ import "./CardGameCalendar.css";
 // TODO Если не зарегестрированный пользователь нажимает на добавить игру в свою коллекцию, то появляется надпись над кнопкой добавить и 
 // эта надпись медленно поднимает и исчезает
 // TODO При наведении на карточку увеличивать её и добавить тень. С плавным переходом
+// TODO Заменить стрелочку на картинку
 
 // 'id': output.gameId,
 // 'name': output.name,
@@ -34,16 +35,21 @@ function CardGameCalendar({ day, games }) {
                 <div className='card-media'>
                     <img src={games[currentIndex]?.imageBackground} />
                 </div>
-                <div className='NumberofDay'>
-                    {day}
+                <div className='day-add'>
+                    <div className='NumberofDay'>
+                        {day}
+                    </div>
+                    <div className='button-add'>
+                        <img src='/src/assets/plus.svg' alt="Add button" />
+                    </div>
                 </div>
 
                 <div className='switchers'>
                     <div className="left" onClick={handlePrev}>
-                        ←
+                    🠈
                     </div>
                     <div className="right" onClick={handleNext}>
-                        →
+                    🠊
                     </div>
                 </div>
             </div>
