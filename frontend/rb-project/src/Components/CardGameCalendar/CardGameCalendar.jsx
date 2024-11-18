@@ -29,6 +29,10 @@ function CardGameCalendar({ day, games }) {
         );
     };
 
+    const platform_icon_define = (name) => {
+        return `/src/assets/platforms/${name.toLowerCase()}.svg`;
+    }
+
     return (
         <div className='card-game-calendar'>
             <div className='card-top'>
@@ -43,36 +47,47 @@ function CardGameCalendar({ day, games }) {
                         <img src='/src/assets/plus.svg' alt="Add button" />
                     </div>
                 </div>
-
-                <div className='switchers'>
-                    <div className="left" onClick={handlePrev}>
-                    🠈
+                {games.length > 1 && (
+                    <div className='switchers'>
+                        <div className="left" onClick={handlePrev}>
+                            🠈
+                        </div>
+                        <div className="right" onClick={handleNext}>
+                            🠊
+                        </div>
                     </div>
-                    <div className="right" onClick={handleNext}>
-                    🠊
-                    </div>
-                </div>
+                )}
             </div>
             <div className='card-bottom'>
                 <div className='info'>
+                    <div className='platforms'>
+                        {games[currentIndex]?.platform.split(", ").map((platformName) => (
+                            <img
+                                key={platformName}
+                                src={platform_icon_define(platformName)}
+                                alt={platformName}
+                                className="platform-icon"
+                            />
+                        ))}
+                    </div>
                     <div className='name-game'>
                         {games[currentIndex]?.name}
                     </div>
-                    {/* <p>Releases:</p>
-                    <p>Platforms:</p> */}
                 </div>
-                <div className='amount-games'>
-                    <div className='dot'>
-
+                
+                {games.length > 1 && (
+                    <div className='amount-games'>
+                        {games.map((_, index) => (
+                            <div
+                                key={index}
+                                className={`dot ${index === currentIndex ? "active" : ""
+                                    }`}
+                            ></div>
+                        ))}
                     </div>
-                    <div className='dot'>
-
-                    </div>
-                    <div className='dot'>
-
-                    </div>
-                </div>
+                )}
             </div>
+
         </div>
 
     );

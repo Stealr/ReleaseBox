@@ -1,6 +1,8 @@
 import React from 'react';
 import "./CardGameList.css";
 
+// Добавить вслывающиеся окно при новедении на иконку с платформой. Название платформы
+
 function CardGameList({ name, released, platform, genres, metacritic, imageBackground }) {
 
     const platform_icon_define = (name) => {

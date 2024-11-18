@@ -109,9 +109,11 @@
 
 .card-game-calendar .info {
     display: flex;
+    flex-direction: column;
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
+    gap: 4px;
 }
 
 .card-game-calendar .amount-games {
@@ -127,5 +129,19 @@
     height: 6px;
     background-color: #dbdbdb;
     border-radius: 50%;
-    
-  }
+}
+
+.card-game-calendar .dot.active {
+    background-color: #ff7f50f1;
+}
+
+.card-game-calendar .platforms {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.card-game-calendar .platform-icon {
+    width: 14px;
+    height: auto;
+}
