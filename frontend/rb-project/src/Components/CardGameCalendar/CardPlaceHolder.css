@@ -1,0 +1,7 @@
+.card-placeholder {
+    display: flex;
+    width: 211px;
+    height: 335px;
+    background-color: #4c4774;
+    border-radius: 10px;
+}

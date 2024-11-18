@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import "/src/pages/main-container.css";
 import axios from "axios";
 import CalendarGrid from "/src/Components/CalendarGrid/calendargrid.jsx";
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay } from 'date-fns';
+// import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay } from 'date-fns';
+import "./calendar.css";
+
 
 function Calendar() {
     const [data, setData] = useState([]);
@@ -50,11 +52,11 @@ function Calendar() {
     return (
         <div>
             <div className="main-content">
-                <div className="month-switcher">
+                {/* <div className="month-switcher">
                     nov sep
-                </div>
+                </div> */}
                 <div className="container">
-                    Count of new releases
+                    Count of new releases in this month: {data.length}
                     <div className="calendar">
                         <CalendarGrid grouped_data={groupByDay(data)} />
                     </div>
