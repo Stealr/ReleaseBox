@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import "/src/pages/main-container.css";
 import axios from "axios";
 import CalendarGrid from "/src/Components/CalendarGrid/calendargrid.jsx";
-// import { format, startOfMonth, endOfMonth, eachDayOfInterval, getDay } from 'date-fns';
 import "./calendar.css";
 
 
@@ -29,9 +28,8 @@ function Calendar() {
 
         const number_of_days = new Date(year, month, 0).getDate()
 
-        // ЗАМЕНИТЬ 31 НА number_of_days!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         const days = [];
-        for (let i = 0; i <= 31 - 1; i++) {
+        for (let i = 0; i <= number_of_days - 1; i++) {
             days[i.toString()] = [];
         }
         return days;
@@ -39,9 +37,9 @@ function Calendar() {
 
     const groupByDay = (games) => {
         const grouped = initializeDays();
-
+        
         games.forEach((game) => {
-            const day = new Date(game.released).getDate().toString();
+            const day = new Date(game.releaseDate).getDate().toString();
             grouped[day - 1].push(game);
         });
 
@@ -49,7 +47,7 @@ function Calendar() {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:8000/games/')
+        axios.get('http://localhost:8000/unreleasedGames/')
             .then(response => {
                 setData(response.data);
                 console.log("Successful data recording!")
