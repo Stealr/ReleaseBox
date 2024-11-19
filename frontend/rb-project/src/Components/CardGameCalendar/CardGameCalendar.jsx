@@ -6,13 +6,7 @@ import "./CardGameCalendar.css";
 // эта надпись медленно поднимает и исчезает
 // TODO При наведении на карточку увеличивать её и добавить тень. С плавным переходом
 // TODO Заменить стрелочку на картинку
-
-// 'id': output.gameId,
-// 'name': output.name,
-// 'release date': output.releaseDate,
-// 'platform': output.platform,
-// 'genres': output.genres,
-// 'imageBackground': output.imageBackground
+// TODO Баг с переключением игр, игра исчезает, затем появляется опять прежняя игра, а затем уже новая
 
 function CardGameCalendar({ day, games }) {
 

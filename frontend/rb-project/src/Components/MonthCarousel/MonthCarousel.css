@@ -1,0 +1,39 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1c1c2a;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+  }
+  
+  .arrow-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .months {
+    display: flex;
+    overflow: hidden;
+    width: 300px;
+    justify-content: space-between;
+  }
+  
+  .month {
+    padding: 10px 20px;
+    margin: 0 5px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    opacity: 0.6;
+  }
+  
+  .month.active {
+    transform: scale(1.2);
+    color: #f0f0f0;
+    opacity: 1;
+  }
+  

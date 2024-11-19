@@ -3,12 +3,13 @@ import "/src/pages/main-container.css";
 import axios from "axios";
 import CalendarGrid from "/src/Components/CalendarGrid/calendargrid.jsx";
 import "./calendar.css";
+import MonthCarousel from '../../Components/MonthCarousel/monthcarousel';
 
 
 function Calendar() {
     const [data, setData] = useState([]);
 
-    const  definedayofweek = () => {
+    const definedayofweek = () => {
         const today = new Date();
 
         const month = today.getMonth() + 1;
@@ -37,7 +38,7 @@ function Calendar() {
 
     const groupByDay = (games) => {
         const grouped = initializeDays();
-        
+
         games.forEach((game) => {
             const day = new Date(game.releaseDate).getDate().toString();
             grouped[day - 1].push(game);
@@ -62,10 +63,10 @@ function Calendar() {
     return (
         <div>
             <div className="main-content">
-                {/* <div className="month-switcher">
-                    nov sep
-                </div> */}
                 <div className="container">
+                    <div class="carousel">
+                        <MonthCarousel/>
+                    </div>
                     Count of new releases in this month: {data.length}
                     <div className="calendar">
                         <CalendarGrid grouped_data={groupByDay(data)} dayofweek={definedayofweek()} />
