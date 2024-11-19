@@ -74,7 +74,7 @@ class UnreleasedGameInfoView(APIView):
             {
                 'id': output.gameId,
                 'name': output.name,
-                'release date': output.releaseDate,
+                'releaseDate': output.releaseDate,
                 'platform': output.platform,
                 'genres': output.genres,
                 'imageBackground': output.imageBackground
@@ -160,5 +160,8 @@ def filtration(request):
 
 
 @api_view(['GET'])
-def sorting(request):
-    return GameInfo.objects.all().order_by(str(request.data.get('sorting')))
+def sorting(request):  # request содержит название колонки в таблице
+    if request.data.get('sorting+'):
+        return GameInfo.objects.all().order_by(str(request.data.get('sorting')))
+    if request.data.get('sorting-'):
+        return GameInfo.objects.all().order_by('-' + str(request.data.get('sorting')))
