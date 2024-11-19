@@ -1,6 +1,6 @@
 .card-game-calendar {
-    width: 211px;
-    height: 335px;
+    max-width: 400px;
+
     
 }
 
@@ -67,7 +67,7 @@
 .card-game-calendar .card-bottom {
     display: flex;
     flex-direction: column;
-    width: 211px;
+
     height: 100px;
     background-color: #343052;
     border-radius: 0 0 10px 10px;

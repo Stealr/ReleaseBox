@@ -1,6 +1,6 @@
 .card-placeholder {
     display: flex;
-    width: 211px;
+    max-width: 400px;
     height: 335px;
     background-color: #4c4774;
     border-radius: 10px;
