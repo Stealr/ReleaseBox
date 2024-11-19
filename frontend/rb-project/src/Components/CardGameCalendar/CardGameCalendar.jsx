@@ -17,15 +17,33 @@ import "./CardGameCalendar.css";
 function CardGameCalendar({ day, games }) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isFadingOut, setIsFadingOut] = useState(false);
+    const [isFadingIn, setIsFadingIn] = useState(false);
 
     const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % games.length);
+        if (isFadingIn || isFadingOut) return
+        setIsFadingOut(true);
+        setTimeout(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % games.length);
+            setIsFadingOut(false);
+            setIsFadingIn(true);
+
+            setTimeout(() => setIsFadingIn(false), 300);
+        }, 300);
     };
 
     const handlePrev = () => {
-        setCurrentIndex((prevIndex) =>
-            (prevIndex - 1 + games.length) % games.length
-        );
+        if (isFadingIn || isFadingOut) return
+        setIsFadingOut(true);
+        setTimeout(() => {
+            setCurrentIndex((prevIndex) =>
+                (prevIndex - 1 + games.length) % games.length
+            );
+            setIsFadingOut(false);
+            setIsFadingIn(true);
+
+            setTimeout(() => setIsFadingIn(false), 300);
+        }, 300);
     };
 
     const platform_icon_define = (name) => {
@@ -35,7 +53,8 @@ function CardGameCalendar({ day, games }) {
     return (
         <div className='card-game-calendar'>
             <div className='card-top'>
-                <div className='card-media'>
+                <div className={`card-media ${isFadingOut ? "fading-out" : ""
+                    } ${isFadingIn ? "fading-in" : ""}`}>
                     <img src={games[currentIndex]?.imageBackground} />
                 </div>
                 <div className='day-add'>
@@ -58,7 +77,8 @@ function CardGameCalendar({ day, games }) {
                 )}
             </div>
             <div className='card-bottom'>
-                <div className='info'>
+                <div className={`info ${isFadingOut ? "fading-out" : ""
+                        } ${isFadingIn ? "fading-in" : ""}`}>
                     <div className='platforms'>
                         {games[currentIndex]?.platform.split(", ").map((platformName) => (
                             <img
