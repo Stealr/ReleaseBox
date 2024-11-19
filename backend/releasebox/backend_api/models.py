@@ -5,7 +5,7 @@ from django.contrib.auth.models import  AbstractBaseUser, PermissionsMixin
 
 
 class GameInfo(models.Model):
-    gameId = models.IntegerField(blank=False)
+    gameId = models.IntegerField(blank=False, unique=True)
     name = models.CharField(max_length=255, blank=False)  # Поле для названия игры
     released = models.CharField(max_length=100, blank=False)  # Поле для даты релиза
     rating = models.CharField(max_length=5, blank=True, default='No data')

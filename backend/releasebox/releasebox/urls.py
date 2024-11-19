@@ -7,6 +7,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('games/', GameInfoView.as_view()),
     path('games/<int:id>/', getGame),
+    path('games/filtration', filtration),
+    path('games/sorting/', sorting),
     path('unreleasedGames/', UnreleasedGameInfoView.as_view()),
     path('unreleasedGames/<int:id>/', getGame),
     path('', include('backend_api.urls')),

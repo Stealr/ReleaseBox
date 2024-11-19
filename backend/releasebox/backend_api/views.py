@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.db.models import Q
 
 
 def getGame(request, id):
@@ -116,3 +117,48 @@ def addToCollection(request):
     else:
         user.add_to_user_collection(collection_name, game_id)
     return Response({'message': 'Game added to collection'})
+
+
+@api_view(['GET'])
+def filtration(request):
+    if request.data.get('filtration') == 'month':
+        return GameInfo.objects.filter(
+            released__year=request.data.get('year'),
+            released__month=request.data.get('month')
+        )
+    if request.data.get('filtration') == 'released':
+        return GameInfo.objects.filter(
+            released__gte=str(request.data.get('start')),
+            released__lte=str(request.data.get('end'))
+        )
+    if request.data.get('filtration') == 'metacritic':
+        return GameInfo.objects.filter(
+            metacritic__gte=str(request.data.get('start')),
+            metacritic_lte=str(request.data.get('end'))
+        )
+    if request.data.get('filtration') == 'tags':
+        filters = str(request.data.get('tags')).split(',')
+        query = Q()
+        for filter in filters:
+            filter = filter.strip()
+            query &= Q(tags__icontains=filter)
+        return GameInfo.objects.filter(query)
+    if request.data.get('filtration') == 'platform':
+        filters = str(request.data.get('platform')).split(',')
+        query = Q()
+        for filter in filters:
+            filter = filter.strip()
+            query &= Q(platform__icontains=filter)
+        return GameInfo.objects.filter(query)
+    if request.data.get('filtration') == 'genres':
+        filters = str(request.data.get('genres')).split(',')
+        query = Q()
+        for filter in filters:
+            filter = filter.strip()
+            query &= Q(genres__icontains=filter)
+        return GameInfo.objects.filter(query)
+
+
+@api_view(['GET'])
+def sorting(request):
+    return GameInfo.objects.all().order_by(str(request.data.get('sorting')))
