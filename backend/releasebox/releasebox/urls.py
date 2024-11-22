@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.urls import re_path as url
 from backend_api.views import *
 
 urlpatterns = [
@@ -14,5 +13,6 @@ urlpatterns = [
     path('', include('backend_api.urls')),
     path('register/', RegisterView.as_view()),
     path('login/', CustomTokenObtainPairView.as_view()),
-    path('games/addToCollection/', addToCollection)
-    ]
+    path('games/addToCollection/', addToCollection),
+    path('games/deleteFromCollection/', deleteFromCollection),
+]

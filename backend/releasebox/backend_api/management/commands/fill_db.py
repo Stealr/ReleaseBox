@@ -15,9 +15,10 @@ class Command(BaseCommand):
         if model_name.lower() == 'GameInfo'.lower():
             url = 'https://api.rawg.io/api/games?key=d6c9714af1784481affffd3493eff327' + \
                   '&ordering=-metacritic&page_size=40&page=1'
-            for i in range(1,2):
+            for i in range(1, 2):
                 if url == 'null':
                     break
+            # While url != 'null'
                 response = requests.get(url)
                 data = response.json()
                 url = data.get('next')
@@ -49,9 +50,11 @@ class Command(BaseCommand):
         if model_name.lower() == 'UnreleasedGamesInfo'.lower():
             url = 'https://api.rawg.io/api/games?key=d6c9714af1784481affffd3493eff327' + \
                   '&ordering=-rating&dates=2024-11-01,2024-12-01&page_size=40&page=' + str(1)
+            # Изменить url при конечном заполнении
             for i in range(1, 3):
                 if url == 'null':
                     break
+            # While url != 'null'
                 response = requests.get(url)
                 data = response.json()
                 url = data.get('next')

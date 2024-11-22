@@ -119,6 +119,17 @@ def addToCollection(request):
     return Response({'message': 'Game added to collection'})
 
 
+@api_view(['POST'])
+def deleteFromCollection(request):
+    user_id = request.data.get('user_id')
+    collection_name = request.data.get('collection_name')
+    game_id = request.data.get('gameId')
+
+    user = CustomUser.objects.get(id=user_id)
+    user.delete_from_user_collection(collection_name, game_id)
+    return Response({'message': 'Game deleted from collection'})
+
+
 @api_view(['GET'])
 def filtration(request):
     if request.data.get('filtration') == 'month':

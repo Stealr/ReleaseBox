@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import EmailValidator
 from django.contrib.auth.hashers import make_password, check_password
-from django.contrib.auth.models import  AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 
 class GameInfo(models.Model):
@@ -40,6 +40,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     REQUIRED_FIELDS = ['email', 'password']  # Укажите обязательные поля
     USERNAME_FIELD = 'username'  # Поле, используемое для аутентификации
+
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
 

@@ -10,9 +10,9 @@ class Command(BaseCommand):
     help = 'Transfer unreleased games to released games'
 
     def handle(self, *args, **kwargs):
-        next_sunday = self.get_next_sunday()
+        today = self.get_today()
         released_games = GameInfo.objects.count()
-        unreleased_games = UnreleasedGamesInfo.objects.filter(releaseDate__lt=next_sunday)
+        unreleased_games = UnreleasedGamesInfo.objects.filter(releaseDate__lt=today)
 
         for game in unreleased_games:
             GameInfo.objects.get_or_create(
@@ -33,9 +33,6 @@ class Command(BaseCommand):
             )
         self.stdout.write(self.style.SUCCESS(f'Transferred {GameInfo.objects.count() - released_games} games.'))
 
-    def get_next_sunday(self):
+    def get_today(self):
         today = timezone.now()
-        days_ahead = 6 - today.weekday()  # 6 - это воскресенье
-        if days_ahead < 0:
-            days_ahead += 7
-        return today + timedelta(days=days_ahead)
+        return today
