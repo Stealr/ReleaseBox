@@ -37,16 +37,16 @@ function Header(props) {
 
                     <div className='normal-size'>
                         <a href="#en">EN</a>
-                        <Link to="/Sign up">Sign up</Link>
-                        <Link to="/Log in">Log in</Link>
+                        <Link to="/Signup">Sign up</Link>
+                        <Link to="/Login">Log in</Link>
                     </div>
 
                     <div class="menu-container-right">
                         <span>☰</span>
                         <div class="dropdown-menu-right">
                             <a href="#">EN</a>
-                            <Link to="/Sign up">Sign up</Link>
-                            <Link to="/Log in">Log in</Link>
+                            <Link to="/Signup">Sign up</Link>
+                            <Link to="/Login">Log in</Link>
                         </div>
                     </div>
 
