@@ -5,16 +5,15 @@ import CalendarGrid from "/src/Components/CalendarGrid/calendargrid.jsx";
 import "./calendar.css";
 import MonthCarousel from '../../Components/MonthCarousel/monthcarousel';
 
+const today = new Date();
+
+const month = today.getMonth() + 1;
+const year = today.getFullYear();
 
 function Calendar() {
     const [data, setData] = useState([]);
 
     const definedayofweek = () => {
-        const today = new Date();
-
-        const month = today.getMonth() + 1;
-        const year = today.getFullYear();
-
         const firstDayOfMonth = new Date(year, month - 1, 0);
         const dayOfWeek = firstDayOfMonth.getDay();
 
@@ -22,11 +21,6 @@ function Calendar() {
     }
 
     const initializeDays = () => {
-        const today = new Date();
-
-        const month = today.getMonth() + 1;
-        const year = today.getFullYear();
-
         const number_of_days = new Date(year, month, 0).getDate()
 
         const days = [];
@@ -62,11 +56,12 @@ function Calendar() {
 
     return (
         <div>
-            <div className="main-content">
-                <div className="container">
-                    <div class="carousel">
-                        <MonthCarousel/>
-                    </div>
+            <div className="main-content-calendar">
+                <div class="carousel-filtr">
+                    <MonthCarousel month={month} year={year}/>
+                </div>
+                <div className="container-calendar">
+
                     Count of new releases in this month: {data.length}
                     <div className="calendar">
                         <CalendarGrid grouped_data={groupByDay(data)} dayofweek={definedayofweek()} />

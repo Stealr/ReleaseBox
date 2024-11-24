@@ -1,39 +1,48 @@
 .carousel-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #1c1c2a;
-    padding: 10px;
-    border-radius: 10px;
-    color: white;
-  }
-  
-  .arrow-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    padding: 10px;
-  }
-  
-  .months {
-    display: flex;
-    overflow: hidden;
-    width: 300px;
-    justify-content: space-between;
-  }
-  
-  .month {
-    padding: 10px 20px;
-    margin: 0 5px;
-    transition: transform 0.3s ease, color 0.3s ease;
-    opacity: 0.6;
-  }
-  
-  .month.active {
-    transform: scale(1.2);
-    color: #f0f0f0;
-    opacity: 1;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #26253bd8;
+  padding: 10px;
+  border-radius: 10px;
+  width: 45vw;
+  margin-top: 150px;
+  user-select: none;
+}
+
+.carousel {
+  display: flex;
+  width: 700px;
+  align-items: center;
+  justify-content: space-around;
+  gap: 25px;
+  font-size: 24px;
+}
+
+.month {
+  transition: color 0.3s ease, transform 0.3s ease;
+  color: rgb(204, 204, 204);
+  width: 100px;
+  text-align: center;
+}
+
+.month.selected {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  transform: scale(1.2);
+  width: 160px;
+}
+
+.arrow-button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+}
+
+.arrow-button:hover {
+  color: darkgray;
+}
