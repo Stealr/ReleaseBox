@@ -16,3 +16,8 @@
     margin-bottom: 150px;
     padding: 63px;
 }
+
+.main-content-calendar span {
+    font-size: 22px;
+    padding-bottom: 30px;
+}

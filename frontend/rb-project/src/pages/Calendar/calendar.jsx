@@ -63,14 +63,14 @@ function Calendar() {
                 month: currentIndex
             }
         })
-        .then(response => {
-            setData(response.data);
-            console.log("Successful data recording! New month.");
-            console.log(response.data)
-        })
-        .catch(error => {
-            console.error(error);
-        });
+            .then(response => {
+                setData(response.data);
+                console.log("Successful data recording! New month.");
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }, [currentIndex]);
 
 
@@ -78,11 +78,10 @@ function Calendar() {
         <div>
             <div className="main-content-calendar">
                 <div class="carousel-filtr">
-                    <MonthCarousel currentIndex={currentIndex} currentYear={currentYear} setCurrentYear={setCurrentYear} setCurrentIndex={setCurrentIndex}/>
+                    <MonthCarousel currentIndex={currentIndex} currentYear={currentYear} setCurrentYear={setCurrentYear} setCurrentIndex={setCurrentIndex} />
                 </div>
                 <div className="container-calendar">
-
-                    Count of new releases in this month: {data.length}
+                    <span>New releases: {data.length}</span>
                     <div className="calendar">
                         <CalendarGrid grouped_data={groupByDay(data)} dayofweek={definedayofweek()} />
                     </div>

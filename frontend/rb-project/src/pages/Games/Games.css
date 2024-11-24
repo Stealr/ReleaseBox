@@ -1,5 +1,5 @@
 
-.container .filters h3 {
+.container .filters-block h3 {
     font-size: 25px;
 }
 
@@ -8,3 +8,13 @@
     justify-content: center;
     margin-top: 63px; 
 }   
+
+.filters-block .filters{
+    display: flex;
+    flex-direction: row;
+}
+
+.filters-block .checkbox-blocks {
+    display: flex;
+    flex-direction: row;
+}

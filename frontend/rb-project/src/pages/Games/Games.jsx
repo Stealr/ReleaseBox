@@ -32,11 +32,36 @@ function Games() {
             >
                 <div className='container'>
                     <div className='filters-sort'>
-                        <div className='filters'>
+                        <div className='filters-block'>
                             <h3>Filters</h3>
+                            <div className="filters">
+                                <div className='sliders-block'>
+                                    <div className="sliders">
+                                        sliders
+                                    </div>
+                                    <div className="button-apply">
+                                        <button>Apply</button>
+                                        <button>reset</button>
+                                    </div>
+                                </div>
+                                <div className="checkbox-blocks">
+                                    <div className="checkbox-genres">
+                                        Genres
+                                    </div>
+                                    <div className="checkbox-platforms">
+                                        Platforms
+                                    </div>
+                                    <div className="checkbox-modes">
+                                        Game modes
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <p>Games are found: {Object.keys(data).length}</p>
                         <div className='sort'>
+                            <button>sort</button>
+                            <button>sort</button>
+                            <button>sort</button>
                             <button>sort</button>
                         </div>
                     </div>
