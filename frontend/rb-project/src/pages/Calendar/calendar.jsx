@@ -12,6 +12,8 @@ const year = today.getFullYear();
 
 function Calendar() {
     const [data, setData] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(month - 1);
+    const [currentYear, setCurrentYear] = useState(year);
 
     const definedayofweek = () => {
         const firstDayOfMonth = new Date(year, month - 1, 0);
@@ -53,12 +55,30 @@ function Calendar() {
             });
     }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:8000/unreleasedGames/', {
+            params: {
+                filtration: 'month',
+                year: currentYear,
+                month: currentIndex
+            }
+        })
+        .then(response => {
+            setData(response.data);
+            console.log("Successful data recording! New month.");
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }, [currentIndex]);
+
 
     return (
         <div>
             <div className="main-content-calendar">
                 <div class="carousel-filtr">
-                    <MonthCarousel month={month} year={year}/>
+                    <MonthCarousel currentIndex={currentIndex} currentYear={currentYear} setCurrentYear={setCurrentYear} setCurrentIndex={setCurrentIndex}/>
                 </div>
                 <div className="container-calendar">
 

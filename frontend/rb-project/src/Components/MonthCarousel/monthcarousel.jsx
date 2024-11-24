@@ -17,14 +17,10 @@ const monthNames = [
   "December",
 ];
 
-console.log(window.innerWidth);
 
-function MonthCarousel({ month, year }) {
-  const [currentIndex, setCurrentIndex] = useState(month - 1);
-  const [currentYear, setCurrentYear] = useState(year);
-  const [visibleMonths, setVisibleMonths] = useState(5); // Количество месяцев
+function MonthCarousel({currentIndex, currentYear, setCurrentIndex, setCurrentYear}) {
+  const [visibleMonths, setVisibleMonths] = useState(5);
 
-  // Обновление количества видимых месяцев на основе ширины экрана
   useEffect(() => {
     const updateVisibleMonths = () => {
       const width = window.innerWidth;
