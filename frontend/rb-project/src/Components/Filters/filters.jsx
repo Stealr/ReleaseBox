@@ -1,6 +1,8 @@
 import { React, useState } from 'react';
 import "./filters.css";
 import Slider from "/src/Components/Filters/slider/slider.jsx";
+import CheckboxGroup from "./group/checkboxGroup.jsx";
+
 
 const today = new Date();
 const year = today.getFullYear();
@@ -46,13 +48,13 @@ function Filters() {
                 </div>
                 <div className="checkbox-blocks">
                     <div className="checkbox-genres">
-                        Genres
+                        <CheckboxGroup name={"Genres"}/>
                     </div>
                     <div className="checkbox-platforms">
-                        Platforms
+                        <CheckboxGroup name={"Platforms"}/>
                     </div>
                     <div className="checkbox-modes">
-                        Game modes
+                        <CheckboxGroup name={"Game modes"}/>
                     </div>
                 </div>
             </div>
