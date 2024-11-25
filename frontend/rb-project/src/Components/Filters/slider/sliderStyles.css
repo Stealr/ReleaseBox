@@ -1,0 +1,40 @@
+.custom-slider-container {
+    width: 500px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.slider-wrapper {
+    position: relative;
+}
+
+.slider-tooltip {
+    position: absolute;
+    top: -30px; /* Расположение над слайдером */
+    background-color: #444;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none; /* Чтобы блок не мешал взаимодействию */
+}
+
+.rc-slider {
+    position: relative;
+}
+
+.rc-slider-rail {
+    height: 4px;
+}
+
+.rc-slider-track {
+    height: 4px;
+}
+
+.rc-slider-handle {
+    border: none;
+    box-shadow: none;
+}

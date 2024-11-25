@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import GameList from "/src/Components/GameList/GameList.jsx";
+import Filters from "/src/Components/Filters/filters.jsx";
 import "./Games.css";
 import "/src/pages/main-container.css";
 
@@ -20,7 +21,7 @@ function Games() {
             });
     }, []);
 
-
+    // TODO: Добавить заглушку, если игры не загрузились из бд
     return (
         <div>
             <div className='main-content'
@@ -32,31 +33,7 @@ function Games() {
             >
                 <div className='container'>
                     <div className='filters-sort'>
-                        <div className='filters-block'>
-                            <h3>Filters</h3>
-                            <div className="filters">
-                                <div className='sliders-block'>
-                                    <div className="sliders">
-                                        sliders
-                                    </div>
-                                    <div className="button-apply">
-                                        <button>Apply</button>
-                                        <button>reset</button>
-                                    </div>
-                                </div>
-                                <div className="checkbox-blocks">
-                                    <div className="checkbox-genres">
-                                        Genres
-                                    </div>
-                                    <div className="checkbox-platforms">
-                                        Platforms
-                                    </div>
-                                    <div className="checkbox-modes">
-                                        Game modes
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Filters/>
                         <p>Games are found: {Object.keys(data).length}</p>
                         <div className='sort'>
                             <button>sort</button>
