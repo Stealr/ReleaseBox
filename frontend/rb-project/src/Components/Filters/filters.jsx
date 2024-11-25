@@ -10,6 +10,9 @@ const year = today.getFullYear();
 function Filters() {
     const [yearRange, setYearRange] = useState([1980, 2026]);
     const [metacriticRange, setMetacriticRange] = useState([0, 100]);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+    const [selectedModes, setSelectedModes] = useState([]);
 
     const generateYearMarks = () => {
         const marks = {};

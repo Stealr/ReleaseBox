@@ -1,7 +1,8 @@
 import React from 'react';
 import "./CardGameList.css";
 
-// Добавить вслывающиеся окно при новедении на иконку с платформой. Название платформы
+//TODO: Добавить вслывающиеся окно при новедении на иконку с платформой. Название платформы
+// Добавить значок для неизвестной платформы
 
 function CardGameList({ name, released, platform, genres, metacritic, imageBackground }) {
 
