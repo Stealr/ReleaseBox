@@ -1,7 +1,34 @@
-.filter-slider {
-    width: 30vw;
+.sliders-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }
 
 .sliders {
     gap: 10px;
+}
+
+.apply-reset {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding: 40px 0;
+}
+
+.apply-reset .btn {
+    width: 120px;
+    height: 40px;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+}
+
+.apply-reset .apply{
+    background-color: #EA6A1B;
+}
+
+.apply-reset .reset{
+    background-color: #7B4422;
 }

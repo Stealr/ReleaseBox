@@ -1,10 +1,10 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import "./sliderStyles.css";
 
-
-function BlockSlider({ name, Range, setRange, marks, min_max, metacritic }) {
+//TODO: Добавить автоматическое уменьшении кол ва marks если они не вмещаются
+function BlockSlider({ name, Range, setRange, marks, min_max }) {
     const [positions, setPositions] = useState({ left: 0, right: 0 });
 
     const handleSliderChange = (value) => {
@@ -17,6 +17,10 @@ function BlockSlider({ name, Range, setRange, marks, min_max, metacritic }) {
         const rightPosition = ((value[1] - min_max[0]) / (min_max[1] - min_max[0])) * 100;
         setPositions({ left: leftPosition, right: rightPosition });
     };
+
+    useEffect(() => {
+        handleSliderChange(min_max)
+    }, []);
 
     return (
         <div className="custom-slider-container">

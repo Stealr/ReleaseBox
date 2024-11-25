@@ -14,7 +14,7 @@ function Filters() {
         for (let i = 1980; i <= year; i += 10) {
             marks[i] = `${i}`;
         }
-        // marks[year + 2] = `${year + 2}`;
+        marks[year + 2] = `${year + 2}`;
         return marks;
     };
 
@@ -32,18 +32,16 @@ function Filters() {
             <div className="filters">
                 <div className='sliders-block'>
                     <div className="sliders">
-                        {/* Slider for Year Range */}
                         <Slider name={"Year Range:"} Range={yearRange} setRange={setYearRange}
-                            marks={generateYearMarks()} min_max={[1980, year]}
+                            marks={generateYearMarks()} min_max={[1980, year + 2]}
                         />
-
-                        {/* Slider for Metacritic Range */}
                         <Slider name={"Metacritic Range:"} Range={metacriticRange} setRange={setMetacriticRange}
-                            marks={generateMetacriticMarks()} min_max={[0, 100]} metacritic={true}/>
+                            marks={generateMetacriticMarks()} min_max={[0, 100]}
+                        />
                     </div>
-                    <div className="button-apply">
-                        <button>Apply</button>
-                        <button>reset</button>
+                    <div className="apply-reset">
+                        <button className='btn apply'>Apply</button>
+                        <button className='btn reset'>reset</button>
                     </div>
                 </div>
                 <div className="checkbox-blocks">
