@@ -36,8 +36,8 @@ function BlockSlider({ name, Range, setRange, marks, min_max }) {
                     marks={marks}
                     dotStyle={{ display: 'none' }}
                     styles={{
-                        track: { backgroundColor: "#ff7f50", height: 8 },
-                        handle: { borderColor: "#e67247", backgroundColor: "#e67247", height: 20, width: 20, opacity: 100, },
+                        track: { backgroundColor: "#ee6736", height: 8 },
+                        handle: { borderColor: "#ee6736", backgroundColor: "#ee6736", height: 20, width: 20, opacity: 100, },
                         rail: { backgroundColor: "#555", height: 8 },
                     }}
                 />

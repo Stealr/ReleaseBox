@@ -31,6 +31,21 @@
     flex-direction: column;
     padding: 10px;
     gap: 6px;
+    max-height: 202px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.filter-options::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+.filter-options::-webkit-scrollbar-thumb {
+    border-radius: 0 !important;
+}
+
+.filter-options::-webkit-scrollbar-track {
+    border-radius: 0 !important;
 }
 
 .filter-options label {
@@ -48,14 +63,14 @@
     cursor: pointer;
     display: inline-block;
     vertical-align: middle;
-  }
-  
-  .filter-options input[type="checkbox"]:checked {
-    background-color: #ff7f50;
-    border-color: #ff7f50;
-  }
-  
-  .filter-options input[type="checkbox"]:checked::after {
+}
+
+.filter-options input[type="checkbox"]:checked {
+    background-color: #ee6736;
+    border-color: #ee6736;
+}
+
+.filter-options input[type="checkbox"]:checked::after {
     content: "✔";
     color: white;
     font-size: 14px;
@@ -63,13 +78,11 @@
     text-align: center;
     transform: translate(0px, -2px);
     line-height: 18px;
-  }
-  
-  .filter-options label {
+}
+
+.filter-options label {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
-  }
-  
-
+}

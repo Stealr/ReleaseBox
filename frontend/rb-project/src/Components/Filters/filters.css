@@ -1,3 +1,10 @@
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .sliders-block {
     display: flex;
     flex-direction: column;
@@ -25,16 +32,15 @@
 }
 
 .apply-reset .apply{
-    background-color: #EA6A1B;
+    background-color: #ee6736;
 }
 
 .apply-reset .reset{
-    background-color: #7B4422;
+    background-color: #8b4010;
 }
 
 .checkbox-blocks {
     display: flex;
     flex-direction: row;
     gap: 30px;
-    padding-left: 80px;
 }
