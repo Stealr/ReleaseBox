@@ -4,53 +4,51 @@ import "rc-slider/assets/index.css";
 import "./sliderStyles.css";
 
 
-function BlockSlider() {
-    const [yearRange, setYearRange] = useState([1980, 2026]);
-    const [metacriticRange, setMetacriticRange] = useState([0, 100]);
+function BlockSlider({ name, Range, setRange, marks, min_max, metacritic }) {
     const [positions, setPositions] = useState({ left: 0, right: 0 });
 
     const handleSliderChange = (value) => {
-        setYearRange(value);
+        setRange(value);
         updateHandlePositions(value);
     };
 
     const updateHandlePositions = (value) => {
-        const leftPosition = ((value[0] - 1980) / (2026 - 1980)) * 100;
-        const rightPosition = ((value[1] - 1980) / (2026 - 1980)) * 100;
+        const leftPosition = ((value[0] - min_max[0]) / (min_max[1] - min_max[0])) * 100;
+        const rightPosition = ((value[1] - min_max[0]) / (min_max[1] - min_max[0])) * 100;
         setPositions({ left: leftPosition, right: rightPosition });
     };
 
     return (
         <div className="custom-slider-container">
-            <p>Year Range</p>
+            <p>{name}</p>
             <div className="slider-wrapper">
-
                 <Slider
                     range
-                    min={1980}
-                    max={2026}
-                    value={yearRange}
+                    min={min_max[0]}
+                    max={min_max[1]}
+                    value={Range}
                     onChange={handleSliderChange}
+                    allowCross={false}
+                    marks={marks}
+                    dotStyle={{ display: 'none' }}
                     styles={{
-                        track: { backgroundColor: "orange", height: 8 },
-                        handle: { borderColor: "orange", backgroundColor: "orange", height: 20, width: 20 },
+                        track: { backgroundColor: "#ff7f50", height: 8 },
+                        handle: { borderColor: "#e67247", backgroundColor: "#e67247", height: 20, width: 20, opacity: 100, },
                         rail: { backgroundColor: "#555", height: 8 },
                     }}
                 />
-                {/* Левый маркер */}
                 <div
-                    className="slider-tooltip"
-                    style={{ left: `calc(${positions.left}% - 20px)` }}
+                    className="slider-tooltip tooltip-left"
+                    style={{ left: `calc(${positions.left}%` }}
                 >
-                    {yearRange[0]}
+                    {Range[0]}
                 </div>
 
-                {/* Правый маркер */}
                 <div
-                    className="slider-tooltip"
-                    style={{ left: `calc(${positions.right}% - 20px)` }}
+                    className="slider-tooltip tooltip-right"
+                    style={{ left: `calc(${positions.right}%)` }}
                 >
-                    {yearRange[1]}
+                    {Range[1]}
                 </div>
             </div>
         </div>

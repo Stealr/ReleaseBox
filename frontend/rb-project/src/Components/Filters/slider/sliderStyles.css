@@ -1,40 +1,66 @@
 .custom-slider-container {
     width: 500px;
-    margin: 20px auto;
+    padding: 40px 0;
     position: relative;
+}
+
+.custom-slider-container p {
+    padding-bottom: 30px;
 }
 
 .slider-wrapper {
     position: relative;
+    margin-left: 10px;
 }
 
 .slider-tooltip {
+    transform: translateX(-50%);
     position: absolute;
-    top: -30px; /* Расположение над слайдером */
-    background-color: #444;
+    background-color: #663829;
     color: #fff;
-    padding: 5px 10px;
+    padding: 0 10px;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 15px;
     text-align: center;
     white-space: nowrap;
-    transform: translateX(-50%);
-    pointer-events: none; /* Чтобы блок не мешал взаимодействию */
+    pointer-events: none;
 }
 
-.rc-slider {
-    position: relative;
+.tooltip-left {
+    top: 25px;
 }
 
-.rc-slider-rail {
-    height: 4px;
+.tooltip-right {
+    top: -28px;
 }
 
-.rc-slider-track {
-    height: 4px;
+.rc-slider-step {
+    height: 8px;
 }
 
-.rc-slider-handle {
-    border: none;
-    box-shadow: none;
+.rc-slider-mark{
+    padding-top: 8px;
+}
+
+.rc-slider-mark-text-active {
+    color: #d6d6d6;
+    font-size: 14px;
+}
+
+.rc-slider-handle-dragging {
+    outline: none !important;
+    /* Убираем обводку */
+    box-shadow: none !important;
+    /* Убираем тень */
+    border-color: #b14a24 !important;
+    background-color: #b14a24 !important;
+}
+
+.rc-slider-handle:focus {
+    box-shadow: none !important;
+}
+
+.rc-slider-handle:hover {
+    border-color: #b14a24 !important;
+    background-color: #b14a24 !important;
 }
