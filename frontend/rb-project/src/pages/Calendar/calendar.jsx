@@ -55,6 +55,7 @@ function Calendar() {
             });
     }, []);
 
+    // TODO Проверить ссылку. Попробовать заменить на filtration
     useEffect(() => {
         axios.get('http://localhost:8000/unreleasedGames/', {
             params: {
