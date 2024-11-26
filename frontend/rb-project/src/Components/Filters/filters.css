@@ -1,8 +1,40 @@
+.filters-block {
+    padding-bottom: 15px;
+}
+
+.wrap-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.arrow-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    width: 15px;
+    height: 15px;
+}
+
+.arrow-switcher:hover {
+    color: rgb(216, 216, 216);
+}
+
 .filters {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.filters.notactive {
+    display: none !important;
 }
 
 .sliders-block {
@@ -33,11 +65,19 @@
 
 .apply-reset .apply{
     background-color: #ee6736;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .apply-reset .reset{
     background-color: #8b4010;
+    font-weight: bold;
+    cursor: pointer;
 }
+
+.apply-reset .btn:hover {
+    background-color: #b34c27;
+  }
 
 .checkbox-blocks {
     display: flex;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import GameList from "/src/Components/GameList/GameList.jsx";
 import Filters from "/src/Components/Filters/filters.jsx";
+import Sorts from "/src/Components/Filters/sorts/sorts.jsx";
 import "./Games.css";
 import "/src/pages/main-container.css";
 
@@ -34,12 +35,9 @@ function Games() {
                 <div className='container'>
                     <div className='filters-sort'>
                         <Filters/>
-                        <p>Games are found: {Object.keys(data).length}</p>
+                        <span className='found'>Games are found: {Object.keys(data).length}</span>
                         <div className='sort'>
-                            <button>sort</button>
-                            <button>sort</button>
-                            <button>sort</button>
-                            <button>sort</button>
+                            <Sorts/>
                         </div>
                     </div>
                     <div className='list-games-grid'>

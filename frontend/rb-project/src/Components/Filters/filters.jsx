@@ -14,6 +14,8 @@ function Filters() {
     const [selectedPlatforms, setSelectedPlatforms] = useState([]);
     const [selectedModes, setSelectedModes] = useState([]);
 
+    const [filterActive, setfilterActive] = useState(true);
+
     const generateYearMarks = () => {
         const marks = {};
         for (let i = 1980; i <= year; i += 10) {
@@ -33,8 +35,13 @@ function Filters() {
 
     return (
         <div className='filters-block'>
-            <h3>Filters</h3>
-            <div className="filters">
+            <div className="wrap-filter">
+                <h3>Filters</h3>
+                <button className='arrow-switcher' onClick={() => (
+                    setfilterActive(filterActive ? false : true)
+                )}>{filterActive ? "⯆" : "⯈"}</button>
+            </div>
+            <div className={`filters ${filterActive ? "" : "notactive"}`}>
                 <div className='sliders-block'>
                     <div className="sliders">
                         <Slider name={"Year Range:"} Range={yearRange} setRange={setYearRange}
@@ -51,13 +58,13 @@ function Filters() {
                 </div>
                 <div className="checkbox-blocks">
                     <div className="checkbox-genres">
-                        <CheckboxGroup name={"Genres"}/>
+                        <CheckboxGroup name={"Genres"} />
                     </div>
                     <div className="checkbox-platforms">
-                        <CheckboxGroup name={"Platforms"}/>
+                        <CheckboxGroup name={"Platforms"} />
                     </div>
                     <div className="checkbox-modes">
-                        <CheckboxGroup name={"Game modes"}/>
+                        <CheckboxGroup name={"Game modes"} />
                     </div>
                 </div>
             </div>
