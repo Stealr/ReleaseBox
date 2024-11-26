@@ -49,7 +49,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS('Database ' + str(model_name) + ' filled successfully!'))
         if model_name.lower() == 'UnreleasedGamesInfo'.lower():
             url = 'https://api.rawg.io/api/games?key=d6c9714af1784481affffd3493eff327' + \
-                  '&ordering=-rating&dates=2024-11-01,2024-12-01&page_size=40&page=' + str(1)
+                  '&dates=2024-11-01,2024-12-01&page_size=40&page=' + str(1)
             # Изменить url при конечном заполнении
             for i in range(1, 3):
                 if url == 'null':

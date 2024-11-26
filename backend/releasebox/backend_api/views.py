@@ -132,42 +132,34 @@ def deleteFromCollection(request):
 
 @api_view(['GET'])
 def filtration(request):
-    if request.data.get('filtration') == 'month':
-        return GameInfo.objects.filter(
-            released__year=request.data.get('year'),
-            released__month=request.data.get('month')
-        )
-    if request.data.get('filtration') == 'released':
-        return GameInfo.objects.filter(
-            released__gte=str(request.data.get('start')),
-            released__lte=str(request.data.get('end'))
-        )
-    if request.data.get('filtration') == 'metacritic':
-        return GameInfo.objects.filter(
-            metacritic__gte=str(request.data.get('start')),
-            metacritic_lte=str(request.data.get('end'))
-        )
-    if request.data.get('filtration') == 'tags':
-        filters = str(request.data.get('tags')).split(',')
-        query = Q()
-        for filter in filters:
-            filter = filter.strip()
-            query &= Q(tags__icontains=filter)
-        return GameInfo.objects.filter(query)
-    if request.data.get('filtration') == 'platform':
-        filters = str(request.data.get('platform')).split(',')
-        query = Q()
-        for filter in filters:
-            filter = filter.strip()
-            query &= Q(platform__icontains=filter)
-        return GameInfo.objects.filter(query)
-    if request.data.get('filtration') == 'genres':
-        filters = str(request.data.get('genres')).split(',')
-        query = Q()
-        for filter in filters:
-            filter = filter.strip()
-            query &= Q(genres__icontains=filter)
-        return GameInfo.objects.filter(query)
+    filters = request.data.get('filtration', {})
+    query = Q()
+    for filter_type, filter_values in filters.items():
+        if filter_type == 'month':
+            year = filters.get('year')
+            month = filters.get('month')
+            query &= Q(released__year=year, released__month=month)
+        if filter_type == 'released':
+            start = filters.get('start')
+            end = filters.get('end')
+            query &= Q(released__gte=start, released__lte=end)
+        if filter_type == 'metacritic':
+            start = filters.get('start')
+            end = filters.get('end')
+            query &= Q(metacritic__gte=start, metacritic__lte=end)
+        if filter_type == 'tags':
+            tags = [tag.strip() for tag in filter_values]
+            for tag in tags:
+                query &= Q(tags__icontains=tag)
+        if filter_type == 'platform':
+            platforms = [platform.strip() for platform in filter_values]
+            for platform in platforms:
+                query &= Q(platform__icontains=platform)
+        if filter_type == 'genres':
+            genres = [genre.strip() for genre in filter_values]
+            for genre in genres:
+                query &= Q(genres__icontains=genre)
+    return GameInfo.objects.filter(query)
 
 
 @api_view(['GET'])
