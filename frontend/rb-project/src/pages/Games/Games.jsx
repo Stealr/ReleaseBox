@@ -5,10 +5,12 @@ import Filters from "/src/Components/Filters/filters.jsx";
 import Sorts from "/src/Components/Filters/sorts/sorts.jsx";
 import "./Games.css";
 import "/src/pages/main-container.css";
+import { useNavigate } from "react-router-dom";
 
 
 function Games() {
     const [data, setData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchData()
@@ -113,8 +115,8 @@ function Games() {
         }
     };
 
-    const handleGameClick = () => {
-        navigate(`/games/${game.name}`, { state: { id: game.id } });
+    const handleGameClick = (name, gameId) => {
+        navigate(`/games/${name}`, { state: { id: gameId } });
       };
 
     // TODO: Добавить заглушку, если игры не загрузились из бд
@@ -135,7 +137,7 @@ function Games() {
                         </div>
                     </div>
                     <div className='list-games-grid'>
-                        <GameList data={data} addCollection={addCollection} />
+                        <GameList data={data} addCollection={addCollection} handleGameClick={handleGameClick}/>
                     </div>
                 </div>
             </div>

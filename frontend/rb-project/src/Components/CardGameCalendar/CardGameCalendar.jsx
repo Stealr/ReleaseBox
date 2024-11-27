@@ -8,7 +8,7 @@ import "./CardGameCalendar.css";
 // TODO Заменить стрелочку на картинку
 // TODO Баг с переключением игр, игра исчезает, затем появляется опять прежняя игра, а затем уже новая
 
-function CardGameCalendar({ day, games }) {
+function CardGameCalendar({ day, games, handleGameClick }) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isFadingOut, setIsFadingOut] = useState(false);
@@ -83,7 +83,7 @@ function CardGameCalendar({ day, games }) {
                             />
                         ))}
                     </div>
-                    <div className='name-game'>
+                    <div className='name-game' onClick={() => handleGameClick(games[currentIndex]?.name, games[currentIndex]?.id)}>
                         {games[currentIndex]?.name}
                     </div>
                 </div>

@@ -28,6 +28,7 @@ function CalendarGrid(props) {
                         <Card
                             day={index + 1}
                             games={games}
+                            handleGameClick={props['handleGameClick']}
                         />
                     </div>
                 ) : (

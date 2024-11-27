@@ -4,6 +4,7 @@ import axios from "axios";
 import CalendarGrid from "/src/Components/CalendarGrid/calendargrid.jsx";
 import "./calendar.css";
 import MonthCarousel from '../../Components/MonthCarousel/monthcarousel';
+import { useNavigate } from "react-router-dom";
 
 const today = new Date();
 
@@ -11,6 +12,7 @@ const month = today.getMonth() + 1;
 const year = today.getFullYear();
 
 function Calendar() {
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(month - 1);
     const [currentYear, setCurrentYear] = useState(year);
@@ -74,6 +76,9 @@ function Calendar() {
             });
     }, [currentIndex]);
 
+    const handleGameClick = (name, gameId) => {
+        navigate(`/games/${name}`, { state: { id: gameId } });
+      };
 
     return (
         <div>
@@ -88,7 +93,7 @@ function Calendar() {
                 <div className="container-calendar">
                     <span>New releases: {data.length}</span>
                     <div className="calendar">
-                        <CalendarGrid grouped_data={groupByDay(data)} dayofweek={definedayofweek()} />
+                        <CalendarGrid grouped_data={groupByDay(data)} dayofweek={definedayofweek() } handleGameClick={handleGameClick}/>
                     </div>
                 </div>
             </div>
