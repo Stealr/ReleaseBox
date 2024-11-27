@@ -77,6 +77,10 @@ function Calendar() {
 
     return (
         <div>
+            <img
+                src='/src/assets/vampire-the-masquerade-bloodlines-2.jpg'
+                className='background-image'
+            />
             <div className="main-content-calendar">
                 <div class="carousel-filtr">
                     <MonthCarousel currentIndex={currentIndex} currentYear={currentYear} setCurrentYear={setCurrentYear} setCurrentIndex={setCurrentIndex} />

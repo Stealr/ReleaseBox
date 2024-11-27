@@ -38,6 +38,7 @@ function Login() {
 
     return (
         <div className='main-content'>
+            
             <div className='auth-cont'>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <h1>Log in</h1>

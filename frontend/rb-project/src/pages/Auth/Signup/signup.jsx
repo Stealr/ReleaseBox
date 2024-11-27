@@ -36,7 +36,7 @@ function Login() {
 
     return (
         <div className='main-content'>
-            <div className='auth-cont'>
+            <div className='auth-cont sign'>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <h1>Sign up</h1>
                     <input

@@ -5,6 +5,10 @@ function Home() {
 
     return (
         <div>
+            <img
+                src='/src/assets/vampire-the-masquerade-bloodlines-2.jpg'
+                className='background-image'
+            />
             <div className="main-content">
                 <div className="container">
 

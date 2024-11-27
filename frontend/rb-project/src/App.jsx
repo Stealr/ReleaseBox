@@ -28,7 +28,7 @@ function App() {
         <Route path="/Profile" element={<Test />} />
         <Route path="/Profile/Settings" element={<Test />} />
       </Routes>
-      <MemoizedFooter />
+      {/* <MemoizedFooter /> */}
     </Router>
   )
 }
