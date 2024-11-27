@@ -34,7 +34,7 @@ const CheckboxGroup = ({ name, listCheckBoxes, selected, setSelected }) => {
                         <input
                             type="checkbox"
                             checked={selected.includes(item)}
-                            onChange={() => handleCheckboxChange(item)} // Обрабатываем выбор
+                            onChange={() => handleCheckboxChange(item)}
                         />{' '}
                         {item}
                     </label>
