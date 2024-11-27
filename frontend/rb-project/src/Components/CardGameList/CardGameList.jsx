@@ -4,12 +4,11 @@ import "./CardGameList.css";
 //TODO: Добавить вслывающиеся окно при новедении на иконку с платформой. Название платформы
 // Добавить значок для неизвестной платформы
 
-function CardGameList({ name, released, platform, genres, metacritic, imageBackground }) {
-
+function CardGameList({ gameId, name, released, platform, genres, metacritic, imageBackground, addCollection }) {
     const platform_icon_define = (name) => {
         return `/src/assets/platforms/${name.toLowerCase()}.svg`;
     }
-
+    // console.log(gameId)
     return (
         <div className='card-game-list'>
             <div className='card-top'>
@@ -21,7 +20,11 @@ function CardGameList({ name, released, platform, genres, metacritic, imageBackg
                         {metacritic}
                     </div>
                     <div className='button-add'>
-                        <img src='/src/assets/plus.svg' alt="Add button" />
+                        <img
+                            src='/src/assets/plus.svg'
+                            alt="Add button"
+                            onClick={() => addCollection(gameId)}
+                        />
                     </div>
                 </div>
             </div>

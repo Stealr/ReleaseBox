@@ -15,12 +15,40 @@ function Games() {
             .then(response => {
                 setData(response.data);
                 console.log("Successful data recording! ")
-                console.log(data)
             })
             .catch(error => {
                 console.error(error);
             });
     }, []);
+
+    const addCollection = async (gameId) => {
+        const user_id = localStorage.getItem('userID');
+        const accessToken = localStorage.getItem('accessToken');
+        const collection_name = "Done";
+        const user_rating = "";
+        console.log(gameId);
+
+
+        if (!accessToken) {
+            console.error('Юзер не залогинен');
+            return;
+        }
+
+        try {
+            const response = await axios.post('http://localhost:8000/games/addToCollection/', {
+                user_id,
+                collection_name,
+                gameId,
+                user_rating,
+            });
+
+            if (response.status === 200) {
+                console.log('Данные успешно отправлены:', response.data);
+            }
+        } catch (error) {
+            console.error('Ошибка при отправке данных:', error);
+        }
+    };
 
     // TODO: Добавить заглушку, если игры не загрузились из бд
     return (
@@ -41,7 +69,7 @@ function Games() {
                         </div>
                     </div>
                     <div className='list-games-grid'>
-                        <GameList data={data} />
+                        <GameList data={data} addCollection={addCollection} />
                     </div>
                 </div>
             </div>
