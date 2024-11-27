@@ -1,7 +1,7 @@
 import React from 'react';
 import './checkboxGroup.css';
 
-const CheckboxGroup = ({ name }) => {
+const CheckboxGroup = ({ name, listCheckBoxes }) => {
     return (
         <div className="filter-group">
             <div className='block-header'>
@@ -9,10 +9,11 @@ const CheckboxGroup = ({ name }) => {
             </div>
             <input type="text" placeholder="Search for genre" className="filter-search" />
             <div className="filter-options">
-                <label><input type="checkbox" /> Genre 1</label>
-                <label><input type="checkbox" /> Genre 2</label>
-                <label><input type="checkbox" /> Genre 3</label>
-                <label><input type="checkbox" /> Genre 4</label>
+                {listCheckBoxes.map((item, index) => (
+                    <label key={index}>
+                        <input type="checkbox" /> {item}
+                    </label>
+                ))}
             </div>
         </div>
     );

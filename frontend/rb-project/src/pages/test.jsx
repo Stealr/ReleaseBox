@@ -1,79 +1,71 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from "axios";
-
+import "./test.css";
 
 function Test() {
-    // const [data, setData] = useState([{}]);
+    
+    
 
-    // useEffect(() => {
-    // axios.get('http://localhost:8000/games/')
-    // .then(response => {
-    //     setData(response.data);
-    // })
-    // .catch(error => {
-    //     console.error(error);
-    // });
-    // }, []);
+    const API_KEY = 'd6c9714af1784481affffd3493eff327'; // Замените на свой API-ключ
 
-    const sendData = async (data) => {
-        try {
-            console.log("after in")
-            const response = await axios.post('http://localhost:8000/games/addToCollection/', data, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            console.log("in func ")
-        }
-        catch (error) {
-            console.log('Error ', error.response)
-        }
+    // const fetchData = async () => {
+    //     try {
+    //         const [tagsResponse] = await Promise.all([
+    //             // axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`),
+    //             // axios.get(`https://api.rawg.io/api/platforms?key=${API_KEY}`),
+    //             axios.get(`https://api.rawg.io/api/tags?page=1&page_size=50&key=d6c9714af1784481affffd3493eff327`),
+    //         ]);
 
-    }
+    //         // const genresData = genresResponse.data.results || [];
+    //         // const platformsData = platformsResponse.data.results || [];
+    //         const tagsData = tagsResponse.data.results || [];
 
-    const sendData_reg = async (data) => {
-        try {
-            console.log("after in")
-            const response = await axios.post('http://localhost:8000/register/', data, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            console.log("in func ")
-        }
-        catch (error) {
-            console.log('Error ', error.response)
-        }
+    //         // setGenres(genresData.map((item) => item.name));
+    //         // setPlatforms(platformsData.map((item) => item.name));
+    //         setTags(tagsData.map((item) => item.name));
 
-    }
+    //     } catch (error) {
+    //         console.error('Ошибка при получении данных:', error);
+    //     }
+    // };
 
-    console.log("out func ")
-    const data = { 'username': 'newuser2', 'email': 'email@gmail.com', 'password': '5dads23', 'userCollections': {} }
-
-    // sendData({ 'user_id': 2, 'collection_name': 'Done', 'gameId': 523})
-    // sendData_reg({ 'username': 'newuser', 'email': 'email@gmail.com', 'password': '5dads23', 'userCollections': {}})
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
-        <div>
-            <h1>Data from Django</h1>
-            <button onClick={() => sendData_reg(data)} > test button</button>
-            {/* <ul>
-                {data.map(data => (
-                    <li key={data.id}>
-                        <h2>{data.name}</h2>
-                        <p><strong>Released:</strong> {data.released}</p>
-                        <p><strong>Platform:</strong> {data.platform}</p>
-                        <p><strong>Dev:</strong></p>
-                        <p><strong>Push:</strong></p>
-                        <p><strong>Genres:</strong> {data.genres}</p>
-                        <br/>
-                    </li>
-                ))}
-            </ul>
-            {console.log("test")} */}
+        <div className='column-test'>
+            <div>
+                <h1>Genres</h1>
+                {console.log(genres)}
+                {console.log(platforms)}
+                {console.log(tags)}
+                <ul>
+                    {genres.map((genre) => (
+                        <li key={genre}>{genre}</li>
+                    ))}
+                </ul>
+            </div>
+            <div>
+                <h1>Platforms</h1>
+                <ul>
+                    {platforms.map((platform) => (
+                        <li key={platform}>{platform}</li>
+                    ))}
+                </ul>
+            </div>
+            <div>
+                <h1>Tags</h1>
+                <ul>
+                    {tags.map((tag) => (
+                        <li key={tag}>{tag}</li>
+                    ))}
+                </ul>
+            </div>
+
         </div>
-    )
+    );
 }
 
 export default Test

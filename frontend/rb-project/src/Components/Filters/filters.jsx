@@ -16,6 +16,10 @@ function Filters() {
 
     const [filterActive, setfilterActive] = useState(true);
 
+    const [genres, setGenres] = useState(['Action', 'Indie', 'Adventure', 'RPG', 'Strategy', 'Shooter', 'Casual', 'Simulation', 'Puzzle', 'Arcade', 'Platformer', 'Racing', 'Massively Multiplayer', 'Sports', 'Fighting', 'Family', 'Board Games', 'Educational', 'Card']);
+    const [platforms, setPlatforms] = useState(['PC', 'PlayStation 5', 'PlayStation 4', 'Xbox One', 'Xbox Series S/X', 'Nintendo Switch', 'iOS', 'Android', 'Nintendo 3DS', 'Nintendo DS', 'Nintendo DSi', 'macOS', 'Linux', 'Xbox 360', 'Xbox', 'PlayStation 3', 'PlayStation 2', 'PlayStation', 'PS Vita', 'PSP', 'Wii U', 'Wii', 'GameCube', 'Nintendo 64', 'Game Boy Advance', 'Game Boy Color', 'Game Boy', 'SNES', 'NES', 'Classic Macintosh', 'Apple II', 'Commodore / Amiga', 'Atari 7800', 'Atari 5200', 'Atari 2600', 'Atari Flashback', 'Atari 8-bit', 'Atari ST', 'Atari Lynx', 'Atari XEGS', 'Genesis', 'SEGA Saturn', 'SEGA CD', 'SEGA 32X', 'SEGA Master System', 'Dreamcast', '3DO', 'Jaguar', 'Game Gear', 'Neo Geo']);
+    const [tags, setTags] = useState(['Singleplayer', 'Steam Achievements', 'Multiplayer', 'Full controller support', 'Steam Cloud', 'Atmospheric', 'steam-trading-cards', 'Great Soundtrack', 'RPG', 'Co-op', 'Story Rich', 'Open World', 'cooperative', 'First-Person', '2D', 'Third Person', 'Sci-fi', 'Partial Controller Support', 'Horror', 'FPS', 'Online Co-Op', 'Fantasy', 'Funny', 'Gore', 'Difficult', 'Steam Leaderboards', 'Exploration', 'Classic', 'Sandbox', 'Female Protagonist', 'Survival', 'Comedy', 'Violent', 'Free to Play', 'Online multiplayer', 'Stealth', 'Split Screen', 'Local Co-Op', 'Action-Adventure', 'Action RPG']);
+
     const generateYearMarks = () => {
         const marks = {};
         for (let i = 1980; i <= year; i += 10) {
@@ -59,13 +63,13 @@ function Filters() {
 
                 <div className="checkbox-blocks">
                     <div className="checkbox-genres">
-                        <CheckboxGroup name={"Genres"} />
+                        <CheckboxGroup name={"Genres"} listCheckBoxes={genres}/>
                     </div>
                     <div className="checkbox-platforms">
-                        <CheckboxGroup name={"Platforms"} />
+                        <CheckboxGroup name={"Platforms"} listCheckBoxes={platforms}/>
                     </div>
                     <div className="checkbox-modes">
-                        <CheckboxGroup name={"Game modes"} />
+                        <CheckboxGroup name={"Game modes"} listCheckBoxes={tags}/>
                     </div>
                 </div>
             </div>
