@@ -97,13 +97,11 @@ function Games() {
     // TODO: Добавить заглушку, если игры не загрузились из бд
     return (
         <div>
-            <div className='main-content'
-                style={{
-                    backgroundImage: `url(/src/assets/vampire-the-masquerade-bloodlines-2.jpg)`,
-                    backgroundPosition: 'top',
-                    backgroundRepeat: 'no-repeat',
-                }}
-            >
+            <img
+                src='/src/assets/vampire-the-masquerade-bloodlines-2.jpg'
+                className='background-image'
+            />
+            <div className='main-content'>
                 <div className='container'>
                     <div className='filters-sort'>
                         <Filters applybtn={applyFilters} />
