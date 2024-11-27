@@ -63,13 +63,28 @@ function Filters() {
 
                 <div className="checkbox-blocks">
                     <div className="checkbox-genres">
-                        <CheckboxGroup name={"Genres"} listCheckBoxes={genres}/>
+                        <CheckboxGroup
+                            name={"Genres"}
+                            listCheckBoxes={genres}
+                            selected={selectedGenres}
+                            setSelected={setSelectedGenres}
+                        />
                     </div>
                     <div className="checkbox-platforms">
-                        <CheckboxGroup name={"Platforms"} listCheckBoxes={platforms}/>
+                        <CheckboxGroup
+                            name={"Platforms"}
+                            listCheckBoxes={platforms}
+                            selected={selectedPlatforms}
+                            setSelected={setSelectedPlatforms}
+                        />
                     </div>
                     <div className="checkbox-modes">
-                        <CheckboxGroup name={"Game modes"} listCheckBoxes={tags}/>
+                        <CheckboxGroup
+                            name={"Game modes"}
+                            listCheckBoxes={tags}
+                            selected={selectedModes}
+                            setSelected={setSelectedModes}
+                        />
                     </div>
                 </div>
             </div>
