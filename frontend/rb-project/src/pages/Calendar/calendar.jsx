@@ -67,7 +67,7 @@ function Calendar() {
             .then(response => {
                 setData(response.data);
                 console.log("Successful data recording! New month.");
-                console.log(response.data)
+                // console.log(response.data)
             })
             .catch(error => {
                 console.error(error);

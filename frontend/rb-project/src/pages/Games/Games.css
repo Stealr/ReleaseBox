@@ -14,11 +14,6 @@
     flex-direction: row;
 }
 
-.filters-block .checkbox-blocks {
-    display: flex;
-    flex-direction: row;
-}
-
 .filters-sort .found {
     font-size: 16px;
 }

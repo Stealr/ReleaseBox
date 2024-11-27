@@ -56,6 +56,7 @@ function Filters() {
                         <button className='btn reset'>reset</button>
                     </div>
                 </div>
+
                 <div className="checkbox-blocks">
                     <div className="checkbox-genres">
                         <CheckboxGroup name={"Genres"} />

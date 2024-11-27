@@ -63,13 +63,13 @@
     border: none;
 }
 
-.apply-reset .apply{
+.apply-reset .apply {
     background-color: #ee6736;
     font-weight: bold;
     cursor: pointer;
 }
 
-.apply-reset .reset{
+.apply-reset .reset {
     background-color: #8b4010;
     font-weight: bold;
     cursor: pointer;
@@ -77,7 +77,7 @@
 
 .apply-reset .btn:hover {
     background-color: #b34c27;
-  }
+}
 
 .checkbox-blocks {
     display: grid;
@@ -85,4 +85,5 @@
     margin-left: 30px;
     gap: 30px;
     width: 100%;
+    justify-items: center;
 }

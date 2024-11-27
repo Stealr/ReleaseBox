@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import "./header_style.css";
 
 function Header(props) {
+    const accessToken = localStorage.getItem('accessToken');
+
+
     return (
         <div className="header">
             <div className='content-header'>
