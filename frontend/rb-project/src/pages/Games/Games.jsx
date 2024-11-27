@@ -11,6 +11,10 @@ function Games() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        fetchData()
+    }, []);
+
+    const fetchData = async () => {
         axios.get('http://localhost:8000/games/')
             .then(response => {
                 setData(response.data);
@@ -19,7 +23,7 @@ function Games() {
             .catch(error => {
                 console.error(error);
             });
-    }, []);
+    };
 
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
@@ -49,12 +53,10 @@ function Games() {
         if (selectedModes.length > 0) {
             filters.tags = selectedModes;
         }
-        console.log(filters);
         if (Object.keys(filters).length != 0) {
             try {
                 const response = await axios.get('http://localhost:8000/games/filtration', { filtration: filters });
                 setData(response.data);
-                console.log('Filtered data:', response.data);
             } catch (error) {
                 console.error('Error applying filters:', error);
             }
@@ -62,8 +64,25 @@ function Games() {
         else {
             console.log("Enter filters");
         }
-
     };
+
+    const fetchSortedData = async (sortField, sortOrder) => {
+        try {
+            sortField = sortField.toLowerCase() == "popularity" ? "rating" : sortField
+            sortField = sortField.toLowerCase() == "date" ? "released" : sortField
+            const sortParam = sortOrder === "asc" ? `sorting+` : `sorting-`;
+            console.log({ [sortParam]: sortField.toLowerCase() })
+            const response = await axios.get("http://localhost:8000/games/sorting/", {
+                params: {
+                    [sortParam]: sortField.toLowerCase(),
+                },
+            });
+            setData(response.data);
+        } catch (error) {
+            console.error("Error fetching sorted data:", error);
+        }
+    };
+    
 
     const addCollection = async (gameId) => {
         const user_id = localStorage.getItem('userID');
@@ -107,7 +126,7 @@ function Games() {
                         <Filters applybtn={applyFilters} />
                         <span className='found'>Games are found: {Object.keys(data).length}</span>
                         <div className='sort'>
-                            <Sorts />
+                            <Sorts fetchSortedData={fetchSortedData} fetchData={fetchData} />
                         </div>
                     </div>
                     <div className='list-games-grid'>
