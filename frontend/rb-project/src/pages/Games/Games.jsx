@@ -113,7 +113,12 @@ function Games() {
         }
     };
 
+    const handleGameClick = () => {
+        navigate(`/games/${game.name}`, { state: { id: game.id } });
+      };
+
     // TODO: Добавить заглушку, если игры не загрузились из бд
+    // При наведении на карточку, что то должно происходить
     return (
         <div>
             <img

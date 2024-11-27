@@ -1,6 +1,10 @@
 .card-game-list {
     max-width: 1200px;
-    /* transition: all 0.3s ease-out; */
+    transition: all 0.3s ease-out;
+}
+
+.card-game-list:hover {
+    scale: 1.05;
 }
 
 .card-game-list .card-top {
@@ -41,7 +45,7 @@
     border-radius: 6px;
     padding: 2px 4px;
     font-weight: 600;
-    
+
 }
 
 .card-game-list .button-add {
@@ -52,6 +56,10 @@
     border-radius: 6px;
     padding: 7px;
     cursor: pointer;
+}
+
+.card-game-list .button-add:hover {
+    background-color: #db693fd7;
 }
 
 .card-game-list .card-bottom {
@@ -76,6 +84,13 @@
     width: 77%;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.card-game-list .game-name:hover {
+    color: #c7c7c7;
+    scale: 1.05;
 }
 
 .card-game-list .platforms {

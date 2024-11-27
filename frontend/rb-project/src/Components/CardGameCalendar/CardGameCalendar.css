@@ -1,7 +1,10 @@
 .card-game-calendar {
     max-width: 400px;
+    transition: all 0.3s ease-out;
+}
 
-    
+.card-game-calendar:hover {
+    scale: 1.02;
 }
 
 .card-game-calendar .card-top {
@@ -26,6 +29,10 @@
     position: relative;
 }
 
+.card-game-calendar .button-add:hover {
+    background-color: #ce6843d7;
+}
+
 .card-game-calendar .day-add {
     display: flex;
     flex-direction: row;
@@ -46,13 +53,14 @@
 
 .card-game-calendar .card-media.fading-in {
     opacity: 0;
-    animation: fadeIn 0.3s ease forwards; 
+    animation: fadeIn 0.3s ease forwards;
 }
 
 @keyframes fadeIn {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -88,8 +96,13 @@
 }
 
 .card-game-calendar .name-game {
-    font-size: 18px;
+    font-size: 16px;
     position: relative;
+    cursor: pointer;
+}
+
+.card-game-calendar .name-game:hover {
+    color: #d6d6d6;
 }
 
 .card-game-calendar .switchers {
@@ -112,6 +125,14 @@
     cursor: pointer;
 }
 
+.card-game-calendar .switchers .left:hover {
+    color: #dfdfdf;
+}
+
+.card-game-calendar .switchers .right:hover {
+    color: #dfdfdf;
+}
+
 .card-game-calendar .switchers .right {
     display: flex;
     align-items: center;
@@ -132,7 +153,7 @@
     flex-direction: column;
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 10px;
+    margin:  10px;
     gap: 4px;
     transition: all 0.3s ease;
 }
@@ -143,7 +164,7 @@
 
 .card-game-calendar .info.fading-in {
     opacity: 0;
-    animation: fadeIn 0.3s ease forwards; 
+    animation: fadeIn 0.3s ease forwards;
 }
 
 .card-game-calendar .amount-games {
@@ -169,7 +190,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    
+
 }
 
 .card-game-calendar .platform-icon {
