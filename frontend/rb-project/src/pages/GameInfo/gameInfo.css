@@ -1,0 +1,23 @@
+.gameInfo {
+    transition: all 0.3s ease;
+}
+
+.top-info {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.center-column {
+    display: flex;
+    flex-direction: column;
+}
+.right-column {
+    display: flex;
+    flex-direction: column;
+}
