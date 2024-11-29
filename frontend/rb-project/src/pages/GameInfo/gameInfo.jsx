@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import './gameInfo.css';
 
 
-function Game({  }) {
-    const { game, id } = useParams();
-    console.log(game, id);
+function Game() {
+    const [data, setData] = useState([]);
+    const location = useLocation();
+    const { name } = useParams();
+
+    const { id } = location.state || {};
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/games/${id}/`)
+            .then(response => {
+                setData(response.data);
+                console.log("Successful data recording!")
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
 
 
     return (
@@ -21,10 +35,12 @@ function Game({  }) {
                         <div className="top-info">
                             <div className="left-column">
                                 <div className="coverImage">
-                                    <img />
+                                    {/* <img
+                                        src={data.imageBackground}
+                                    /> */}
                                 </div>
                                 <div className="ratingGame">
-                                
+                                    {console.log(data)}
                                 </div>
                                 <div className="statistics">
 
@@ -32,7 +48,7 @@ function Game({  }) {
                             </div>
                             <div className="center-column">
                                 <div className="infoGame">
-                                    
+
                                 </div>
                             </div>
                             <div className="right-column">
