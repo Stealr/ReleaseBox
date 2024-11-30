@@ -91,7 +91,6 @@ function Games() {
         const accessToken = localStorage.getItem('accessToken');
         const collection_name = "Done";
         const user_rating = "";
-        console.log(gameId);
 
 
         if (!accessToken) {

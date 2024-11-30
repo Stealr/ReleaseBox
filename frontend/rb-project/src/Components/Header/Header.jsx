@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "./header_style.css";
 
-function Header(props) {
+function Header() {
+    const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
-
 
     return (
         <div className="header">
             <div className='content-header'>
-                {/* <img src=''> */}
                 <img src='/src/assets/LOGO.png' alt='logo' />
                 <div className='center'>
                     <nav className="navigation">
@@ -35,20 +34,29 @@ function Header(props) {
                     </div>
                 </div>
                 <div className="right">
-
-                    <div className='normal-size'>
-                        <Link to="/Signup">Sign up</Link>
-                        <Link to="/Login">Log in</Link>
-                    </div>
-
-                    <div class="menu-container-right">
-                        <span>☰</span>
-                        <div class="dropdown-menu-right">
+                    {!accessToken ? (
+                        <div className='normal-size'>
                             <Link to="/Signup">Sign up</Link>
                             <Link to="/Login">Log in</Link>
                         </div>
-                    </div>
-
+                    ) : (
+                        <div className='normal-size'>
+                            <Link to="/profile">Profile</Link>
+                        </div>
+                    )}
+                    {!accessToken ? (
+                        <div class="menu-container-right">
+                            <span>☰</span>
+                            <div class="dropdown-menu-right">
+                                <Link to="/Signup">Sign up</Link>
+                                <Link to="/Login">Log in</Link>
+                            </div>
+                        </div>
+                    ) : (
+                        <div class="menu-container-right">
+                            <Link to="/profile">Profile</Link>
+                        </div>
+                    )}
                 </div>
 
             </div>
