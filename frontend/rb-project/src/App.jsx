@@ -9,6 +9,7 @@ import Signup from './pages/Auth/Signup/signup.jsx';
 import Games from './pages/Games/Games.jsx';
 import Calendar from './pages/Calendar/calendar.jsx';
 import GameInfo from './pages/GameInfo/gameInfo.jsx';
+import Profile from './pages/profile/profile.jsx';
 
 
 const MemoizedHeader = memo(Header);
@@ -26,7 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/games/:game" element={<GameInfo />} />
-        <Route path="/profile" element={<Test />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/profile/settings" element={<Test />} />
       </Routes>
       {/* <MemoizedFooter /> */}
