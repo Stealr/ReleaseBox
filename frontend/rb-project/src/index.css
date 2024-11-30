@@ -1,9 +1,17 @@
+
 body {
   font-family: Arial, sans-serif;
   color: white;
   background: #19182C;
   line-height: 23px;
   font-size: 18px;
+}
+
+.Loading {
+  font-size: 35px;
+  text-align: center;
+  padding: 25% 0;
+
 }
 
 /* Стилизация всей полосы прокрутки */

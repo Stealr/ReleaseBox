@@ -16,7 +16,6 @@ function Header(props) {
                         <Link to="/">Home</Link>
                         <Link to="/Games">Games</Link>
                         <Link to="/Calendar">Calendar</Link>
-                        <Link to="/Reviews">Reviews</Link>
                     </nav>
 
                     <div class="menu-container-center">
@@ -25,7 +24,6 @@ function Header(props) {
                             <Link to="/">Home</Link>
                             <Link to="/Games">Games</Link>
                             <Link to="/Calendar">Calendar</Link>
-                            <Link to="/Reviews">Reviews</Link>
                         </div>
                     </div>
 
@@ -39,7 +37,6 @@ function Header(props) {
                 <div className="right">
 
                     <div className='normal-size'>
-                        <a href="#en">EN</a>
                         <Link to="/Signup">Sign up</Link>
                         <Link to="/Login">Log in</Link>
                     </div>
@@ -47,7 +44,6 @@ function Header(props) {
                     <div class="menu-container-right">
                         <span>☰</span>
                         <div class="dropdown-menu-right">
-                            <a href="#">EN</a>
                             <Link to="/Signup">Sign up</Link>
                             <Link to="/Login">Log in</Link>
                         </div>
