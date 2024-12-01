@@ -15,4 +15,6 @@ urlpatterns = [
     path('login/', CustomTokenObtainPairView.as_view()),
     path('games/addToCollection/', addToCollection),
     path('games/deleteFromCollection/', deleteFromCollection),
+    path('get_user/', get_user),
+    path('get_games/', get_games),
 ]

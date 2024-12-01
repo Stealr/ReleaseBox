@@ -10,6 +10,35 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.db.models import Q
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """ Переопределяем стандартный TokenObtainPairSerializer, чтобы использовать CustomUser модель. """
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        # Добавляем user_id в ответ
+        data['user_id'] = self.user.id
+        return data
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Добавляем дополнительные данные в токен
+        token['username'] = user.username
+        token['email'] = user.email
+
+        return token
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    # После регистрации пользователь может отправить POST на
+    # path(token/), которые проверит данные с бд
+    # чтобы получить токен
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 def getGame(request, id):
@@ -30,14 +59,18 @@ def getGame(request, id):
         'tags': ', '.join([tag.get('name') for tag in game.get('tags', [])]),
         'imageBackground': game.get('background_image'),
         'system_requirements': {
-                                platform.get("platform").get("name"): {
-                                    key: platform.get("requirements", {}).get(key)
-                                    for key in platform.get("requirements", {}).keys()
-                                }
-                                for platform in game.get("platforms", [])
-                                },
+            platform.get("platform").get("name"): {
+                key: platform.get("requirements", {}).get(key)
+                for key in platform.get("requirements", {}).keys()
+            }
+            for platform in game.get("platforms", [])
+        },
         'description': game.get('description_raw')
     }
+    try:
+        item['short_screenshots'] = GameInfo.objects.filter(gameId=game.get('id')).values_list('short_screenshots', flat=True).get()
+    except GameInfo.DoesNotExist:
+        item['short_screenshots'] = game.get('background_image_additional')
     return JsonResponse(item)
 
 
@@ -93,15 +126,8 @@ class RegisterView(generics.CreateAPIView):
     # При POST запросе данные передаются в userSerializer,
     # который создает экземпляр класса
     queryset = CustomUser.objects.all()
-    serializer = UserSerializer
+    serializer_class = UserSerializer
     permission_classes = [AllowAny]
-
-
-class CustomTokenObtainPairView(TokenObtainPairView):
-    # После регистрации пользователь может отправить POST на
-    # path(token/), которые проверит данные с бд
-    # чтобы получить токен
-    pass
 
 
 @api_view(['POST'])
@@ -159,12 +185,79 @@ def filtration(request):
             genres = [genre.strip() for genre in filter_values]
             for genre in genres:
                 query &= Q(genres__icontains=genre)
-    return GameInfo.objects.filter(query)
+
+    # Fetch the filtered data
+    filtered_games = GameInfo.objects.filter(query)
+
+    # Serialize the data (if needed) and return it as a Response
+    data = list(filtered_games.values())  # Convert QuerySet to a list of dictionaries
+    return Response(data)
 
 
 @api_view(['GET'])
-def sorting(request):  # request содержит название колонки в таблице
-    if request.data.get('sorting+'):
-        return GameInfo.objects.all().order_by(str(request.data.get('sorting')))
-    if request.data.get('sorting-'):
-        return GameInfo.objects.all().order_by('-' + str(request.data.get('sorting')))
+def sorting(request):
+    # Получаем параметры сортировки из запроса
+    sort_field = request.query_params.get('sorting+')
+    sort_field_desc = request.query_params.get('sorting-')
+
+    # Сортируем данные на основе параметров
+    if sort_field:
+        games = GameInfo.objects.all().order_by(sort_field)
+    elif sort_field_desc:
+        games = GameInfo.objects.all().order_by(f'-{sort_field_desc}')
+    else:
+        return Response({"error": "No sorting field provided"}, status=400)
+
+    response_data = []
+    for game in games:
+        response_data.append({
+            'gameId': game.gameId,
+            'name': game.name,
+            'released': game.released,
+            'rating': game.rating,
+            'platform': game.platform,
+            'genres': game.genres,
+            'stores': game.stores,
+            'metacritic': game.metacritic,
+            'esrb_rating': game.esrb_rating,
+            'tags': game.tags,
+            "short_screenshots": game.short_screenshots,
+            'imageBackground': game.imageBackground
+        })
+    return Response(response_data)
+
+
+@api_view(['GET'])
+def get_user(request):
+    user_id = request.data.get('user_id')
+    if user_id:
+        user = CustomUser.objects.get(id=user_id)
+        response = {'username': user.username,
+                    'email': user.email,
+                    'userCollection': user.userCollections,
+                    'lolo': user.logo}
+        return Response(response)
+
+@api_view(['GET'])
+def get_games(request):
+    response_data = []
+    for game in request.data.get('game_id'):
+        try:
+            output = GameInfo.objects.get(id=game)
+            response_data.append({
+                'gameId': output.gameId,
+                'name': output.name,
+                'released': output.released,
+                'rating': output.rating,
+                'platform': output.platform,
+                'genres': output.genres,
+                'stores': output.stores,
+                'metacritic': output.metacritic,
+                'esrb_rating': output.esrb_rating,
+                'tags': output.tags,
+                "short_screenshots": output.short_screenshots,
+                'imageBackground': output.imageBackground
+            })
+        except:
+            pass
+    return Response(response_data)

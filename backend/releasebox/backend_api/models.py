@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import EmailValidator
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import BaseUserManager
 
 
 class GameInfo(models.Model):
@@ -27,6 +28,9 @@ class UnreleasedGamesInfo(models.Model):
     genres = models.CharField(max_length=100, null=True)  # Поле для жанра
     imageBackground = models.CharField(max_length=255, null=True)
 
+class CustomUserManager(BaseUserManager):
+    def get_by_natural_key(self, username):
+        return self.get(username=username)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
@@ -38,6 +42,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     logo = models.CharField(max_length=300, null=True)
     userCollections = models.JSONField(default=dict, null=True, blank=True)
 
+    objects = CustomUserManager()
+
     REQUIRED_FIELDS = ['email', 'password']  # Укажите обязательные поля
     USERNAME_FIELD = 'username'  # Поле, используемое для аутентификации
 
@@ -48,7 +54,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return check_password(raw_password, self.password)
 
     def add_to_user_collection(self, collection_name, game_id, user_rating=None):
-        if self.userCollections == "":
+        if self.userCollections == {}:
             self.userCollections = {
                 'Wishlist': [],
                 'Playing': [],
