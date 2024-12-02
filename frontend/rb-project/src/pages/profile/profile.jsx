@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './profile.css';
-import PresentGames from '/src/Components/presentGames/presentGames.jsx';
+import PresentGames from '/src/Components/profile/presentGames.jsx';
 
 
 function Profile() {
@@ -31,6 +31,20 @@ function Profile() {
 
     }, [user_id]);
 
+    const getGames = async (collection) => {
+        const listGames = data.userCollection[collection].map(game => game[0]);;
+        console.log(listGames)
+        try {
+            const response = await axios.get("http://localhost:8000/get_games/", {
+                params: {
+                    game_id: listGames // Передача массива game_id
+                }
+            });
+            return response.data
+        } catch (error) {
+            console.error("Error fetching sorted data:", error);
+        }
+    };
 
     return (
         <div>
@@ -50,10 +64,8 @@ function Profile() {
                                     let count = 0;
 
                                     if (field === "All Games" && data.userCollection) {
-                                        // Подсчитываем общее количество всех категорий
                                         count = Object.values(data.userCollection).reduce((sum, items) => sum + items.length, 0);
                                     } else if (data.userCollection && data.userCollection[field]) {
-                                        // Получаем длину конкретной категории
                                         count = data.userCollection[field].length;
                                     }
 
@@ -69,7 +81,7 @@ function Profile() {
                             </div>
                         </div>
                         <div className="right-column">
-                            <PresentGames />
+                            <PresentGames listGames={getGames("Done")} />
                             <PresentGames />
                             <PresentGames />
                             <PresentGames />
