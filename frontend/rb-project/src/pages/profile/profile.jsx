@@ -10,15 +10,26 @@ function Profile() {
     const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        axios.get('http://localhost:8000/get_user/', {params: {user_id}})
-            .then(response => {
-                setData(response.data);
-                console.log("Successful data recording! ")
+        // axios.get('http://localhost:8000/get_user/', { user_id: user_id })
+        //     .then(response => {
+        //         setData(response.data);
+        //         console.log("Successful data recording! ")
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
+
+        axios.get(`http://localhost:8000/get_user/`,
+            { params: { user_id: user_id } }, // Передаем user_id как query параметр
+        )
+            .then((response) => {
+                setData(response.data); // Устанавливаем данные пользователя
             })
-            .catch(error => {
-                console.error(error);
+            .catch((err) => {
+                setError(err.message); // Обрабатываем ошибки
             });
-    }, []);
+
+    }, [user_id]);
 
 
     return (
@@ -31,19 +42,31 @@ function Profile() {
                 <div className='container'>
                     <div className="profile">
                         <div className="left-column">
-                            <h2 className='username'>Name of User</h2>
+                            <h2 className='username'>{data.username}</h2>
                             <p>Collections:</p>
+                            {console.log(data)}
                             <div className="btns-col">
-                                {["Favorite", "All Games", "Done", "Will play", "Abandoned"].map((field) => (
-                                    <div className="block" key={field}>
-                                        <div className='btn-collection'>
-                                            <p>{field}</p>
-                                            <p>N</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                                {["All Games", "Wishlist", "Playing", "Done", "Favourite", "Abandoned"].map((field) => {
+                                    let count = 0;
 
+                                    if (field === "All Games" && data.userCollection) {
+                                        // Подсчитываем общее количество всех категорий
+                                        count = Object.values(data.userCollection).reduce((sum, items) => sum + items.length, 0);
+                                    } else if (data.userCollection && data.userCollection[field]) {
+                                        // Получаем длину конкретной категории
+                                        count = data.userCollection[field].length;
+                                    }
+
+                                    return (
+                                        <div className="block" key={field}>
+                                            <div className="btn-collection">
+                                                <p>{field}</p>
+                                                <p>{count}</p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                         <div className="right-column">
                             <PresentGames />

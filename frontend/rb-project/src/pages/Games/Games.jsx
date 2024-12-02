@@ -89,7 +89,7 @@ function Games() {
     const addCollection = async (gameId) => {
         const user_id = localStorage.getItem('userID');
         const accessToken = localStorage.getItem('accessToken');
-        const collection_name = "Done";
+        const collection_name = "Abandoned";
         const user_rating = "";
 
 

@@ -18,7 +18,6 @@ function Login() {
                 username,
                 password,
             });
-
             if (response.status === 200) {
                 const { access, refresh, user_id } = response.data;
 
