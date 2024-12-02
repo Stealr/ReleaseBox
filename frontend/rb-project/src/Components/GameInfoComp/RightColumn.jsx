@@ -4,6 +4,7 @@ const RightColumn = ({ data }) => {
         .split(', ') // Разделяем строку по ", "
         .map(url => url.trim()); // Убираем лишние пробелы
 
+
     return (
         <div className="right-column">
             {(screenshots.length > 0 && screenshots[0] != 'No data') && (
@@ -25,10 +26,6 @@ const RightColumn = ({ data }) => {
                     </div>
                 </div>
             )}
-            <div className="stores">
-                <p>Stores:</p>
-                {/* Отобразите доступные магазины */}
-            </div>
         </div>
     );
 };

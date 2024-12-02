@@ -123,6 +123,17 @@
     width: 20%;
 }
 
+.right-column .gallary {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+
+.right-column p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
 .right-column .gallary .gridImages{
     width: 100%;
     height: auto;
@@ -192,7 +203,7 @@
     width: 45%;
 }
 
-@media (max-width: 1550px) {
+/* @media (max-width: 1550px) {
     .right-column .gridImages{
         display: none;
     }
@@ -204,7 +215,7 @@
     .right-column .btn-gallary {
         display: block;
     }
- }
+ } */
 
  @media (max-width: 1300px) {
     .center-column .info {
