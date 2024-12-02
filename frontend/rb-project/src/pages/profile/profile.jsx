@@ -10,14 +10,6 @@ function Profile() {
     const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        // axios.get('http://localhost:8000/get_user/', { user_id: user_id })
-        //     .then(response => {
-        //         setData(response.data);
-        //         console.log("Successful data recording! ")
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //     });
 
         axios.get(`http://localhost:8000/get_user/`,
             { params: { user_id: user_id } }, // Передаем user_id как query параметр
@@ -32,7 +24,7 @@ function Profile() {
     }, [user_id]);
 
     const getGames = async (collection) => {
-        const listGames = data.userCollection[collection].map(game => game[0]);;
+        const listGames = data.userCollection[collection];
         console.log(listGames)
         try {
             const response = await axios.get("http://localhost:8000/get_games/", {
