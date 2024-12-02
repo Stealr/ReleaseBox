@@ -8,17 +8,17 @@ function Profile() {
     const [data, setData] = useState([]);
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
+    console.log(user_id);
 
-    useEffect(() => {
-        axios.get('http://localhost:8000/get_user/', {params: {user_id}})
-            .then(response => {
-                setData(response.data);
-                console.log("Successful data recording! ")
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+    // useEffect(() => {
+
+    //     const response = axios.get("http://localhost:8000/get_user/", {
+    //         params: {
+    //             user_id: user_id,
+    //         },
+    //     })
+    //     setData(response.data);
+    // }, []);
 
 
     return (
@@ -39,6 +39,7 @@ function Profile() {
                                         <div className='btn-collection'>
                                             <p>{field}</p>
                                             <p>N</p>
+                                            {/* {console.log(data)} */}
                                         </div>
                                     </div>
                                 ))}

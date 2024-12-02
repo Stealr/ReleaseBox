@@ -12,6 +12,7 @@ function Login() {
         event.preventDefault();
         setErrorMessage('');
         setSuccessMessage('');
+        console.log("username", username, password)
 
         try {
             const response = await axios.post('http://localhost:8000/token/', {
@@ -25,6 +26,7 @@ function Login() {
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
                 localStorage.setItem('userID', user_id);
+                console.log(access, refresh, user_id)
 
                 setSuccessMessage('Logged in successfully!');
             }
