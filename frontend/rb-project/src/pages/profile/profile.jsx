@@ -5,6 +5,21 @@ import PresentGames from '/src/Components/presentGames/presentGames.jsx';
 
 
 function Profile() {
+    const [data, setData] = useState([]);
+    const user_id = localStorage.getItem('userID');
+    const accessToken = localStorage.getItem('accessToken');
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/get_user/', {params: {user_id}})
+            .then(response => {
+                setData(response.data);
+                console.log("Successful data recording! ")
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
 
     return (
         <div>
