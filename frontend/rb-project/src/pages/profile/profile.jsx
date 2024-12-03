@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './profile.css';
 import PresentGames from '/src/Components/profile/presentGames.jsx';
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
     const [data, setData] = useState([]); // Данные пользователя
     const [collections, setCollections] = useState({}); // Данные для всех коллекций
     const [loading, setLoading] = useState(true); // Индикатор загрузки данных
-    const [amount, setAmount] = useState(window.innerWidth); // Состояние для ширины экрана
+    const [amount, setAmount] = useState(4); // Состояние для ширины экрана
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleResize = () => {
@@ -81,6 +83,16 @@ function Profile() {
         }
     }, [data]);
 
+    const logoutHandler = () => {
+        // Очистка токенов и данных пользователя
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken'); 
+        localStorage.removeItem('userID'); 
+
+        navigate(`/games`);
+    };
+
+
     return (
         <div>
             <img
@@ -114,6 +126,7 @@ function Profile() {
                                     );
                                 })}
                             </div>
+                            <a className="logout" onClick={logoutHandler}> Log out </a>
                         </div>
                         <div className="right-column">
                             {loading ? (

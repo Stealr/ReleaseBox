@@ -5,12 +5,12 @@ import Filters from "/src/Components/Filters/filters.jsx";
 import Sorts from "/src/Components/Filters/sorts/sorts.jsx";
 import "./Games.css";
 import "/src/pages/main-container.css";
-import { useNavigate } from "react-router-dom";
+import { useContextCard } from "/src/context/contextCardGame.js";
 
 
 function Games() {
     const [data, setData] = useState([]);
-    const navigate = useNavigate();
+    const { addCollection, handleGameClick } = useContextCard();
 
     useEffect(() => {
         fetchData()
@@ -85,38 +85,6 @@ function Games() {
         }
     };
     
-
-    const addCollection = async (gameId) => {
-        const user_id = localStorage.getItem('userID');
-        const accessToken = localStorage.getItem('accessToken');
-        const collection_name = "Done";
-        const user_rating = "";
-
-
-        if (!accessToken) {
-            console.error('Юзер не залогинен');
-            return;
-        }
-
-        try {
-            const response = await axios.post('http://localhost:8000/games/addToCollection/', {
-                user_id,
-                collection_name,
-                gameId,
-                user_rating,
-            });
-
-            if (response.status === 200) {
-                console.log('Данные успешно отправлены:', response.data);
-            }
-        } catch (error) {
-            console.error('Ошибка при отправке данных:', error);
-        }
-    };
-
-    const handleGameClick = (name, gameId) => {
-        navigate(`/games/${name}`, { state: { id: gameId } });
-      };
 
     // TODO: Добавить заглушку, если игры не загрузились из бд
     // При наведении на карточку, что то должно происходить

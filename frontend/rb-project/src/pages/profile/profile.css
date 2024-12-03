@@ -8,6 +8,17 @@
     gap: 50px;
 }
 
+.profile .logout {
+    margin-top: 20px;
+    cursor: pointer;
+    color: #dbdbdb;
+    text-decoration: none;
+}
+
+.profile .logout:hover {
+    color: #9c9c9c;
+}
+
 .profile .left-column {
     display: flex;
     flex-direction: column;
@@ -54,13 +65,14 @@
 
 .right-column h2 {
     font-size: 26px;
-    padding-bottom: 13px;
+    padding-bottom: 16px;
 }
 
 .profile .right-column .present-games {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .right-column .list-games {

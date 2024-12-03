@@ -1,7 +1,8 @@
 .card-game-list {
-    max-width: 1200px;
+    max-width: 500px;
     transition: all 0.3s ease-out;
     width: 100%;
+    position: relative;
 }
 
 .card-game-list:hover {
@@ -115,11 +116,32 @@
 
 .menu {
     position: absolute;
-    top: 41px; /* Расстояние от кнопки до меню */
-    right: 41px;
+    display: flex;
+    flex-direction: row;
+    top: 45px;
+    
+    right: 16px;
     background-color: white;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
     border-radius: 5px;
+}
+
+
+.menu .rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+    padding: 20px 25px 10px 0;
+}
+
+.menu .rating .rating-value {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #000000;
+}
+
+.menu .btns {
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -133,10 +155,18 @@
     cursor: pointer;
 }
 
+.menu-item.selected {
+    border: 2px solid rgb(0, 0, 0);
+}
+
 .menu-item:hover {
     background-color: #cbcbcb;
 }
 
 .menu-item.del:hover {
     background-color: #e67e7e;
+}
+
+.menu-item.apply:hover {
+    background-color: #a7f582;
 }
