@@ -112,3 +112,31 @@
     width: 14px;
     height: auto;
 }
+
+.menu {
+    position: absolute;
+    top: 41px; /* Расстояние от кнопки до меню */
+    right: 41px;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.menu-item {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: #cbcbcb;
+}
+
+.menu-item.del:hover {
+    background-color: #e67e7e;
+}
