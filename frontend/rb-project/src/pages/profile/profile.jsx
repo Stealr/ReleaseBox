@@ -3,12 +3,19 @@ import axios from "axios";
 import './profile.css';
 import PresentGames from '/src/Components/profile/presentGames.jsx';
 import { useNavigate } from "react-router-dom";
+import GameList from "/src/Components/GameList/GameList.jsx";
+import Filters from "/src/Components/Filters/filters.jsx";
+import Sorts from "/src/Components/Filters/sorts/sorts.jsx";
+import { useContextCard } from "/src/context/contextCardGame.js";
+
 
 function Profile({ onLogOut }) {
     const [data, setData] = useState([]); // Данные пользователя
     const [collections, setCollections] = useState({}); // Данные для всех коллекций
     const [loading, setLoading] = useState(true); // Индикатор загрузки данных
     const [amount, setAmount] = useState(4); // Состояние для ширины экрана
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const { addCollection, handleGameClick, applyFilters } = useContextCard();
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
     const navigate = useNavigate();
@@ -67,14 +74,22 @@ function Profile({ onLogOut }) {
         const loadAllCollections = async () => {
             setLoading(true);
 
-            const collectionsToFetch = ["Favourite", "Playing", "Done", "Wishlist", "Abandoned"];
+            const collectionsToFetch = ["All games", "Favourite", "Playing", "Done", "Wishlist", "Abandoned"];
             const loadedCollections = {};
 
             for (const collection of collectionsToFetch) {
-                loadedCollections[collection] = await fetchGames(collection);
+                if (collection != "All games") {
+                    loadedCollections[collection] = await fetchGames(collection);
+                }
+                else {
+                    loadedCollections[collection] = []
+                }
             }
 
+            loadedCollections["All games"] = Object.values(loadedCollections).flatMap(category => category)
+
             setCollections(loadedCollections); // Устанавливаем данные для всех коллекций
+
             setLoading(false);
         };
 
@@ -86,13 +101,16 @@ function Profile({ onLogOut }) {
     const logoutHandler = () => {
         // Очистка токенов и данных пользователя
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken'); 
-        localStorage.removeItem('userID'); 
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('userID');
         onLogOut()
 
         navigate(`/games`);
     };
 
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+    };
 
     return (
         <div>
@@ -108,10 +126,10 @@ function Profile({ onLogOut }) {
                             <h2 className='username'>{data.username}</h2>
                             <p>Collections:</p>
                             <div className="btns-col">
-                                {["All Games", "Wishlist", "Playing", "Done", "Favourite", "Abandoned"].map((field) => {
+                                {["All games", "Wishlist", "Playing", "Done", "Favourite", "Abandoned"].map((field) => {
                                     let count = 0;
 
-                                    if (field === "All Games" && data.userCollection) {
+                                    if (field === "All games" && data.userCollection) {
                                         count = Object.values(data.userCollection).reduce((sum, items) => sum + items.length, 0);
                                     } else if (data.userCollection && data.userCollection[field]) {
                                         count = data.userCollection[field].length;
@@ -119,11 +137,15 @@ function Profile({ onLogOut }) {
 
                                     return (
                                         <div className="block" key={field}>
-                                            <div className="btn-collection">
+                                            <div
+                                                className={`btn-collection ${selectedCategory?.toLowerCase() === field.toLowerCase() ? 'active' : ''}`}
+                                                onClick={() => handleCategorySelect(field)}
+                                            >
                                                 <p>{field}</p>
                                                 <p>{count}</p>
                                             </div>
                                         </div>
+
                                     );
                                 })}
                             </div>
@@ -132,32 +154,25 @@ function Profile({ onLogOut }) {
                         <div className="right-column">
                             {loading ? (
                                 <p>Loading games...</p>
-                            ) : (
-                                <>
-                                    <div className="present-games">
-                                        <h2>Favourite</h2>
-                                        <PresentGames listGames={collections["Favourite"].slice(0, amount) || []} />
+                            ) : selectedCategory ? ( // Если выбрана категория
+                                <div className="present-games">
+                                    <h2>{selectedCategory}</h2>
+                                    <div className='filters-sort'>
+                                        <Filters applybtn={applyFilters} filterSwitcher={false} />
+                                        <span className='found'>Games are found: {Object.keys(collections[selectedCategory]).length}</span>
                                     </div>
-                                    <div className="present-games">
-                                        <h2>Playing</h2>
-                                        <PresentGames listGames={collections["Playing"].slice(0, amount) || []} />
+                                    <GameList data={collections[selectedCategory]} addCollection={addCollection} handleGameClick={handleGameClick} />
+                                </div>
+                            ) : ( // Если категория не выбрана, показываем по 4 игры из каждой
+                                Object.entries(collections).map(([category, games]) => (
+                                    <div className="present-games" key={category}>
+                                        <h2>{category}</h2>
+                                        <PresentGames listGames={games.slice(0, amount) || []} />
                                     </div>
-                                    <div className="present-games">
-                                        <h2>Done</h2>
-                                        <PresentGames listGames={collections["Done"].reverse().slice(0, amount) || []} />
-                                    </div>
-                                    <div className="present-games">
-                                        <h2>Wishlist</h2>
-                                        <PresentGames listGames={collections["Wishlist"].slice(0, amount) || []} />
-                                    </div>
-                                    <div className="present-games">
-                                        <h2>Abandoned</h2>
-                                        <PresentGames listGames={collections["Abandoned"].slice(0, amount) || []} />
-                                    </div>
-
-                                </>
+                                ))
                             )}
                         </div>
+
                     </div>
                 </div>
             </div>
