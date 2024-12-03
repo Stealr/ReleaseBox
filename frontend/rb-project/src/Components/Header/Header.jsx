@@ -45,12 +45,6 @@ function Header() {
                         </div>
                     </div>
 
-                    <div className='mini-lup'>
-                        <img src='/src/assets/search.png' alt='magnifier' />
-                    </div>
-                    <div className="search-bar">
-                        <input type="text" placeholder="Enter game's name" />
-                    </div>
                 </div>
                 <div className="right">
                     {!accessToken ? (

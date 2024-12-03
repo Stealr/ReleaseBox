@@ -3,46 +3,69 @@ import axios from "axios";
 import './profile.css';
 import PresentGames from '/src/Components/profile/presentGames.jsx';
 
-
 function Profile() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([]); // Данные пользователя
+    const [collections, setCollections] = useState({}); // Данные для всех коллекций
+    const [loading, setLoading] = useState(true); // Индикатор загрузки данных
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
 
+    // Функция для получения данных пользователя
     useEffect(() => {
-
-        axios.get(`http://localhost:8000/get_user/`,
-            { params: { user_id: user_id } }, // Передаем user_id как query параметр
-        )
+        axios.get(`http://localhost:8000/get_user/`, {
+            params: { user_id: user_id } // Передаем user_id как query параметр
+        })
             .then((response) => {
                 setData(response.data); // Устанавливаем данные пользователя
             })
             .catch((err) => {
-                setError(err.message); // Обрабатываем ошибки
+                console.error("Error fetching user data:", err.message); // Обрабатываем ошибки
             });
-
     }, [user_id]);
 
-    const getGames = async (collection) => {
-        const listGames = data.userCollection[collection];
-        console.log(listGames)
+    // Функция для загрузки игр из коллекции
+    const fetchGames = async (collection) => {
+        if (!data.userCollection || !data.userCollection[collection]) return []; // Проверяем наличие данных
+
+        const listGames = data.userCollection[collection].map(game => game[0]);
         try {
             const response = await axios.get("http://localhost:8000/get_games/", {
-                params: {
-                    game_id: listGames // Передача массива game_id
-                }
+                params: { game_id: listGames } // Передача массива game_id
             });
-            return response.data
+            return response.data;
         } catch (error) {
-            console.error("Error fetching sorted data:", error);
+            console.error(`Error fetching ${collection} games:`, error);
+            return [];
         }
     };
+
+    // Загрузка всех коллекций
+    useEffect(() => {
+        const loadAllCollections = async () => {
+            setLoading(true);
+
+            const collectionsToFetch = ["Favourite", "Playing", "Done", "Wishlist", "Abandoned"];
+            const loadedCollections = {};
+
+            for (const collection of collectionsToFetch) {
+                loadedCollections[collection] = await fetchGames(collection);
+            }
+
+            setCollections(loadedCollections); // Устанавливаем данные для всех коллекций
+            setLoading(false);
+        };
+
+        if (data.userCollection) {
+            loadAllCollections(); // Загружаем все коллекции
+        }
+    }, [data]);
 
     return (
         <div>
             <img
                 src='/src/assets/vampire-the-masquerade-bloodlines-2.jpg'
                 className='background-image'
+                alt="Background"
             />
             <div className='main-content'>
                 <div className='container'>
@@ -50,7 +73,6 @@ function Profile() {
                         <div className="left-column">
                             <h2 className='username'>{data.username}</h2>
                             <p>Collections:</p>
-                            {console.log(data)}
                             <div className="btns-col">
                                 {["All Games", "Wishlist", "Playing", "Done", "Favourite", "Abandoned"].map((field) => {
                                     let count = 0;
@@ -73,11 +95,33 @@ function Profile() {
                             </div>
                         </div>
                         <div className="right-column">
-                            <PresentGames listGames={getGames("Done")} />
-                            <PresentGames />
-                            <PresentGames />
-                            <PresentGames />
-                            <PresentGames />
+                            {loading ? (
+                                <p>Loading games...</p>
+                            ) : (
+                                <>
+                                    <div className="present-games">
+                                        <h2>Favourite</h2>
+                                        <PresentGames listGames={collections["Favourite"] || []} />
+                                    </div>
+                                    <div className="present-games">
+                                        <h2>Playing</h2>
+                                        <PresentGames listGames={collections["Playing"] || []} />
+                                    </div>
+                                    <div className="present-games">
+                                        <h2>Done</h2>
+                                        <PresentGames listGames={collections["Done"] || []} />
+                                    </div>
+                                    <div className="present-games">
+                                        <h2>Wishlist</h2>
+                                        <PresentGames listGames={collections["Wishlist"] || []} />
+                                    </div>
+                                    <div className="present-games">
+                                        <h2>Abandoned</h2>
+                                        <PresentGames listGames={collections["Abandoned"] || []} />
+                                    </div>
+
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

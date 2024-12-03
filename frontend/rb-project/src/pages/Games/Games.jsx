@@ -135,6 +135,9 @@ function Games() {
                             <Sorts fetchSortedData={fetchSortedData} fetchData={fetchData} />
                         </div>
                     </div>
+                    <div className="search-bar">
+                        <input type="text" placeholder="Enter game's name" />
+                    </div>
                     <div className='list-games-grid'>
                         <GameList data={data} addCollection={addCollection} handleGameClick={handleGameClick}/>
                     </div>

@@ -45,20 +45,6 @@
     scale: 1.05;
 }
 
-.search-bar input {
-    padding: 10px;
-    margin-left: 15px;
-    border-radius: 15px;
-    width: 15vw;
-    border: none;
-}
-
-.mini-lup img {
-    width: 25px;
-    height: auto;
-    margin-left: 10px;
-    display: none;
-}
 
 .right {
     display: flex;
@@ -145,14 +131,6 @@
 
  /*МЕДИАЗАПРОСЫ*/
 
- @media (max-width: 1200px) {
-    .search-bar input {
-        display: none;
-    }
-    .mini-lup img {
-        display: block;
-    }
- }
 
  @media (max-width: 950px) {
     .menu-container-right {
