@@ -7,33 +7,31 @@ import "./Games.css";
 import "/src/pages/main-container.css";
 import { useContextCard } from "/src/context/contextCardGame.js";
 
-
 function Games() {
     const [data, setData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const { addCollection, handleGameClick, applyFilters } = useContextCard();
 
     useEffect(() => {
-        fetchData()
+        fetchData();
     }, []);
 
     const fetchData = async () => {
         axios.get('http://localhost:8000/games/')
             .then(response => {
                 setData(response.data);
-                console.log("Successful data recording! ")
+                console.log("Successful data recording! ");
             })
             .catch(error => {
                 console.error(error);
             });
     };
 
-
     const fetchSortedData = async (sortField, sortOrder) => {
         try {
-            sortField = sortField.toLowerCase() == "popularity" ? "rating" : sortField
-            sortField = sortField.toLowerCase() == "date" ? "released" : sortField
+            sortField = sortField.toLowerCase() === "popularity" ? "rating" : sortField;
+            sortField = sortField.toLowerCase() === "date" ? "released" : sortField;
             const sortParam = sortOrder === "asc" ? `sorting+` : `sorting-`;
-            console.log({ [sortParam]: sortField.toLowerCase() })
             const response = await axios.get("http://localhost:8000/games/sorting/", {
                 params: {
                     [sortParam]: sortField.toLowerCase(),
@@ -44,10 +42,15 @@ function Games() {
             console.error("Error fetching sorted data:", error);
         }
     };
-    
 
-    // TODO: Добавить заглушку, если игры не загрузились из бд
-    // При наведении на карточку, что то должно происходить
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const filteredData = data.filter((game) =>
+        game.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div>
             <img
@@ -58,16 +61,21 @@ function Games() {
                 <div className='container'>
                     <div className='filters-sort'>
                         <Filters applybtn={applyFilters} filterSwitcher={true} />
-                        <span className='found'>Games are found: {Object.keys(data).length}</span>
+                        <span className='found'>Games are found: {filteredData.length}</span>
                         <div className='sort'>
                             <Sorts fetchSortedData={fetchSortedData} fetchData={fetchData} />
                         </div>
                     </div>
                     <div className="search-bar">
-                        <input type="text" placeholder="Enter game's name" />
+                        <input
+                            type="text"
+                            placeholder="Enter game's name"
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                        />
                     </div>
                     <div className='list-games-grid'>
-                        <GameList data={data} addCollection={addCollection} handleGameClick={handleGameClick}/>
+                        <GameList data={filteredData} addCollection={addCollection} handleGameClick={handleGameClick} />
                     </div>
                 </div>
             </div>
@@ -75,4 +83,4 @@ function Games() {
     );
 }
 
-export default Games
+export default Games;

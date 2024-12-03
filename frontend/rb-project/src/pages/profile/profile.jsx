@@ -15,9 +15,11 @@ function Profile({ onLogOut }) {
     const [loading, setLoading] = useState(true); // Индикатор загрузки данных
     const [amount, setAmount] = useState(4); // Состояние для ширины экрана
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
     const { addCollection, handleGameClick, applyFilters } = useContextCard();
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -112,6 +114,16 @@ function Profile({ onLogOut }) {
         setSelectedCategory(category);
     };
 
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const filteredGames = selectedCategory
+        ? collections[selectedCategory]?.filter((game) =>
+            game.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        : [];
+
     return (
         <div>
             <img
@@ -161,7 +173,20 @@ function Profile({ onLogOut }) {
                                         <Filters applybtn={applyFilters} filterSwitcher={false} />
                                         <span className='found'>Games are found: {Object.keys(collections[selectedCategory]).length}</span>
                                     </div>
-                                    <GameList data={collections[selectedCategory]} addCollection={addCollection} handleGameClick={handleGameClick} />
+                                    <div className="search-bar">
+                                        <input
+                                            type="text"
+                                            placeholder="Enter game's name"
+                                            value={searchQuery}
+                                            onChange={handleSearchChange}
+                                        />
+                                    </div>
+
+                                    <GameList
+                                        data={filteredGames}
+                                        addCollection={addCollection}
+                                        handleGameClick={handleGameClick}
+                                    />
                                 </div>
                             ) : ( // Если категория не выбрана, показываем по 4 игры из каждой
                                 Object.entries(collections).map(([category, games]) => (
