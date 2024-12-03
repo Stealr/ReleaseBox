@@ -7,8 +7,29 @@ function Profile() {
     const [data, setData] = useState([]); // Данные пользователя
     const [collections, setCollections] = useState({}); // Данные для всех коллекций
     const [loading, setLoading] = useState(true); // Индикатор загрузки данных
+    const [amount, setAmount] = useState(window.innerWidth); // Состояние для ширины экрана
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 1000) {
+                setAmount(1);
+            } else if (window.innerWidth < 1200) {
+                setAmount(2);
+            } else if (window.innerWidth < 1500) {
+                setAmount(3);
+            }
+            else {
+                setAmount(4);
+            }
+        };
+
+        window.addEventListener('resize', handleResize); // Слушаем изменение размера экрана
+        return () => {
+            window.removeEventListener('resize', handleResize); // Очистка при размонтировании компонента
+        };
+    }, []);
 
     // Функция для получения данных пользователя
     useEffect(() => {
@@ -101,23 +122,23 @@ function Profile() {
                                 <>
                                     <div className="present-games">
                                         <h2>Favourite</h2>
-                                        <PresentGames listGames={collections["Favourite"] || []} />
+                                        <PresentGames listGames={collections["Favourite"].slice(0, amount) || []} />
                                     </div>
                                     <div className="present-games">
                                         <h2>Playing</h2>
-                                        <PresentGames listGames={collections["Playing"] || []} />
+                                        <PresentGames listGames={collections["Playing"].slice(0, amount) || []} />
                                     </div>
                                     <div className="present-games">
                                         <h2>Done</h2>
-                                        <PresentGames listGames={collections["Done"] || []} />
+                                        <PresentGames listGames={collections["Done"].reverse().slice(0, amount) || []} />
                                     </div>
                                     <div className="present-games">
                                         <h2>Wishlist</h2>
-                                        <PresentGames listGames={collections["Wishlist"] || []} />
+                                        <PresentGames listGames={collections["Wishlist"].slice(0, amount) || []} />
                                     </div>
                                     <div className="present-games">
                                         <h2>Abandoned</h2>
-                                        <PresentGames listGames={collections["Abandoned"] || []} />
+                                        <PresentGames listGames={collections["Abandoned"].slice(0, amount) || []} />
                                     </div>
 
                                 </>
