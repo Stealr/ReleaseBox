@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './login.css';
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ onLogIn  }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setErrorMessage('');
         setSuccessMessage('');
-        console.log("username", username, password)
 
         try {
             const response = await axios.post('http://localhost:8000/token/', {
@@ -25,9 +26,11 @@ function Login() {
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
                 localStorage.setItem('userID', user_id);
-                console.log(access, refresh, user_id)
+
+                onLogIn(access);
 
                 setSuccessMessage('Logged in successfully!');
+                navigate(`/${username}`);
             }
         } catch (error) {
             console.error('Error during login:', error);
@@ -39,7 +42,7 @@ function Login() {
 
     return (
         <div className='main-content'>
-            
+
             <div className='auth-cont'>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <h1>Log in</h1>

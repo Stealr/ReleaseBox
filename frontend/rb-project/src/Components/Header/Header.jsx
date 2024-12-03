@@ -1,28 +1,28 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "./header_style.css";
 import { useState } from 'react';
 import axios from 'axios';
 
-function Header() {
+function Header({ isAuthenticated }) {
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
     const [data, setData] = useState([]);
 
     // Потом убрать, нужно для проверки
     useEffect(() => {
-
-        axios.get(`http://localhost:8000/get_user/`,
-            { params: { user_id: user_id } }, // Передаем user_id как query параметр
-        )
-            .then((response) => {
-                setData(response.data); // Устанавливаем данные пользователя
-            })
-            .catch((err) => {
-                console.log(err); // Обрабатываем ошибки
-            });
-
-    }, [user_id]);
+        if (user_id) {
+            axios.get(`http://localhost:8000/get_user/`,
+                { params: { user_id: user_id } }, // Передаем user_id как query параметр
+            )
+                .then((response) => {
+                    setData(response.data); // Устанавливаем данные пользователя
+                })
+                .catch((err) => {
+                    console.log(err); // Обрабатываем ошибки
+                });
+        }
+    }, [isAuthenticated]);
 
 
     return (
@@ -71,7 +71,6 @@ function Header() {
                         </div>
                     )}
                 </div>
-
             </div>
         </div>
     );

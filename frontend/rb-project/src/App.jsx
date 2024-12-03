@@ -1,4 +1,4 @@
-import {React, memo} from 'react';
+import { React, memo, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "/src/Components/Header/Header.jsx";
 import Footer from "/src/Components/Footer/Footer.jsx";
@@ -16,21 +16,31 @@ const MemoizedHeader = memo(Header);
 const MemoizedFooter = memo(Footer);
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false); // Меняем состояние
+  };
+
+  const handleLogIn = (token) => {
+    localStorage.setItem('token', token);
+    setIsAuthenticated(true); // Меняем состояние
+
+  };
   return (
     <Router>
-      <MemoizedHeader />
+      <MemoizedHeader isAuthenticated={isAuthenticated} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/games" element={<Games />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login onLogIn={handleLogIn} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/games/:game" element={<GameInfo />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/:user" element={<Profile onLogOut={handleLogOut} />} />
         <Route path="/profile/settings" element={<Test />} />
       </Routes>
-      {/* <MemoizedFooter /> */}
     </Router>
   )
 }

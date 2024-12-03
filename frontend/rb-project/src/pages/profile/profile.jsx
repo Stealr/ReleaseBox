@@ -4,7 +4,7 @@ import './profile.css';
 import PresentGames from '/src/Components/profile/presentGames.jsx';
 import { useNavigate } from "react-router-dom";
 
-function Profile() {
+function Profile({ onLogOut }) {
     const [data, setData] = useState([]); // Данные пользователя
     const [collections, setCollections] = useState({}); // Данные для всех коллекций
     const [loading, setLoading] = useState(true); // Индикатор загрузки данных
@@ -88,6 +88,7 @@ function Profile() {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken'); 
         localStorage.removeItem('userID'); 
+        onLogOut()
 
         navigate(`/games`);
     };
