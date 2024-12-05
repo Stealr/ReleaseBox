@@ -162,16 +162,16 @@ def filtration(request):
     query = Q()
     for filter_type, filter_values in filters.items():
         if filter_type == 'month':
-            year = filters.get('year')
-            month = filters.get('month')
+            year = filter_values[0]
+            month = filter_values[1]
             query &= Q(released__year=year, released__month=month)
         if filter_type == 'released':
-            start = filters.get('start')
-            end = filters.get('end')
+            start = filter_values[0]
+            end = filter_values[1]
             query &= Q(released__gte=start, released__lte=end)
         if filter_type == 'metacritic':
-            start = filters.get('start')
-            end = filters.get('end')
+            start = filter_values[0]
+            end = filter_values[1]
             query &= Q(metacritic__gte=start, metacritic__lte=end)
         if filter_type == 'tags':
             tags = [tag.strip() for tag in filter_values]
@@ -229,19 +229,19 @@ def sorting(request):
 
 @api_view(['GET'])
 def get_user(request):
-    user_id = request.data.get('user_id')
+    user_id = request.query_params.get('user_id')
     if user_id:
         user = CustomUser.objects.get(id=user_id)
         response = {'username': user.username,
                     'email': user.email,
                     'userCollection': user.userCollections,
-                    'lolo': user.logo}
+                    'logo': user.logo}
         return Response(response)
 
 @api_view(['GET'])
 def get_games(request):
     response_data = []
-    for game in request.data.get('game_id'):
+    for game in request.query_params.get('game_id'):
         try:
             output = GameInfo.objects.get(id=game)
             response_data.append({
