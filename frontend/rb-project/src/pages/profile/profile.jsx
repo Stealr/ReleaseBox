@@ -120,42 +120,38 @@ function Profile({ onLogOut }) {
 
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
-
+    
         if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
-            filters.released = {
-                start: yearRange[0],
-                end: yearRange[1],
-            };
+            filters.released = [yearRange[0], yearRange[1]];
         }
-
+    
         if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
-            filters.metacritic = {
-                start: metacriticRange[0],
-                end: metacriticRange[1],
-            };
+            filters.metacritic = [metacriticRange[0], metacriticRange[1]];
         }
-
+    
         if (selectedGenres.length > 0) {
             filters.genres = selectedGenres;
         }
-
+    
         if (selectedPlatforms.length > 0) {
             filters.platform = selectedPlatforms;
         }
-
+    
         if (selectedModes.length > 0) {
             filters.tags = selectedModes;
         }
-        if (Object.keys(filters).length != 0) {
+    
+        if (Object.keys(filters).length !== 0) {
             try {
-                const response = await axios.get('http://localhost:8000/games/filtration', { filtration: filters });
+                const response = await axios.get('http://localhost:8000/games/filtration', {
+                    params: { filtration: JSON.stringify(filters) },
+                });
                 setData(response.data);
             } catch (error) {
                 console.error('Error applying filters:', error);
             }
-        }
-        else {
-            console.log("Enter filters");
+        } else {
+            fetchData()
         }
     };
 
