@@ -66,13 +66,10 @@ function Games() {
             filters.tags = selectedModes;
         }
     
-        console.log('Filters:', filters);
-    
-        // Проверяем, есть ли фильтры, и отправляем запрос
         if (Object.keys(filters).length !== 0) {
             try {
                 const response = await axios.get('http://localhost:8000/games/filtration', {
-                    params: { filtration: JSON.stringify(filters) }, // Передаем фильтры без JSON.stringify
+                    params: { filtration: JSON.stringify(filters) },
                 });
                 setData(response.data);
             } catch (error) {

@@ -36,12 +36,10 @@ function Calendar() {
 
     const groupByDay = (games) => {
         const grouped = initializeDays();
-
         games.forEach((game) => {
             const day = new Date(game.releaseDate).getDate().toString();
             grouped[day - 1].push(game);
         });
-
         return grouped;
     };
 
@@ -50,35 +48,31 @@ function Calendar() {
             .then(response => {
                 setData(response.data);
                 console.log("Successful data recording!")
-                // console.log(data)
             })
             .catch(error => {
                 console.error(error);
             });
     }, []);
 
-    // TODO Проверить ссылку. Попробовать заменить на filtration
-    useEffect(() => {
-        axios.get('http://localhost:8000/unreleasedGames/', {
+    const newMonth = async () => {
+        axios.get('http://localhost:8000/games/filtration', {
             params: {
-                filtration: 'month',
-                year: currentYear,
-                month: currentIndex
+                filtration: JSON.stringify({ month: [currentYear, currentIndex] }),
             }
         })
             .then(response => {
                 setData(response.data);
                 console.log("Successful data recording! New month.");
-                // console.log(response.data)
+                console.log(response.data)
             })
             .catch(error => {
                 console.error(error);
             });
-    }, [currentIndex]);
+    };
 
     const handleGameClick = (name, gameId) => {
         navigate(`/games/${name}`, { state: { id: gameId } });
-      };
+    };
 
     return (
         <div>
@@ -88,12 +82,12 @@ function Calendar() {
             />
             <div className="main-content-calendar">
                 <div class="carousel-filtr">
-                    <MonthCarousel currentIndex={currentIndex} currentYear={currentYear} setCurrentYear={setCurrentYear} setCurrentIndex={setCurrentIndex} />
+                    <MonthCarousel currentIndex={currentIndex} currentYear={currentYear} setCurrentYear={setCurrentYear} setCurrentIndex={setCurrentIndex} newMonth={newMonth}/>
                 </div>
                 <div className="container-calendar">
-                    <span>New releases: {data.length}</span>
+                    <p>New releases: {data.length}</p>
                     <div className="calendar">
-                        <CalendarGrid grouped_data={groupByDay(data)} dayofweek={definedayofweek() } handleGameClick={handleGameClick}/>
+                        <CalendarGrid grouped_data={groupByDay(data)} dayofweek={definedayofweek()} handleGameClick={handleGameClick} />
                     </div>
                 </div>
             </div>

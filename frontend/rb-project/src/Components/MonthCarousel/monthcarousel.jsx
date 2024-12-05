@@ -18,7 +18,7 @@ const monthNames = [
 ];
 
 
-function MonthCarousel({currentIndex, currentYear, setCurrentIndex, setCurrentYear}) {
+function MonthCarousel({currentIndex, currentYear, setCurrentIndex, setCurrentYear, newMonth}) {
   const [visibleMonths, setVisibleMonths] = useState(5);
 
   useEffect(() => {
@@ -45,6 +45,7 @@ function MonthCarousel({currentIndex, currentYear, setCurrentIndex, setCurrentYe
       }
       return prevIndex - 1;
     });
+    newMonth()
   };
 
   const handleNext = () => {
@@ -55,6 +56,7 @@ function MonthCarousel({currentIndex, currentYear, setCurrentIndex, setCurrentYe
       }
       return prevIndex + 1;
     });
+    newMonth()
   };
 
 

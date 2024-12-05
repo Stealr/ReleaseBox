@@ -1,6 +1,7 @@
 .card-game-calendar {
     max-width: 400px;
     transition: all 0.3s ease-out;
+    position: relative;
 }
 
 .card-game-calendar:hover {
