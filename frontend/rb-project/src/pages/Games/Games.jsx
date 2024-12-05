@@ -46,18 +46,13 @@ function Games() {
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
     
+        // Добавляем фильтры только если они отличаются от значений по умолчанию
         if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
-            filters.released = {
-                start: yearRange[0],
-                end: yearRange[1],
-            };
+            filters.month = [yearRange[0], yearRange[1]];
         }
     
         if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
-            filters.metacritic = {
-                start: metacriticRange[0],
-                end: metacriticRange[1],
-            };
+            filters.metacritic = [metacriticRange[0], metacriticRange[1]];
         }
     
         if (selectedGenres.length > 0) {
@@ -72,13 +67,15 @@ function Games() {
             filters.tags = selectedModes;
         }
     
+        console.log('Filters:', filters);
+    
+        // Проверяем, есть ли фильтры, и отправляем запрос
         if (Object.keys(filters).length !== 0) {
             try {
                 const response = await axios.get('http://localhost:8000/games/filtration', {
-                    params: { filtration: filters }, // Отправляем данные как параметр запроса
+                    params: { filtration: JSON.stringify(filters) }, // Передаем фильтры без JSON.stringify
                 });
                 setData(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error('Error applying filters:', error);
             }
