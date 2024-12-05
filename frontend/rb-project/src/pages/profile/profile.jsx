@@ -16,7 +16,7 @@ function Profile({ onLogOut }) {
     const [amount, setAmount] = useState(4); // Состояние для ширины экрана
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
-    const { addCollection, handleGameClick, applyFilters } = useContextCard();
+    const { addCollection, handleGameClick } = useContextCard();
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
 
@@ -118,11 +118,53 @@ function Profile({ onLogOut }) {
         setSearchQuery(event.target.value);
     };
 
+    const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
+        const filters = {};
+
+        if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
+            filters.released = {
+                start: yearRange[0],
+                end: yearRange[1],
+            };
+        }
+
+        if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
+            filters.metacritic = {
+                start: metacriticRange[0],
+                end: metacriticRange[1],
+            };
+        }
+
+        if (selectedGenres.length > 0) {
+            filters.genres = selectedGenres;
+        }
+
+        if (selectedPlatforms.length > 0) {
+            filters.platform = selectedPlatforms;
+        }
+
+        if (selectedModes.length > 0) {
+            filters.tags = selectedModes;
+        }
+        if (Object.keys(filters).length != 0) {
+            try {
+                const response = await axios.get('http://localhost:8000/games/filtration', { filtration: filters });
+                setData(response.data);
+            } catch (error) {
+                console.error('Error applying filters:', error);
+            }
+        }
+        else {
+            console.log("Enter filters");
+        }
+    };
+
     const filteredGames = selectedCategory
         ? collections[selectedCategory]?.filter((game) =>
             game.name.toLowerCase().includes(searchQuery.toLowerCase())
         )
         : [];
+
 
     return (
         <div>
