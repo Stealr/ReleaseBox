@@ -13,7 +13,7 @@ class GameInfo(models.Model):
     platform = models.CharField(max_length=100, blank=True, default='No data')  # Поле для платформы
     genres = models.CharField(max_length=100, blank=True, default='No data')  # Поле для жанра
     stores = models.CharField(max_length=500, blank=True, default='No data')
-    metacritic = models.CharField(max_length=3, blank=False)  # Поле для оценки Metacritic
+    metacritic = models.IntegerField(blank=False)  # Поле для оценки Metacritic
     esrb_rating = models.CharField(max_length=255, blank=True, default='No data')
     tags = models.CharField(max_length=1000, blank=True, default='No data')
     short_screenshots = models.CharField(max_length=3000, blank=True, default='No data')

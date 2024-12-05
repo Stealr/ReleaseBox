@@ -158,13 +158,13 @@ def deleteFromCollection(request):
 
 @api_view(['GET'])
 def filtration(request):
-    filters = request.data.get('filtration', {})
+    filters = request.query_params.get('filtration', {})
     query = Q()
     for filter_type, filter_values in filters.items():
         if filter_type == 'month':
             year = filter_values[0]
             month = filter_values[1]
-            query &= Q(released__year=year, released__month=month)
+            query &= Q(released__startswith=f"{year}-{month.zfill(2)}")
         if filter_type == 'released':
             start = filter_values[0]
             end = filter_values[1]
