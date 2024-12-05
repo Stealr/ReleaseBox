@@ -22,6 +22,10 @@ function BlockSlider({ name, Range, setRange, marks, min_max }) {
         handleSliderChange(min_max)
     }, []);
 
+    useEffect(() => {
+        updateHandlePositions(Range);
+    }, [Range]);
+
     return (
         <div className="custom-slider-container">
             <p>{name}</p>

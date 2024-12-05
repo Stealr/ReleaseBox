@@ -46,9 +46,8 @@ function Games() {
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
     
-        // Добавляем фильтры только если они отличаются от значений по умолчанию
         if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
-            filters.month = [yearRange[0], yearRange[1]];
+            filters.released = [yearRange[0], yearRange[1]];
         }
     
         if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
@@ -80,7 +79,7 @@ function Games() {
                 console.error('Error applying filters:', error);
             }
         } else {
-            console.log('Enter filters');
+            fetchData()
         }
     };
     
@@ -102,7 +101,7 @@ function Games() {
             <div className='main-content'>
                 <div className='container'>
                     <div className='filters-sort'>
-                        <Filters applybtn={applyFilters} filterSwitcher={true} />
+                        <Filters applybtn={applyFilters} filterSwitcher={true} fetchData={fetchData} />
                         <span className='found'>Games are found: {filteredData.length}</span>
                         <div className='sort'>
                             <Sorts fetchSortedData={fetchSortedData} fetchData={fetchData} />

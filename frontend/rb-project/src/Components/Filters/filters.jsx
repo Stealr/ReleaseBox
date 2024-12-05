@@ -7,7 +7,7 @@ import CheckboxGroup from "./group/checkboxGroup.jsx";
 const today = new Date();
 const year = today.getFullYear();
 
-function Filters({ applybtn, filterSwitcher }) {
+function Filters({ applybtn, filterSwitcher, fetchData }) {
     const [yearRange, setYearRange] = useState([1980, year + 2]);
     const [metacriticRange, setMetacriticRange] = useState([0, 100]);
     const [selectedGenres, setSelectedGenres] = useState([]);
@@ -39,11 +39,12 @@ function Filters({ applybtn, filterSwitcher }) {
     };
 
     const resetFilters = () => { // нужно как то обновлять слайдеры
-        setYearRange[1980, 2026];
-        setMetacriticRange[0, 100]; // не работает
+        setYearRange([1980, year + 2]); // Правильный вызов setYearRange
+        setMetacriticRange([0, 100]);  // Правильный вызов setMetacriticRange
         setSelectedGenres([]);
         setSelectedPlatforms([]);
         setSelectedModes([]);
+        fetchData()
     }
 
     return (
