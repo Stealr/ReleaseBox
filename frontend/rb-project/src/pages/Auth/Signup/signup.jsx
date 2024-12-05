@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import "./signup.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -8,6 +9,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -24,8 +26,9 @@ function Login() {
             });
 
             if (response.status === 201) {
-                setSuccessMessage('User registered successfully!');
+                navigate(`/login`);
             }
+            
 
             
         } catch (error) {
