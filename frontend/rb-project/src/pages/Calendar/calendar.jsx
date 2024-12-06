@@ -37,7 +37,7 @@ function Calendar() {
     const groupByDay = (games) => {
         const grouped = initializeDays();
         games.forEach((game) => {
-            const day = new Date(game.releaseDate).getDate().toString();
+            const day = new Date(game.released).getDate().toString();
             grouped[day - 1].push(game);
         });
         return grouped;
@@ -55,7 +55,9 @@ function Calendar() {
     }, []);
 
     const newMonth = async () => {
-        axios.get('http://localhost:8000/games/filtration', {
+        
+        console.log(currentYear, currentIndex)
+        const response = await axios.get('http://localhost:8000/games/filtration', {
             params: {
                 filtration: JSON.stringify({ month: [currentYear, currentIndex] }),
             }

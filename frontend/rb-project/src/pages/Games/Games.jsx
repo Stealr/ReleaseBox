@@ -65,7 +65,8 @@ function Games() {
         if (selectedModes.length > 0) {
             filters.tags = selectedModes;
         }
-    
+
+
         if (Object.keys(filters).length !== 0) {
             try {
                 const response = await axios.get('http://localhost:8000/games/filtration', {

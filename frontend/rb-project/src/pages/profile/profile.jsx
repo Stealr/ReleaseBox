@@ -60,15 +60,25 @@ function Profile({ onLogOut }) {
         if (!data.userCollection || !data.userCollection[collection]) return []; // Проверяем наличие данных
 
         const listGames = data.userCollection[collection].map(game => game[0]);
+        const params = new URLSearchParams();
+        listGames.forEach(id => params.append('game_id', id));
+
         try {
-            const response = await axios.get("http://localhost:8000/get_games/", {
-                params: { game_id: listGames } // Передача массива game_id
-            });
+            const response = await axios.get(`http://localhost:8000/get_games/?${params.toString()}`);
             return response.data;
         } catch (error) {
             console.error(`Error fetching ${collection} games:`, error);
             return [];
         }
+        // try {
+        //     const response = await axios.get("http://localhost:8000/get_games/", {
+        //         params: { game_id: listGames }
+        //     });
+        //     return response.data;
+        // } catch (error) {
+        //     console.error(`Error fetching ${collection} games:`, error);
+        //     return [];
+        // }
     };
 
     // Загрузка всех коллекций
@@ -120,27 +130,27 @@ function Profile({ onLogOut }) {
 
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
-    
+
         if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
             filters.released = [yearRange[0], yearRange[1]];
         }
-    
+
         if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
             filters.metacritic = [metacriticRange[0], metacriticRange[1]];
         }
-    
+
         if (selectedGenres.length > 0) {
             filters.genres = selectedGenres;
         }
-    
+
         if (selectedPlatforms.length > 0) {
             filters.platform = selectedPlatforms;
         }
-    
+
         if (selectedModes.length > 0) {
             filters.tags = selectedModes;
         }
-    
+
         if (Object.keys(filters).length !== 0) {
             try {
                 const response = await axios.get('http://localhost:8000/games/filtration', {
