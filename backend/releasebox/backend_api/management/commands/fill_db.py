@@ -49,31 +49,24 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS('Database ' + str(model_name) + ' filled successfully!'))
         if model_name.lower() == 'UnreleasedGamesInfo'.lower():
             url = 'https://api.rawg.io/api/games?key=d6c9714af1784481affffd3493eff327' + \
-                  '&dates=2024-11-01,2024-12-01&page_size=40&page=' + str(1)
+                  '&dates=2025-01-01,2025-02-01&page_size=40&page=' + str(1)
             # Изменить url при конечном заполнении
-            for i in range(1, 3):
-                if url == 'null':
-                    break
-            # While url != 'null'
-                response = requests.get(url)
-                data = response.json()
-                url = data.get('next')
-                games = data.get('results', [])
-                for game in games:
-                    if not any(restricted_tag in
-                               (tag.get('name') for tag in game.get('tags', []))
-                               for restricted_tag in restricted_tags):
-                        item = {
-                            'gameId': game.get('id'),
-                            'name': game.get('name'),
-                            'released': game.get('released'),
-                            'platform': ', '.join([platform.get('platform').get('name') for platform in game.get('parent_platforms', [])]),
-                            'genres': ', '.join([genre.get('name') for genre in game.get('genres', [])]),
-                            'imageBackground': game.get('background_image')
-                        }
-                        serializer = UnreleasedGamesSerializer(data=item)
-                        if serializer.is_valid():
-                            serializer.save()
-                        else:
-                            self.stdout.write(self.style.ERROR(f'Error saving data: {serializer.errors}'))
+            response = requests.get(url)
+            data = response.json()
+            games = data.get('results', [])
+            for game in games:
+                item = {
+                    'gameId': game.get('id'),
+                    'name': game.get('name'),
+                    'released': game.get('released'),
+                    'platform': ', '.join([platform.get('platform').get('name') for platform in
+                                           game.get('parent_platforms', [])]),
+                    'genres': ', '.join([genre.get('name') for genre in game.get('genres', [])]),
+                    'imageBackground': game.get('background_image')
+                }
+                serializer = UnreleasedGamesSerializer(data=item)
+                if serializer.is_valid():
+                    serializer.save()
+                else:
+                    self.stdout.write(self.style.ERROR(f'Error saving data: {serializer.errors}'))
             self.stdout.write(self.style.SUCCESS('Database ' + str(model_name) + ' filled successfully!'))

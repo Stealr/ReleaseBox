@@ -18,6 +18,6 @@ class UnreleasedGamesSerializer(serializers.ModelSerializer):
     class Meta:
         model = UnreleasedGamesInfo
         fields = ['gameId', 'name',
-                  'releaseDate', 'platform',
+                  'released', 'platform',
                   'genres',
                   'imageBackground']

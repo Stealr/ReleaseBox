@@ -24,8 +24,8 @@ class UnreleasedGamesInfo(models.Model):
     gameId = models.IntegerField(null=True)
     name = models.CharField(max_length=255)  # Поле для названия игры
     released = models.CharField(max_length=100)  # Поле для даты релиза
-    platform = models.CharField(max_length=100, null=True)  # Поле для платформы
-    genres = models.CharField(max_length=100, null=True)  # Поле для жанра
+    platform = models.CharField(max_length=100, blank=True)  # Поле для платформы
+    genres = models.CharField(max_length=100, blank=True)  # Поле для жанра
     imageBackground = models.CharField(max_length=255, null=True)
 
 class CustomUserManager(BaseUserManager):
