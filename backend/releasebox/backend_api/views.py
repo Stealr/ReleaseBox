@@ -107,7 +107,7 @@ class UnreleasedGameInfoView(APIView):
             {
                 'id': output.gameId,
                 'name': output.name,
-                'releaseDate': output.releaseDate,
+                'released': output.released,
                 'platform': output.platform,
                 'genres': output.genres,
                 'imageBackground': output.imageBackground
@@ -163,7 +163,7 @@ def filtration(request):
     for filter_type, filter_values in filters.items():
         if filter_type == 'month':
             year = filter_values[0]
-            month = filter_values[1]
+            month = str(filter_values[1])
             query &= Q(released__startswith=f"{year}-{month.zfill(2)}")
         if filter_type == 'released':
             start = filter_values[0]

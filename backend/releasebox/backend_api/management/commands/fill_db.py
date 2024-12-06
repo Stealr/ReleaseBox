@@ -66,7 +66,7 @@ class Command(BaseCommand):
                         item = {
                             'gameId': game.get('id'),
                             'name': game.get('name'),
-                            'releaseDate': game.get('released'),
+                            'released': game.get('released'),
                             'platform': ', '.join([platform.get('platform').get('name') for platform in game.get('parent_platforms', [])]),
                             'genres': ', '.join([genre.get('name') for genre in game.get('genres', [])]),
                             'imageBackground': game.get('background_image')

@@ -12,14 +12,14 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         today = self.get_today()
         released_games = GameInfo.objects.count()
-        unreleased_games = UnreleasedGamesInfo.objects.filter(releaseDate__lt=today)
+        unreleased_games = UnreleasedGamesInfo.objects.filter(released__lt=today)
 
         for game in unreleased_games:
             GameInfo.objects.get_or_create(
                 gameId=game.gameId,
                 defaults={
                     'name': game.name,
-                    'released': game.releaseDate,
+                    'released': game.released,
                     'platform': game.platform or 'No data',
                     'genres': game.genres or 'No data',
                     'imageBackground': game.imageBackground or 'No data',
