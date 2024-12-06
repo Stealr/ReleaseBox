@@ -36,7 +36,14 @@ function Game() {
     }, [id]);
 
     if (isLoading) {
-        return <div className='Loading'>Loading...</div>; // Отображение индикатора загрузки
+        window.scrollTo(0, 0);
+        return (
+            <div className='main-content'>
+                <div className='container'>
+                    <div className='Loading'>Loading...</div>
+                </div>
+            </div>
+        )
     }
 
     return (
