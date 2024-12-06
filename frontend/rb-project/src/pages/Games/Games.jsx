@@ -10,6 +10,7 @@ import { useContextCard } from "/src/context/contextCardGame.js";
 function Games() {
     const [data, setData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [visibleCount, setVisibleCount] = useState(20); // Состояние для контроля количества отображаемых игр
     const { addCollection, handleGameClick } = useContextCard();
 
     useEffect(() => {
@@ -45,27 +46,26 @@ function Games() {
 
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
-    
+
         if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
             filters.released = [yearRange[0], yearRange[1]];
         }
-    
+
         if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
             filters.metacritic = [metacriticRange[0], metacriticRange[1]];
         }
-    
+
         if (selectedGenres.length > 0) {
             filters.genres = selectedGenres;
         }
-    
+
         if (selectedPlatforms.length > 0) {
             filters.platform = selectedPlatforms;
         }
-    
+
         if (selectedModes.length > 0) {
             filters.tags = selectedModes;
         }
-
 
         if (Object.keys(filters).length !== 0) {
             try {
@@ -77,10 +77,9 @@ function Games() {
                 console.error('Error applying filters:', error);
             }
         } else {
-            fetchData()
+            fetchData();
         }
     };
-    
 
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
@@ -89,6 +88,11 @@ function Games() {
     const filteredData = data.filter((game) =>
         game.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    // Увеличение количества отображаемых игр
+    const loadMoreGames = () => {
+        setVisibleCount(prevCount => prevCount + 20);
+    };
 
     return (
         <div>
@@ -114,7 +118,18 @@ function Games() {
                         />
                     </div>
                     <div className='list-games-grid'>
-                        <GameList data={filteredData} addCollection={addCollection} handleGameClick={handleGameClick} />
+                        <GameList
+                            data={filteredData.slice(0, visibleCount)} // Отображение только первых `visibleCount` игр
+                            addCollection={addCollection}
+                            handleGameClick={handleGameClick}
+                        />
+                    </div>
+                    <div className='load-more'>
+                        {visibleCount < filteredData.length && ( // Показываем кнопку, только если есть больше игр для отображения
+                            <button onClick={loadMoreGames} className="load-more-button">
+                                Load More
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
