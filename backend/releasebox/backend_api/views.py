@@ -4,6 +4,7 @@ from .models import GameInfo, UnreleasedGamesInfo, CustomUser
 from .gameSerializer import GameSerializer, UnreleasedGamesSerializer
 from .userSerializer import UserSerializer
 import requests
+import json
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework import generics
@@ -68,7 +69,8 @@ def getGame(request, id):
         'description': game.get('description_raw')
     }
     try:
-        item['short_screenshots'] = GameInfo.objects.filter(gameId=game.get('id')).values_list('short_screenshots', flat=True).get()
+        item['short_screenshots'] = GameInfo.objects.filter(gameId=game.get('id')).values_list('short_screenshots',
+                                                                                               flat=True).get()
     except GameInfo.DoesNotExist:
         item['short_screenshots'] = game.get('background_image_additional')
     return JsonResponse(item)
@@ -158,7 +160,8 @@ def deleteFromCollection(request):
 
 @api_view(['GET'])
 def filtration(request):
-    filters = request.query_params.get('filtration', {})
+    filters = request.query_params.get('filtration')
+    filters = json.load(filters)
     query = Q()
     for filter_type, filter_values in filters.items():
         if filter_type == 'month':
@@ -238,12 +241,13 @@ def get_user(request):
                     'logo': user.logo}
         return Response(response)
 
+
 @api_view(['GET'])
 def get_games(request):
     response_data = []
-    for game in request.query_params.get('game_id'):
+    for game in request.query_params.getlist('game_id'):
         try:
-            output = GameInfo.objects.get(id=game)
+            output = GameInfo.objects.get(gameId=game)
             response_data.append({
                 'gameId': output.gameId,
                 'name': output.name,
