@@ -161,7 +161,7 @@ def deleteFromCollection(request):
 @api_view(['GET'])
 def filtration(request):
     filters = request.query_params.get('filtration')
-    filters = json.load(filters)
+    filters = json.loads(filters)
     query = Q()
     for filter_type, filter_values in filters.items():
         if filter_type == 'month':
@@ -190,8 +190,12 @@ def filtration(request):
                 query &= Q(genres__icontains=genre)
 
     # Fetch the filtered data
-    filtered_games = GameInfo.objects.filter(query)
-
+    if filters.get('table') == 'GameInfo':
+        filtered_games = GameInfo.objects.filter(query)
+    elif filters.get('table') == 'UnreleasedGamesInfo':
+        filtered_games = UnreleasedGamesInfo.objects.filter(query)
+    else:
+        return 'Choose table to filter'
     # Serialize the data (if needed) and return it as a Response
     data = list(filtered_games.values())  # Convert QuerySet to a list of dictionaries
     return Response(data)
