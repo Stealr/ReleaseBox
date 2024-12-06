@@ -94,3 +94,13 @@
 .profile .search-bar {
     margin: 25px 0;
 }
+
+.profile .back {
+    font-size: 14px;
+    cursor: pointer;
+    padding-bottom: 10px;
+}
+
+.profile .back:hover {
+    color: #c7c7c7;
+}

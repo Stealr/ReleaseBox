@@ -3,11 +3,10 @@ import "./CardGameList.css";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-function CardGameList({ gameId, name, released, platform, genres, metacritic, imageBackground, addCollection, handleGameClick }) {
+function CardGameList({ gameId, name, released, platform, genres, metacritic, imageBackground, addCollection, handleGameClick, userRatings, getUserRating }) {
     const platform_icon_define = (name) => {
         return `/src/assets/platforms/${name.toLowerCase()}.svg`;
     }
-
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [collection, setCollection] = useState();
     const [rating, setRating] = useState(5);
@@ -52,12 +51,19 @@ function CardGameList({ gameId, name, released, platform, genres, metacritic, im
                     <div className='metacritic-game'>
                         {metacritic}
                     </div>
-                    <div className='button-add' onClick={handleAddClick}>
-                        <img
-                            src='/src/assets/plus.svg'
-                            alt="Add button"
-                        />
-                    </div>
+                    {userRatings ? (
+                        <div className='change-rating'>
+                            {getUserRating(gameId) || ""}
+                        </div>
+                    ) : (
+                        <div className='button-add' onClick={handleAddClick}>
+                            <img
+                                src='/src/assets/plus.svg'
+                                alt="Add button"
+                            />
+                        </div>
+                    )}
+
                 </div>
             </div>
 

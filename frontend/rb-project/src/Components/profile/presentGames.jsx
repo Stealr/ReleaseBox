@@ -1,13 +1,18 @@
 import React from 'react';
 import './presentGames.css';
 import Card from "/src/Components/CardGameList/CardGameList.jsx";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useContextCard } from "/src/context/contextCardGame.js";
 
 
-function PresentGames({ listGames = [], }) {
+function PresentGames({ listGames = [], userRatings }) {
     const { addCollection, handleGameClick } = useContextCard();
+
+    console.log(userRatings)
+
+    const getUserRating = (gameId) => {
+        const ratingEntry = userRatings.find(entry => entry.id === gameId);
+        return ratingEntry ? ratingEntry.rating : null;
+    };
 
     // Проверка, если список игр пуст
     if (!listGames || listGames.length === 0) {
@@ -29,6 +34,8 @@ function PresentGames({ listGames = [], }) {
                     imageBackground={game.imageBackground}
                     addCollection={() => addCollection(game.gameId)} // Передаем функцию добавления в коллекцию
                     handleGameClick={() => handleGameClick(game.name, game.gameId)} // Передаем функцию обработки клика
+                    getUserRating={getUserRating}
+                    userRatings={userRatings}
                 />
             ))}
         </div>

@@ -5,7 +5,6 @@ import PresentGames from '/src/Components/profile/presentGames.jsx';
 import { useNavigate } from "react-router-dom";
 import GameList from "/src/Components/GameList/GameList.jsx";
 import Filters from "/src/Components/Filters/filters.jsx";
-import Sorts from "/src/Components/Filters/sorts/sorts.jsx";
 import { useContextCard } from "/src/context/contextCardGame.js";
 
 
@@ -70,15 +69,6 @@ function Profile({ onLogOut }) {
             console.error(`Error fetching ${collection} games:`, error);
             return [];
         }
-        // try {
-        //     const response = await axios.get("http://localhost:8000/get_games/", {
-        //         params: { game_id: listGames }
-        //     });
-        //     return response.data;
-        // } catch (error) {
-        //     console.error(`Error fetching ${collection} games:`, error);
-        //     return [];
-        // }
     };
 
     // Загрузка всех коллекций
@@ -113,7 +103,6 @@ function Profile({ onLogOut }) {
     const logoutHandler = () => {
         // Очистка токенов и данных пользователя
         onLogOut()
-
         navigate(`/games`);
     };
 
@@ -162,12 +151,21 @@ function Profile({ onLogOut }) {
         }
     };
 
-    const filteredGames = selectedCategory
-        ? collections[selectedCategory]?.filter((game) =>
-            game.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        : [];
+    const [userRatings, setUserRatings] = useState([]); // Массив оценок
 
+    useEffect(() => {
+        if (data.userCollection) {
+            const ratings = Object.values(data.userCollection)
+                .flatMap(category => category.map(([id, rating]) => ({ id, rating }))); // Стандартный формат
+            setUserRatings(ratings);
+        }
+    }, [data]);
+
+    const filteredGames = selectedCategory ? collections[selectedCategory]?.filter((game) =>
+            game.name.toLowerCase().includes(searchQuery.toLowerCase())
+        ): [];
+    
+    
 
     return (
         <div>
@@ -202,7 +200,6 @@ function Profile({ onLogOut }) {
                                                 <p>{count}</p>
                                             </div>
                                         </div>
-
                                     );
                                 })}
                             </div>
@@ -211,8 +208,9 @@ function Profile({ onLogOut }) {
                         <div className="right-column">
                             {loading ? (
                                 <p>Loading games...</p>
-                            ) : selectedCategory ? ( // Если выбрана категория
+                            ) : selectedCategory ? (
                                 <div className="present-games">
+                                    <p className='back' onClick={() => setSelectedCategory(null)}>Назад</p>
                                     <h2>{selectedCategory}</h2>
                                     <div className='filters-sort'>
                                         <Filters applybtn={applyFilters} filterSwitcher={false} />
@@ -236,8 +234,11 @@ function Profile({ onLogOut }) {
                             ) : ( // Если категория не выбрана, показываем по 4 игры из каждой
                                 Object.entries(collections).map(([category, games]) => (
                                     <div className="present-games" key={category}>
-                                        <h2>{category}</h2>
-                                        <PresentGames listGames={games.slice(0, amount) || []} />
+                                        <h2 onClick={() => handleCategorySelect(category)}>{category}</h2>
+                                        <PresentGames 
+                                            listGames={games.slice(0, amount) || []} 
+                                            userRatings={category === "All games" ? userRatings : data.userCollection[category]?.map(([id, rating]) => ({ id, rating })) || []} 
+                                        />
                                     </div>
                                 ))
                             )}

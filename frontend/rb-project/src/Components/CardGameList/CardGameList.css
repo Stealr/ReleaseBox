@@ -60,6 +60,19 @@
     cursor: pointer;
 }
 
+.card-game-list .change-rating {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 22px;
+    height: 15px;
+    background-color: #ff7f50ee;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+}
+
 .card-game-list .button-add:hover {
     background-color: #db693fd7;
 }
