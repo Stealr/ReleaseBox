@@ -8,7 +8,7 @@ from django.contrib.auth.models import BaseUserManager
 class GameInfo(models.Model):
     gameId = models.IntegerField(blank=False, unique=True)
     name = models.CharField(max_length=255, blank=False)  # Поле для названия игры
-    released = models.CharField(max_length=100, blank=False)  # Поле для даты релиза
+    released = models.DateField(max_length=100, blank=False)  # Поле для даты релиза
     rating = models.CharField(max_length=5, blank=True, default='No data')
     platform = models.CharField(max_length=100, blank=True, default='No data')  # Поле для платформы
     genres = models.CharField(max_length=100, blank=True, default='No data')  # Поле для жанра
@@ -23,7 +23,7 @@ class GameInfo(models.Model):
 class UnreleasedGamesInfo(models.Model):
     gameId = models.IntegerField(null=True)
     name = models.CharField(max_length=255)  # Поле для названия игры
-    released = models.CharField(max_length=100)  # Поле для даты релиза
+    released = models.DateField(max_length=100)  # Поле для даты релиза
     platform = models.CharField(max_length=100, blank=True)  # Поле для платформы
     genres = models.CharField(max_length=100, blank=True)  # Поле для жанра
     imageBackground = models.CharField(max_length=255, null=True)
