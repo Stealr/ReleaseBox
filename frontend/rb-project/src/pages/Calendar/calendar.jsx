@@ -18,7 +18,7 @@ function Calendar() {
     const [currentYear, setCurrentYear] = useState(year);
 
     const definedayofweek = () => {
-        const firstDayOfMonth = new Date(year, month - 1, 0);
+        const firstDayOfMonth = new Date(currentYear, currentIndex, 0);
         const dayOfWeek = firstDayOfMonth.getDay();
 
         return dayOfWeek;
@@ -44,28 +44,22 @@ function Calendar() {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:8000/unreleasedGames/')
-            .then(response => {
-                setData(response.data);
-                console.log("Successful data recording!")
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+        newMonth()
+    }, [currentIndex, currentYear]);
 
     const newMonth = async () => {
-        
-        console.log(currentYear, currentIndex)
+        console.log(currentYear, currentIndex )
         const response = await axios.get('http://localhost:8000/games/filtration', {
             params: {
-                filtration: JSON.stringify({ month: [currentYear, currentIndex] }),
+                filtration: JSON.stringify({
+                    month: [currentYear, currentIndex + 1], // год и месяц
+                    table: "UnreleasedGamesInfo"
+                }),
             }
         })
             .then(response => {
                 setData(response.data);
                 console.log("Successful data recording! New month.");
-                console.log(response.data)
             })
             .catch(error => {
                 console.error(error);
@@ -84,7 +78,7 @@ function Calendar() {
             />
             <div className="main-content-calendar">
                 <div class="carousel-filtr">
-                    <MonthCarousel currentIndex={currentIndex} currentYear={currentYear} setCurrentYear={setCurrentYear} setCurrentIndex={setCurrentIndex} newMonth={newMonth}/>
+                    <MonthCarousel currentIndex={currentIndex} currentYear={currentYear} setCurrentYear={setCurrentYear} setCurrentIndex={setCurrentIndex} newMonth={newMonth} />
                 </div>
                 <div className="container-calendar">
                     <p>New releases: {data.length}</p>
