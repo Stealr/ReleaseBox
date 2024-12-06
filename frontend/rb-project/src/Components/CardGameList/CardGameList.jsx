@@ -3,7 +3,7 @@ import "./CardGameList.css";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-function CardGameList({ gameId, name, released, platform, genres, metacritic, imageBackground, addCollection, handleGameClick, userRatings, getUserRating }) {
+function CardGameList({ gameId, name, released, platform, genres, metacritic, imageBackground, addCollection, handleGameClick, userRatings, getUserRating, setUpdate }) {
     const platform_icon_define = (name) => {
         return `/src/assets/platforms/${name.toLowerCase()}.svg`;
     }
@@ -23,6 +23,9 @@ function CardGameList({ gameId, name, released, platform, genres, metacritic, im
     const handleApplyClick = () => {
         if (collection) {
             addCollection(gameId, collection, rating); // Добавляем в коллекцию
+            if (userRatings) {
+                setUpdate(true)
+            }
         }
         setIsMenuVisible(false); // Закрываем меню
     };
@@ -52,7 +55,7 @@ function CardGameList({ gameId, name, released, platform, genres, metacritic, im
                         {metacritic}
                     </div>
                     {userRatings ? (
-                        <div className='change-rating'>
+                        <div className='change-rating' onClick={handleAddClick}>
                             {getUserRating(gameId) || ""}
                         </div>
                     ) : (

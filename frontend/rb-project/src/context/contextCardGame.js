@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 export const useContextCard = () => {
     const navigate = useNavigate();
 
+    const deleteGame = async (gameId, collection_name, user_rating) => {
+    
+    }
+
     const addCollection = async (gameId, collection_name, user_rating) => {
         const user_id = localStorage.getItem('userID');
         const accessToken = localStorage.getItem('accessToken');

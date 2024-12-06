@@ -2,7 +2,7 @@ import React from 'react';
 import Card from "/src/Components/CardGameList/CardGameList.jsx";
 import "./GameList.css";
 
-function GameList({ data, addCollection, handleGameClick }) {
+function GameList({ data, addCollection, handleGameClick, setUpdate, userRatings }) {
     return (
         <div className='games-grid'>
             {data.map((game) => (
@@ -17,6 +17,7 @@ function GameList({ data, addCollection, handleGameClick }) {
                     imageBackground={game.imageBackground}
                     addCollection={addCollection}
                     handleGameClick={handleGameClick}
+                    setUpdate={setUpdate}
                 />
             ))}
         </div>

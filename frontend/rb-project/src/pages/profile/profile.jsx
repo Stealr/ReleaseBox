@@ -15,6 +15,7 @@ function Profile({ onLogOut }) {
     const [amount, setAmount] = useState(4); // Состояние для ширины экрана
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [update, setUpdate] = useState(false);
     const { addCollection, handleGameClick } = useContextCard();
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
@@ -52,7 +53,7 @@ function Profile({ onLogOut }) {
             .catch((err) => {
                 console.error("Error fetching user data:", err.message); // Обрабатываем ошибки
             });
-    }, [user_id]);
+    }, [user_id, update]);
 
     // Функция для загрузки игр из коллекции
     const fetchGames = async (collection) => {
@@ -238,6 +239,7 @@ function Profile({ onLogOut }) {
                                         <PresentGames 
                                             listGames={games.slice(0, amount) || []} 
                                             userRatings={category === "All games" ? userRatings : data.userCollection[category]?.map(([id, rating]) => ({ id, rating })) || []} 
+                                            setUpdate={setUpdate}
                                         />
                                     </div>
                                 ))
