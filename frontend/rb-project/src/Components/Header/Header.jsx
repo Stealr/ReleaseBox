@@ -4,22 +4,22 @@ import "./header_style.css";
 import { useState } from 'react';
 import axios from 'axios';
 
-function Header({ isAuthenticated }) {
+function Header({ isAuthenticated, onLogOut }) {
     const user_id = localStorage.getItem('userID');
     const accessToken = localStorage.getItem('accessToken');
     const [data, setData] = useState([]);
 
-    // Потом убрать, нужно для проверки
     useEffect(() => {
         if (user_id) {
             axios.get(`http://localhost:8000/get_user/`,
-                { params: { user_id: user_id } }, // Передаем user_id как query параметр
+                { params: { user_id: user_id } },
             )
                 .then((response) => {
-                    setData(response.data); // Устанавливаем данные пользователя
+                    setData(response.data);
                 })
                 .catch((err) => {
-                    console.log(err); // Обрабатываем ошибки
+                    console.log("Пользователь ненайден");
+                    onLogOut()
                 });
         }
     }, [isAuthenticated]);

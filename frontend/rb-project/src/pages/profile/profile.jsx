@@ -112,9 +112,6 @@ function Profile({ onLogOut }) {
 
     const logoutHandler = () => {
         // Очистка токенов и данных пользователя
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('userID');
         onLogOut()
 
         navigate(`/games`);

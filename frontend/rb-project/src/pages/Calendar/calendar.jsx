@@ -48,7 +48,6 @@ function Calendar() {
     }, [currentIndex, currentYear]);
 
     const newMonth = async () => {
-        console.log(currentYear, currentIndex )
         const response = await axios.get('http://localhost:8000/games/filtration', {
             params: {
                 filtration: JSON.stringify({

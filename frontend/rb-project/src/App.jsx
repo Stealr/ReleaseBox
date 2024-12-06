@@ -21,6 +21,9 @@ function App() {
   const handleLogOut = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false); // Меняем состояние
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('userID');
   };
 
   const handleLogIn = (token) => {
@@ -30,7 +33,7 @@ function App() {
   };
   return (
     <Router>
-      <MemoizedHeader isAuthenticated={isAuthenticated} />
+      <MemoizedHeader isAuthenticated={isAuthenticated} onLogOut={handleLogOut} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/calendar" element={<Calendar />} />
