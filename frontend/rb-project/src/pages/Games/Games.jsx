@@ -47,38 +47,36 @@ function Games() {
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
 
-        if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
-            filters.released = [yearRange[0], yearRange[1]];
-        }
+    if (yearRange && (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2)) {
+        filters.released = yearRange;
+    }
 
-        if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
-            filters.metacritic = [metacriticRange[0], metacriticRange[1]];
-        }
+    if (metacriticRange && (metacriticRange[0] !== 0 || metacriticRange[1] !== 100)) {
+        filters.metacritic = metacriticRange;
+    }
 
-        if (selectedGenres.length > 0) {
-            filters.genres = selectedGenres;
-        }
+    if (selectedGenres?.length > 0) {
+        filters.genres = selectedGenres;
+    }
 
-        if (selectedPlatforms.length > 0) {
-            filters.platform = selectedPlatforms;
-        }
+    if (selectedPlatforms?.length > 0) {
+        filters.platform = selectedPlatforms;
+    }
 
-        if (selectedModes.length > 0) {
-            filters.tags = selectedModes;
-        }
+    if (selectedModes?.length > 0) {
+        filters.tags = selectedModes;
+    }
 
-        if (Object.keys(filters).length !== 0) {
-            try {
-                const response = await axios.get('http://localhost:8000/games/filtration', {
-                    params: { filtration: JSON.stringify(filters) },
-                });
-                setData(response.data);
-            } catch (error) {
-                console.error('Error applying filters:', error);
-            }
-        } else {
-            fetchData();
-        }
+    filters.table = "GameInfo";
+    console.log(filters)
+    try {
+        const response = await axios.get('http://localhost:8000/games/filtration', {
+            params: { filtration: JSON.stringify(filters) },
+        });
+        setData(response.data);
+    } catch (error) {
+        console.error('Error applying filters:', error);
+    }
     };
 
     const handleSearchChange = (event) => {
