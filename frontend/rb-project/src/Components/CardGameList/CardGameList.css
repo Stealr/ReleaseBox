@@ -183,3 +183,35 @@
 .menu-item.apply:hover {
     background-color: #a7f582;
 }
+
+
+.add-message {
+    position: absolute;
+    width: 100px;
+    top: -10%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    opacity: 0;
+    z-index: 100;
+    animation: fadeUp 2s forwards;
+    pointer-events: none;
+}
+
+@keyframes fadeUp {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50px);
+        opacity: 0;
+    }
+}

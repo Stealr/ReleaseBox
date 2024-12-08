@@ -53,7 +53,7 @@ function Profile({ onLogOut }) {
             .catch((err) => {
                 console.error("Error fetching user data:", err.message); // Обрабатываем ошибки
             });
-    }, [user_id, update]);
+    }, [user_id]);
 
     // Функция для загрузки игр из коллекции
     const fetchGames = async (collection) => {
@@ -99,7 +99,7 @@ function Profile({ onLogOut }) {
         if (data.userCollection) {
             loadAllCollections(); // Загружаем все коллекции
         }
-    }, [data]);
+    }, [data, update]);
 
     const logoutHandler = () => {
         // Очистка токенов и данных пользователя
@@ -114,6 +114,87 @@ function Profile({ onLogOut }) {
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
     };
+
+    function findGameCollection(gameId) {
+        // Перебираем все коллекции, исключая "All games"
+        for (const [collectionName, games] of Object.entries(collections)) {
+            if (collectionName !== 'All games') {
+                // Проверяем, есть ли игра с указанным gameId в текущей коллекции
+                const game = games.find(game => game.gameId === gameId);
+                if (game) {
+                    return collectionName; // Возвращаем название коллекции, если игра найдена
+                }
+            }
+        }
+        return null; // Возвращаем null, если игра не найдена ни в одной коллекции
+    }
+
+    const deleteFromCollection = async (gameId) => {
+        const collectionName = findGameCollection(gameId);
+        if (!collectionName) return;
+
+        try {
+            // Отправка запроса на удаление
+            const response = await axios.post('http://localhost:8000/games/deleteFromCollection/', {
+                user_id: user_id,
+                collection_name: collectionName,
+                gameId: gameId,
+            });
+
+            console.log(response.data);
+
+            // Обновление состояния
+            setCollections((prevCollections) => ({
+                ...prevCollections,
+                [collectionName]: prevCollections[collectionName].filter(game => game.gameId !== gameId),
+                "All games": prevCollections["All games"].filter(game => game.gameId !== gameId)
+            }));
+
+            return response.data;
+        } catch (error) {
+            console.error('Ошибка при удалении из коллекции:', error);
+            throw error;
+        }
+    };
+
+    const moveGameToCollection = async (gameId, fromCollection, toCollection) => {
+        try {
+            // Загружаем игры из коллекции, откуда нужно удалить
+            const fromCollectionGames = await fetchGames(fromCollection);
+
+            // Загружаем игры из коллекции, куда нужно добавить
+            const toCollectionGames = await fetchGames(toCollection);
+
+            // Найдем игру, которую нужно переместить
+            const gameToMove = fromCollectionGames.find(game => game.id === gameId);
+
+            if (!gameToMove) {
+                console.error(`Game with ID ${gameId} not found in ${fromCollection}`);
+                return;
+            }
+
+            // Обновляем локально обе коллекции
+            const updatedFromCollection = fromCollectionGames.filter(game => game.id !== gameId);
+            const updatedToCollection = [...toCollectionGames, gameToMove];
+
+            // Создаем новое состояние коллекций
+            setCollections(prevCollections => ({
+                ...prevCollections,
+                [fromCollection]: updatedFromCollection,
+                [toCollection]: updatedToCollection,
+                "All games": Object.values({
+                    ...prevCollections,
+                    [fromCollection]: updatedFromCollection,
+                    [toCollection]: updatedToCollection
+                }).flat()
+            }));
+
+            console.log(`Game ${gameId} moved from ${fromCollection} to ${toCollection}`);
+        } catch (error) {
+            console.error(`Error moving game ${gameId} from ${fromCollection} to ${toCollection}:`, error);
+        }
+    };
+
 
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
@@ -163,10 +244,10 @@ function Profile({ onLogOut }) {
     }, [data]);
 
     const filteredGames = selectedCategory ? collections[selectedCategory]?.filter((game) =>
-            game.name.toLowerCase().includes(searchQuery.toLowerCase())
-        ): [];
-    
-    
+        game.name.toLowerCase().includes(searchQuery.toLowerCase())
+    ) : [];
+
+
 
     return (
         <div>
@@ -236,10 +317,11 @@ function Profile({ onLogOut }) {
                                 Object.entries(collections).map(([category, games]) => (
                                     <div className="present-games" key={category}>
                                         <h2 onClick={() => handleCategorySelect(category)}>{category}</h2>
-                                        <PresentGames 
-                                            listGames={games.slice(0, amount) || []} 
-                                            userRatings={category === "All games" ? userRatings : data.userCollection[category]?.map(([id, rating]) => ({ id, rating })) || []} 
+                                        <PresentGames
+                                            listGames={games.slice(0, amount) || []}
+                                            userRatings={category === "All games" ? userRatings : data.userCollection[category]?.map(([id, rating]) => ({ id, rating })) || []}
                                             setUpdate={setUpdate}
+                                            deleteFromCollection={deleteFromCollection}
                                         />
                                     </div>
                                 ))

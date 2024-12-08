@@ -3,28 +3,50 @@ import "./CardGameList.css";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-function CardGameList({ gameId, name, released, platform, genres, metacritic, imageBackground, addCollection, handleGameClick, userRatings, getUserRating, setUpdate }) {
+function CardGameList({ gameId, name, released, platform, metacritic, imageBackground, addCollection, handleGameClick, userRatings, getUserRating, setUpdate, deleteFromCollection, moveGameToCollection }) {
     const platform_icon_define = (name) => {
         return `/src/assets/platforms/${name.toLowerCase()}.svg`;
     }
     const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [isMessageVisible, setIsMessageVisible] = useState(false);
     const [collection, setCollection] = useState();
     const [rating, setRating] = useState(5);
     const menuRef = useRef(null); // Ссылка на меню
 
+    const user_id = localStorage.getItem('userID');
+    const accessToken = localStorage.getItem('accessToken');
+
     const handleAddClick = () => {
-        setIsMenuVisible(!isMenuVisible); // Переключаем видимость меню
+        if (user_id) {
+            setIsMenuVisible(!isMenuVisible); // Переключаем видимость меню
+        }
+        else {
+            setIsMessageVisible(true);
+
+            // Скрыть сообщение через 2 секунды
+            setTimeout(() => {
+                setIsMessageVisible(false);
+            }, 2000);
+        }
     };
 
     const handleButtonClick = (buttonName) => {
         setCollection(buttonName);
     };
 
+    const handleDelClick = () => {
+        setCollection(null)
+        setIsMenuVisible(!isMenuVisible);
+        deleteFromCollection(gameId)
+    }
+
     const handleApplyClick = () => {
         if (collection) {
             addCollection(gameId, collection, rating); // Добавляем в коллекцию
             if (userRatings) {
-                setUpdate(true)
+                setTimeout(() => {
+                    setUpdate((prevUpdate) => !prevUpdate);
+                }, 400);
             }
         }
         setIsMenuVisible(false); // Закрываем меню
@@ -46,6 +68,11 @@ function CardGameList({ gameId, name, released, platform, genres, metacritic, im
 
     return (
         <div className='card-game-list'>
+            {isMessageVisible && (
+                <div className="add-message">
+                    Необходима авторизация
+                </div>
+            )}
             <div className='card-top'>
                 <div className='card-media'>
                     <img src={imageBackground} />
@@ -105,7 +132,7 @@ function CardGameList({ gameId, name, released, platform, genres, metacritic, im
                                     {item}
                                 </button>
                             ))}
-                            <button className="menu-item del" onClick={() => setCollection(null)}>Delete</button>
+                            {userRatings != undefined && <button className="menu-item del" onClick={handleDelClick}>Delete</button>}
                         </div>
                         <button className='menu-item apply' onClick={handleApplyClick}>Apply</button>
                     </div>
@@ -115,7 +142,7 @@ function CardGameList({ gameId, name, released, platform, genres, metacritic, im
                             vertical
                             min={0}
                             max={5}
-                            step={0.1} // Дробный шаг для оценки
+                            step={0.1}
                             value={rating}
                             onChange={(value) => setRating(value)}
                             marks={{ "1": 1, "2": 2, "3": 3, "4": 4, "5": 5 }}
