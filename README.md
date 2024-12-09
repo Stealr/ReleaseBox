@@ -2,11 +2,11 @@
 
 ### Запуск проекта: 
 backend: 
-- /backend  
+- cd backend  
 
-- /python -m venv venv 
+- python -m venv venv 
 
-- /venv/Scripts/activate 
+- venv/Scripts/activate 
 
 - pip install -r requirements.txt 
 
@@ -16,7 +16,7 @@ backend:
 
 frontend: 
 
-- /frontend/rb-project 
+- cd frontend/rb-project 
 
 - yarn 
 
