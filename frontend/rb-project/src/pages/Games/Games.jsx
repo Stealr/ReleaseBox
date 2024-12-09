@@ -46,6 +46,7 @@ function Games() {
 
     const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
         const filters = {};
+        console.log(selectedPlatforms)
 
     if (yearRange && (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2)) {
         filters.released = yearRange;

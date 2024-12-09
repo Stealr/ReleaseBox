@@ -101,7 +101,7 @@ function CardGameCalendar({ day, games, handleGameClick, addCollection }) {
                             />
                         ))}
                     </div>
-                    <div className='name-game' onClick={() => handleGameClick(games[currentIndex]?.name, games[currentIndex]?.id)}>
+                    <div className='name-game' onClick={() => handleGameClick(games[currentIndex]?.name, games[currentIndex]?.gameId)}>
                         {games[currentIndex]?.name}
                     </div>
                 </div>
