@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend_api',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
 ]
 
@@ -55,9 +57,12 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSON_CLASSES': [
-        'rest_framework.permissions.AllowAny'
+        #'rest_framework.permissions.AllowAny'
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
+
+AUTH_USER_MODEL = 'backend_api.CustomUser'
 
 CORS_ORIGIN_ALLOW_ALL = True
 

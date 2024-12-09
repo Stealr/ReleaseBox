@@ -1,4 +1,7 @@
 
+
+env
+.idea
 # Logs
 logs
 *.log
@@ -208,3 +211,4 @@ fabric.properties
 
 # idea folder, uncomment if you don't need it
 # .idea
+
