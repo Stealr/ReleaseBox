@@ -1,17 +1,26 @@
 ## Web проект ReleaseBox (RB) - 
 
-### Запуск проекта:
-backend:
-	/backend
-	/python -m venv venv
-	/venv/Scripts/activate
-	pip install -r requirements.txt
-	cd /releasebox
-	python manage.py runserver
-frontend:
-	/frontend/rb-project
-	yarn
-	yarn dev
+### Запуск проекта: 
+backend: 
+- /backend  
+
+- /python -m venv venv 
+
+- /venv/Scripts/activate 
+
+- pip install -r requirements.txt 
+
+- cd /releasebox 
+
+- python manage.py runserver 
+
+frontend: 
+
+- /frontend/rb-project 
+
+- yarn 
+
+- yarn dev 
 
 
 ### Дизайн сайта
@@ -39,6 +48,7 @@ Profile:
 ![image](https://github.com/user-attachments/assets/a2e36cf7-a6a4-4861-8a77-b22fef0b4c7b)
 
 Home:
+
 ![image](https://github.com/user-attachments/assets/e97a3642-afce-4cc2-805b-20e90e7bbf58)
 
 
