@@ -1,0 +1,32 @@
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    width: 100%;
+    /* justify-content: space-between; */
+}
+
+.calendar-weekday {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.empty-div {
+    width: 211px;
+    height: 335px;
+    background-color: #222135d8;
+}
+
+@media (max-width: 1890px) {
+    .calendar-grid {
+        grid-template-columns: repeat(auto-fit, minmax(211px, 1fr));
+    }
+
+    .calendar-weekday {
+        display: none;
+    }
+
+    .empty-div {
+        display: none;
+    }
+ }

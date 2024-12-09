@@ -1,0 +1,23 @@
+.main-content-calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-calendar {
+    background-color: #26253bd8;
+    width: 80vw;
+    min-height: 300px;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 150px;
+    padding: 63px;
+}
+
+.main-content-calendar p {
+    font-size: 22px;
+    padding-bottom: 30px;
+}

@@ -1,0 +1,18 @@
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background-color: #26253bd8;
+    width: 80vw;
+    min-height: 300px;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 230px;
+    margin-bottom: 150px;
+    padding: 63px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,52 @@
+.sort-buttons {
+    display: flex;
+    gap: 30px;
+    padding: 15px 0;
+}
+
+.sort-button {
+    width: 120px;
+    height: 38px;
+    background-color: #ee6736;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+}
+
+.sort-button span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.sort-button.active-asc {
+    border: 2px solid white;
+}
+
+.sort-button.active-desc {
+    border: 2px solid white;
+}
+
+.sort-button:hover {
+    background-color: #b34c27;
+}
+
+
+.btn-cancel {
+    width: 70px;
+    height: 38px;
+    background-color: #ee5236;
+    border: 2px solid #ffffff;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+}
+
+.btn-cancel:hover {
+    background-color: #fa320f;
+}

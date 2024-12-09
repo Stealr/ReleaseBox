@@ -1,0 +1,10 @@
+.background-image {
+    position: absolute;
+    width: 101%;
+    left: -20px;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    z-index: -1;
+    filter: blur(20px) contrast(110%) opacity(0.8);
+}

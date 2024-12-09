@@ -1,0 +1,88 @@
+.filter-group {
+    background-color: #3D3B5F;
+    max-width: 260px;
+    height: 300px;
+    color: white;
+}
+
+.block-header {
+    background-color: #33314F;
+}
+
+.filter-group h4 {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.filter-search {
+    width: 240px;
+    padding: 10px;
+    border: none;
+    background-color: #1B1A2B;
+    color: white;
+}
+
+.filter-search:focus {
+    outline: none;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 6px;
+    max-height: 202px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.filter-options::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+.filter-options::-webkit-scrollbar-thumb {
+    border-radius: 0 !important;
+}
+
+.filter-options::-webkit-scrollbar-track {
+    border-radius: 0 !important;
+}
+
+.filter-options label {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.filter-options input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ededff;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.filter-options input[type="checkbox"]:checked {
+    background-color: #ee6736;
+    border-color: #ee6736;
+}
+
+.filter-options input[type="checkbox"]:checked::after {
+    content: "✔";
+    color: white;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    transform: translate(0px, -2px);
+    line-height: 18px;
+}
+
+.filter-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}

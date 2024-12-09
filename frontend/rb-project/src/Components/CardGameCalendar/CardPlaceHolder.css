@@ -1,0 +1,14 @@
+.card-placeholder {
+    display: flex;
+    max-width: 400px;
+    height: 335px;
+    background-color: #4c4774;
+    border-radius: 10px;
+}
+
+.card-placeholder .day {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+}

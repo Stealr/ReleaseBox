@@ -1,0 +1,89 @@
+.filters-block {
+    padding-bottom: 15px;
+}
+
+.wrap-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.arrow-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    width: 15px;
+    height: 15px;
+}
+
+.arrow-switcher:hover {
+    color: rgb(216, 216, 216);
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filters.notactive {
+    display: none !important;
+}
+
+.sliders-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sliders {
+    gap: 10px;
+}
+
+.apply-reset {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding: 40px 0;
+}
+
+.apply-reset .btn {
+    width: 120px;
+    height: 40px;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+}
+
+.apply-reset .apply {
+    background-color: #ee6736;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.apply-reset .reset {
+    background-color: #8b4010;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.apply-reset .btn:hover {
+    background-color: #b34c27;
+}
+
+.checkbox-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-left: 30px;
+    gap: 30px;
+    width: 100%;
+    justify-items: center;
+}

@@ -1,0 +1,151 @@
+.header {
+    background: #26253bc7;
+    padding: 15px 0 15px 0;
+    display: flex;
+    justify-content: center;
+    
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+    font-size: 18px;
+}
+
+.content-header img {
+    width: 165px;
+    height: auto;
+}
+
+.center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+}
+
+.navigation a {
+    margin: 0 10px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.navigation a:hover {
+    color: rgb(204, 204, 204);
+    scale: 1.05;
+}
+
+
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.right a {
+    margin-left: 1.8vw;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.right a:hover {
+    color: rgb(209, 209, 209);
+}
+
+/*------------------------menu right----------------------*/
+.right .menu-container-right span {
+    font-size: 40px;
+}
+
+.menu-container-right {
+    position: relative;
+    display: none;
+  }
+  
+  .dropdown-menu-right {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1;
+  }
+
+  .dropdown-menu-right a {
+    text-decoration: none;
+    color: black;
+    padding: 8px 16px;
+    display: block;
+    margin-left: 0;
+  }
+
+  .menu-container-right:hover .dropdown-menu-right {
+    display: block;
+  }
+
+/*------------------------menu center----------------------*/
+.menu-container-center span {
+    border: 2px solid rgb(255, 255, 255);
+    padding: 5px
+}
+
+.menu-container-center {
+    position: relative;
+    display: none;
+  }
+  
+  .dropdown-menu-center {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1;
+  }
+
+  .dropdown-menu-center a {
+    text-decoration: none;
+    color: black;
+    padding: 8px 16px;
+    display: block;
+  }
+
+  .menu-container-center:hover .dropdown-menu-center {
+    display: block;
+  }
+
+ /*МЕДИАЗАПРОСЫ*/
+
+
+ @media (max-width: 950px) {
+    .menu-container-right {
+        display: inline-block;
+    }
+    .normal-size a {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .menu-container-center {
+        display: inline-block;
+    }
+    .header .navigation a {
+        display: none;
+    }
+}
