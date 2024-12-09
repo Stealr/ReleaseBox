@@ -1,3 +1,17 @@
+## Запуск проекта:
+backend:
+	/backend
+	/python -m venv venv
+	/venv/Scripts/activate
+	pip install -r requirements.txt
+	cd /releasebox
+	python manage.py runserver
+frontend:
+	/frontend/rb-project
+	yarn
+	yarn dev
+
+
 Ссылка на дизайн сайта:
 https://www.figma.com/design/RNe4cKMj4bttBO3lnzswjp/RB?node-id=0-1&node-type=canvas&t=VBhevS6rPRpwazMt-0
 =======
