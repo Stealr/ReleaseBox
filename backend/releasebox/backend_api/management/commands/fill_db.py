@@ -13,15 +13,13 @@ class Command(BaseCommand):
         model_name = kwargs['model_name']
         restricted_tags = ['NSFW', 'hentai', 'Sexual Content', 'Секс', 'Хентай']
         if model_name.lower() == 'GameInfo'.lower():
-            url = 'https://api.rawg.io/api/games?key=d6c9714af1784481affffd3493eff327' + \
-                  '&ordering=-metacritic&page_size=40&page=1'
             for i in range(1, 2):
-                if url == 'null':
-                    break
-            # While url != 'null'
+                url = 'https://api.rawg.io/api/games?key=d6c9714af1784481affffd3493eff327' + \
+                      '&ordering=-metacritic&page_size=40&page=' + str(i)
                 response = requests.get(url)
                 data = response.json()
-                url = data.get('next')
+                if data.get('next') == 'null':
+                    break
                 games = data.get('results', [])
                 for game in games:
                     if not any(restricted_tag in

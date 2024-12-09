@@ -169,8 +169,8 @@ def filtration(request):
             month = str(filter_values[1])
             query &= Q(released__startswith=f"{year}-{month.zfill(2)}")
         if filter_type == 'released':
-            start = filter_values[0]
-            end = filter_values[1]
+            start = str(filter_values[0]) + '-01-01'
+            end = str(filter_values[1]) + '-12-31'
             query &= Q(released__gte=start, released__lte=end)
         if filter_type == 'metacritic':
             start = filter_values[0]
