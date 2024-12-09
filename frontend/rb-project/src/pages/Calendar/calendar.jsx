@@ -25,8 +25,7 @@ function Calendar() {
     }
 
     const initializeDays = () => {
-        const number_of_days = new Date(year, month, 0).getDate()
-
+        const number_of_days = new Date(currentYear, currentIndex + 1, 0).getDate()
         const days = [];
         for (let i = 0; i <= number_of_days - 1; i++) {
             days[i.toString()] = [];

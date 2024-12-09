@@ -3,9 +3,6 @@ const LeftColumn = ({ data }) => (
         <div className="coverImage">
             <img src={data.imageBackground} alt="Cover" />
         </div>
-        <div className="btn-status">
-            <button>User status</button>
-        </div>
         <div className="ratingGame">
             <div className="ratings">
                 <p>Rating</p>
