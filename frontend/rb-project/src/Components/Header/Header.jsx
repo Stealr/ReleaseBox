@@ -31,17 +31,15 @@ function Header({ isAuthenticated, onLogOut }) {
                 <img src='/src/assets/LOGO.png' alt='logo' />
                 <div className='center'>
                     <nav className="navigation">
-                        <Link to="/">Home</Link>
                         <Link to="/Games">Games</Link>
-                        <Link to="/Calendar">Calendar</Link>
+                        <Link to="/">Calendar</Link>
                     </nav>
 
                     <div class="menu-container-center">
                         <span>Navigation</span>
                         <div class="dropdown-menu-center">
-                            <Link to="/">Home</Link>
                             <Link to="/Games">Games</Link>
-                            <Link to="/Calendar">Calendar</Link>
+                            <Link to="/">Calendar</Link>
                         </div>
                     </div>
 

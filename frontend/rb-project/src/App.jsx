@@ -35,14 +35,12 @@ function App() {
     <Router>
       <MemoizedHeader isAuthenticated={isAuthenticated} onLogOut={handleLogOut} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/" element={<Calendar />} />
         <Route path="/games" element={<Games />} />
         <Route path="/login" element={<Login onLogIn={handleLogIn} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/games/:game" element={<GameInfo />} />
         <Route path="/:user" element={<Profile onLogOut={handleLogOut} />} />
-        <Route path="/profile/settings" element={<Test />} />
       </Routes>
     </Router>
   )
