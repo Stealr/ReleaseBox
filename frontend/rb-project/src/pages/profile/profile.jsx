@@ -53,7 +53,7 @@ function Profile({ onLogOut }) {
             .catch((err) => {
                 console.error("Error fetching user data:", err.message); // Обрабатываем ошибки
             });
-    }, [user_id]);
+    }, [user_id, update]);
 
     // Функция для загрузки игр из коллекции
     const fetchGames = async (collection) => {
@@ -99,7 +99,7 @@ function Profile({ onLogOut }) {
         if (data.userCollection) {
             loadAllCollections(); // Загружаем все коллекции
         }
-    }, [data, update]);
+    }, [data]);
 
     const logoutHandler = () => {
         // Очистка токенов и данных пользователя
@@ -157,16 +157,39 @@ function Profile({ onLogOut }) {
         }
     };
 
-    const moveGameToCollection = async (gameId, fromCollection, toCollection) => {
+    const fetchGamesFromCollections = async (collection) => {
+        if (!collections[collection] || collections[collection].length === 0) {
+            return []; // Проверяем, есть ли игры в указанной коллекции
+        }
+    
         try {
+            const listGames = collections[collection].map(game => game.gameId); // Извлекаем gameId из коллекции
+            const params = new URLSearchParams();
+            listGames.forEach(id => params.append('game_id', id)); // Добавляем gameId в параметры запроса
+    
+            // Запрос к API
+            const response = await axios.get(`http://localhost:8000/get_games/?${params.toString()}`);
+            return response.data; // Возвращаем данные из ответа
+        } catch (error) {
+            console.error(`Error fetching ${collection} games:`, error);
+            return [];
+        }
+    };
+
+    const moveGameToCollection = async (gameId, toCollection) => {
+        try {
+            const fromCollection = findGameCollection(gameId)
+
             // Загружаем игры из коллекции, откуда нужно удалить
-            const fromCollectionGames = await fetchGames(fromCollection);
+            const fromCollectionGames = await fetchGamesFromCollections(fromCollection);
+            console.log("from ", fromCollectionGames)
 
             // Загружаем игры из коллекции, куда нужно добавить
-            const toCollectionGames = await fetchGames(toCollection);
+            const toCollectionGames = await fetchGamesFromCollections(toCollection);
+            console.log("to ", toCollectionGames)
 
             // Найдем игру, которую нужно переместить
-            const gameToMove = fromCollectionGames.find(game => game.id === gameId);
+            const gameToMove = fromCollectionGames.find(game => game.gameId === gameId);
 
             if (!gameToMove) {
                 console.error(`Game with ID ${gameId} not found in ${fromCollection}`);
@@ -174,8 +197,10 @@ function Profile({ onLogOut }) {
             }
 
             // Обновляем локально обе коллекции
-            const updatedFromCollection = fromCollectionGames.filter(game => game.id !== gameId);
+            const updatedFromCollection = fromCollectionGames.filter(game => game.gameId !== gameId);
             const updatedToCollection = [...toCollectionGames, gameToMove];
+            console.log("Update from ", updatedFromCollection)
+            console.log("Update to ", updatedToCollection)
 
             // Создаем новое состояние коллекций
             setCollections(prevCollections => ({
@@ -188,7 +213,8 @@ function Profile({ onLogOut }) {
                     [toCollection]: updatedToCollection
                 }).flat()
             }));
-
+            
+            setUpdate(!update)
             console.log(`Game ${gameId} moved from ${fromCollection} to ${toCollection}`);
         } catch (error) {
             console.error(`Error moving game ${gameId} from ${fromCollection} to ${toCollection}:`, error);
@@ -246,8 +272,6 @@ function Profile({ onLogOut }) {
     const filteredGames = selectedCategory ? collections[selectedCategory]?.filter((game) =>
         game.name.toLowerCase().includes(searchQuery.toLowerCase())
     ) : [];
-
-
 
     return (
         <div>
@@ -311,6 +335,12 @@ function Profile({ onLogOut }) {
                                         data={filteredGames}
                                         addCollection={addCollection}
                                         handleGameClick={handleGameClick}
+                                        userRatings={selectedCategory === "All games" ? userRatings : data.userCollection[selectedCategory]?.map(([id, rating]) => ({ id, rating })) || []}
+                                        setUpdate={setUpdate}
+                                        deleteFromCollection={deleteFromCollection}
+                                        moveGameToCollection={moveGameToCollection}
+                                        selectedCategory={selectedCategory}
+                                        findGameCollection={findGameCollection}
                                     />
                                 </div>
                             ) : ( // Если категория не выбрана, показываем по 4 игры из каждой
@@ -322,6 +352,8 @@ function Profile({ onLogOut }) {
                                             userRatings={category === "All games" ? userRatings : data.userCollection[category]?.map(([id, rating]) => ({ id, rating })) || []}
                                             setUpdate={setUpdate}
                                             deleteFromCollection={deleteFromCollection}
+                                            moveGameToCollection={moveGameToCollection}
+                                            selectedCategory={category}
                                         />
                                     </div>
                                 ))

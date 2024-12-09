@@ -2,7 +2,17 @@ import React from 'react';
 import Card from "/src/Components/CardGameList/CardGameList.jsx";
 import "./GameList.css";
 
-function GameList({ data, addCollection, handleGameClick, setUpdate, userRatings }) {
+function GameList({ data, addCollection, handleGameClick, setUpdate, userRatings, deleteFromCollection, moveGameToCollection, selectedCategory, findGameCollection }) {
+    const getUserRating = (gameId) => {
+        const ratingEntry = userRatings.find(entry => entry.id === gameId);
+        return ratingEntry ? ratingEntry.rating : null;
+    };
+
+    // Проверка, если список игр пуст
+    if (!data || data.length === 0) {
+        return <p>No games to display.</p>;
+    }
+
     return (
         <div className='games-grid'>
             {data.map((game) => (
@@ -18,6 +28,11 @@ function GameList({ data, addCollection, handleGameClick, setUpdate, userRatings
                     addCollection={addCollection}
                     handleGameClick={handleGameClick}
                     setUpdate={setUpdate}
+                    userRatings={userRatings}
+                    getUserRating={getUserRating}
+                    deleteFromCollection={deleteFromCollection}
+                    moveGameToCollection={moveGameToCollection}
+                    selectedCategory={selectedCategory === "All games" ? findGameCollection(game.gameId) : selectedCategory}
                 />
             ))}
         </div>

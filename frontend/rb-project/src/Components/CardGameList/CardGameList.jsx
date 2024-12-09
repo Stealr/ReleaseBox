@@ -3,14 +3,14 @@ import "./CardGameList.css";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-function CardGameList({ gameId, name, released, platform, metacritic, imageBackground, addCollection, handleGameClick, userRatings, getUserRating, setUpdate, deleteFromCollection, moveGameToCollection }) {
+function CardGameList({ gameId, name, released, platform, metacritic, imageBackground, addCollection, handleGameClick, userRatings, getUserRating, deleteFromCollection, moveGameToCollection, selectedCategory }) {
     const platform_icon_define = (name) => {
         return `/src/assets/platforms/${name.toLowerCase()}.svg`;
     }
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isMessageVisible, setIsMessageVisible] = useState(false);
-    const [collection, setCollection] = useState();
-    const [rating, setRating] = useState(5);
+    const [collection, setCollection] = useState(selectedCategory || '');
+    const [rating, setRating] = useState(getUserRating(gameId) || "");
     const menuRef = useRef(null); // Ссылка на меню
 
     const user_id = localStorage.getItem('userID');
@@ -42,11 +42,12 @@ function CardGameList({ gameId, name, released, platform, metacritic, imageBackg
 
     const handleApplyClick = () => {
         if (collection) {
-            addCollection(gameId, collection, rating); // Добавляем в коллекцию
             if (userRatings) {
-                setTimeout(() => {
-                    setUpdate((prevUpdate) => !prevUpdate);
-                }, 400);
+                moveGameToCollection(gameId, collection)
+                addCollection(gameId, collection, rating);
+            }
+            else {
+                addCollection(gameId, collection, rating); // Добавляем в коллекцию
             }
         }
         setIsMenuVisible(false); // Закрываем меню

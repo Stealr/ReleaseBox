@@ -4,7 +4,7 @@ import Card from "/src/Components/CardGameList/CardGameList.jsx";
 import { useContextCard } from "/src/context/contextCardGame.js";
 
 
-function PresentGames({ listGames = [], userRatings, setUpdate, deleteFromCollection, moveGameToCollection }) {
+function PresentGames({ listGames = [], userRatings, setUpdate, deleteFromCollection, moveGameToCollection, selectedCategory }) {
     const { addCollection, handleGameClick } = useContextCard();
 
     const getUserRating = (gameId) => {
@@ -36,6 +36,8 @@ function PresentGames({ listGames = [], userRatings, setUpdate, deleteFromCollec
                         userRatings={userRatings}
                         setUpdate={setUpdate}
                         deleteFromCollection={deleteFromCollection}
+                        moveGameToCollection={moveGameToCollection}
+                        selectedCategory={selectedCategory}
                     />
             ))}
         </div>
