@@ -222,42 +222,42 @@ function Profile({ onLogOut }) {
     };
 
 
-    const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
-        const filters = {};
+    // const applyFilters = async (yearRange, metacriticRange, selectedGenres, selectedPlatforms, selectedModes) => {
+    //     const filters = {};
 
-        if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
-            filters.released = [yearRange[0], yearRange[1]];
-        }
+    //     if (yearRange[0] !== 1980 || yearRange[1] !== new Date().getFullYear() + 2) {
+    //         filters.released = [yearRange[0], yearRange[1]];
+    //     }
 
-        if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
-            filters.metacritic = [metacriticRange[0], metacriticRange[1]];
-        }
+    //     if (metacriticRange[0] !== 0 || metacriticRange[1] !== 100) {
+    //         filters.metacritic = [metacriticRange[0], metacriticRange[1]];
+    //     }
 
-        if (selectedGenres.length > 0) {
-            filters.genres = selectedGenres;
-        }
+    //     if (selectedGenres.length > 0) {
+    //         filters.genres = selectedGenres;
+    //     }
 
-        if (selectedPlatforms.length > 0) {
-            filters.platform = selectedPlatforms;
-        }
+    //     if (selectedPlatforms.length > 0) {
+    //         filters.platform = selectedPlatforms;
+    //     }
 
-        if (selectedModes.length > 0) {
-            filters.tags = selectedModes;
-        }
+    //     if (selectedModes.length > 0) {
+    //         filters.tags = selectedModes;
+    //     }
 
-        if (Object.keys(filters).length !== 0) {
-            try {
-                const response = await axios.get('http://localhost:8000/games/filtration', {
-                    params: { filtration: JSON.stringify(filters) },
-                });
-                setData(response.data);
-            } catch (error) {
-                console.error('Error applying filters:', error);
-            }
-        } else {
-            fetchData()
-        }
-    };
+    //     if (Object.keys(filters).length !== 0) {
+    //         try {
+    //             const response = await axios.get('http://localhost:8000/games/filtration', {
+    //                 params: { filtration: JSON.stringify(filters) },
+    //             });
+    //             setData(response.data);
+    //         } catch (error) {
+    //             console.error('Error applying filters:', error);
+    //         }
+    //     } else {
+    //         fetchData()
+    //     }
+    // };
 
     const [userRatings, setUserRatings] = useState([]); // Массив оценок
 
@@ -318,10 +318,10 @@ function Profile({ onLogOut }) {
                                 <div className="present-games">
                                     <p className='back' onClick={() => setSelectedCategory(null)}>Назад</p>
                                     <h2>{selectedCategory}</h2>
-                                    <div className='filters-sort'>
+                                    {/* <div className='filters-sort'>
                                         <Filters applybtn={applyFilters} filterSwitcher={false} />
                                         <span className='found'>Games are found: {Object.keys(collections[selectedCategory]).length}</span>
-                                    </div>
+                                    </div> */}
                                     <div className="search-bar">
                                         <input
                                             type="text"

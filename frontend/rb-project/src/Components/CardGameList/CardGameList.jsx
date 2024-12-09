@@ -10,7 +10,7 @@ function CardGameList({ gameId, name, released, platform, metacritic, imageBackg
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isMessageVisible, setIsMessageVisible] = useState(false);
     const [collection, setCollection] = useState(selectedCategory || '');
-    const [rating, setRating] = useState(getUserRating(gameId) || "");
+    const [rating, setRating] = useState(userRatings ? (getUserRating(gameId) || 5) : (5));
     const menuRef = useRef(null); // Ссылка на меню
 
     const user_id = localStorage.getItem('userID');
