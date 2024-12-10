@@ -1,18 +1,29 @@
-Ссылка на дизайн сайта:
-https://www.figma.com/design/RNe4cKMj4bttBO3lnzswjp/RB?node-id=0-1&node-type=canvas&t=VBhevS6rPRpwazMt-0
-=======
 ## Web проект ReleaseBox (RB) - 
 
-Три ветки в git:
-main - содержит работающий проект
-frontend - здесь ведется разработка frontend и затем рабочая часть соединяется с main
-backend - здесь ведется разработка backend и затем рабочая часть соединяется с main
+### Запуск проекта: 
+backend: 
+- cd backend  
 
-frontend: react
-backend: django
+- python -m venv venv 
+
+- venv/Scripts/activate 
+
+- pip install -r requirements.txt 
+
+- cd /releasebox 
+
+- python manage.py runserver 
+
+frontend: 
+
+- cd frontend/rb-project 
+
+- yarn 
+
+- yarn dev 
 
 
-## Дизайн сайта
+### Дизайн сайта
 
 Calendar page:
 ![image](https://github.com/user-attachments/assets/0533e9b3-98c0-405b-b3f7-59eeea1bd3fd)
@@ -37,15 +48,15 @@ Profile:
 ![image](https://github.com/user-attachments/assets/a2e36cf7-a6a4-4861-8a77-b22fef0b4c7b)
 
 Home:
-![image](https://github.com/user-attachments/assets/e97a3642-afce-4cc2-805b-20e90e7bbf58)
 
+![image](https://github.com/user-attachments/assets/e97a3642-afce-4cc2-805b-20e90e7bbf58)
 
 
 Ссылка на редактор дизайна
 https://www.figma.com/design/RNe4cKMj4bttBO3lnzswjp/RB?node-id=0-1&node-type=canvas&t=VBhevS6rPRpwazMt-0
 
 
-## Полезные ссылки
+### Полезные ссылки
 Материал по основам git:
 https://learngitbranching.js.org/
 https://githowto.com/ru
