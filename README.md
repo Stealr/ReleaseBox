@@ -14,7 +14,7 @@ backend:
 
 - python manage.py runserver 
 
-frontend: 
+frontend(необходим node.js и yarn): 
 
 - cd frontend/rb-project 
 
