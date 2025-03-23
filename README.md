@@ -24,6 +24,9 @@ frontend(необходим node.js и yarn):
 
 
 ### Дизайн сайта
-![localhost_5173_ (1)](https://github.com/user-attachments/assets/12b6b0d0-8d3c-4f99-937e-dda8ca845ee5)
+![localhost_5173_ (3)](https://github.com/user-attachments/assets/ef7a0071-d2e1-4031-804d-ebfb6e74b604)
+
 ![localhost_5173_ (2)](https://github.com/user-attachments/assets/6d712bf4-e2e6-4a9c-b4f6-72fb158ba726)
+
 ![localhost_5173_](https://github.com/user-attachments/assets/de56dd21-b58c-43db-92a9-92132d6d7a63)
+
