@@ -1,4 +1,4 @@
-## Web проект ReleaseBox (RB) - 
+## Web проект ReleaseBox (RB) - Веб-приложение для управления и отслеживания коллекции игр
 
 ### Запуск проекта: 
 backend: 
@@ -24,48 +24,6 @@ frontend(необходим node.js и yarn):
 
 
 ### Дизайн сайта
-
-Calendar page:
-![image](https://github.com/user-attachments/assets/0533e9b3-98c0-405b-b3f7-59eeea1bd3fd)
-
-Games page:
-![image](https://github.com/user-attachments/assets/91fbb579-597c-4777-b370-3ed7abac85da)
-
-Log in page:
-![image](https://github.com/user-attachments/assets/59fa1603-04f9-467d-b023-8f9339bac630)
-
-Sign up page:
-![image](https://github.com/user-attachments/assets/147c0212-403f-4e41-a92e-fc8131560d56)
-
-Game info page:
-![image](https://github.com/user-attachments/assets/4c7f7d59-e478-4f80-87cf-e196ebd388aa)
-
-Profile:
-![image](https://github.com/user-attachments/assets/b899890f-2922-4811-9104-acb6eff77752)
-
-![image](https://github.com/user-attachments/assets/22baac41-9f1d-4599-ae04-2389438977de)
-
-![image](https://github.com/user-attachments/assets/a2e36cf7-a6a4-4861-8a77-b22fef0b4c7b)
-
-Home:
-
-![image](https://github.com/user-attachments/assets/e97a3642-afce-4cc2-805b-20e90e7bbf58)
-
-
-Ссылка на редактор дизайна
-https://www.figma.com/design/RNe4cKMj4bttBO3lnzswjp/RB?node-id=0-1&node-type=canvas&t=VBhevS6rPRpwazMt-0
-
-
-### Полезные ссылки
-Материал по основам git:
-https://learngitbranching.js.org/
-https://githowto.com/ru
-
-Совместная работа с командой в git:
-https://www.youtube.com/watch?v=2qfyLfXEPzs&ab_channel=zkerriga
-
-
-Пример проектов django + react:
-https://www.youtube.com/watch?v=9Rsv99hnqPU&ab_channel=PyLounge-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BD%D0%B0Python%D0%B8%D0%B2%D1%81%D1%91%D0%BEIT
-
-https://habr.com/ru/articles/713490/
+![localhost_5173_ (1)](https://github.com/user-attachments/assets/12b6b0d0-8d3c-4f99-937e-dda8ca845ee5)
+![localhost_5173_ (2)](https://github.com/user-attachments/assets/6d712bf4-e2e6-4a9c-b4f6-72fb158ba726)
+![localhost_5173_](https://github.com/user-attachments/assets/de56dd21-b58c-43db-92a9-92132d6d7a63)
